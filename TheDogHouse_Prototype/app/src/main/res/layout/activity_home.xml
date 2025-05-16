@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/LightBrown"
+    tools:context=".HomeActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The KZN Doghouse"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/heading2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dog Sanctuary in South Africa"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal">
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="193dp"
+                    android:layout_height="182dp"
+                    app:srcCompat="@drawable/dog1" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="200dp"
+                    android:layout_height="175dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/dog2" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="210dp"
+                android:layout_height="175dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/dog3" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="186dp"
+                android:layout_height="181dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/dog4" />
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Theres no place like home"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                android:layout_margin="100dp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
