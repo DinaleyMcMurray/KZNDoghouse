@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="purple">#8692f7</color>
+    <color name="translusent"></color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="ButtonColour">#add8e6</color>
+    <color name="SecondaryBtnColour">#ffc0cb</color>
+    <color name="LightBrown">#F9F0EA</color>
+    <color name="LightGreen">#ACFFAB</color>
+    <color name="Green">#6CF66E</color>
+</resources>
