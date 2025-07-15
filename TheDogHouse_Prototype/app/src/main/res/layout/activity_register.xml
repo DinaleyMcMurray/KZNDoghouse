@@ -75,18 +75,6 @@
                     android:textColorHighlight="@color/cardview_dark_background" />
 
                 <EditText
-                    android:id="@+id/etRegPass"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:padding="8dp"
-                    android:backgroundTint="@color/purple"
-                    android:textColor="@color/black"
-                    android:typeface="serif"
-                    android:textColorHighlight="@color/cardview_dark_background" />
-
-                <EditText
                     android:id="@+id/etRegContactNumber"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
