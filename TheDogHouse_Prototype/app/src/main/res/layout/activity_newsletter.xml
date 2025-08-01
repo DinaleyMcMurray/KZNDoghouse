@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:background="@color/LightBrown"
     android:layout_height="match_parent">
 
     <TextView
