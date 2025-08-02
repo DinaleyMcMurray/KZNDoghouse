@@ -26,8 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/image_placeholder" />
+                android:layout_marginBottom="12dp"/>
+<!--                android:background="@drawable/image_placeholder" />-->
 
             <TextView
                 android:id="@+id/textDogName"
@@ -104,8 +104,9 @@
                     android:adjustViewBounds="true"
                     android:background="@null"
                     android:scaleType="fitCenter"
-                    android:contentDescription="@string/adopt"
                     app:srcCompat="@drawable/bonebutton" />
+<!--                    android:contentDescription="@string/adopt"-->
+
 
                 <TextView
                     android:layout_width="160dp"
