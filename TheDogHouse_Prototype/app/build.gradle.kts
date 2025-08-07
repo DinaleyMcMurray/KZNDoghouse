@@ -63,7 +63,11 @@ dependencies {
 //add features without versions
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-storage-ktx")
+   // implementation("com.google.firebase:firebase-storage-ktx")
+
+    // Firebase Firestore or Realtime Database
+    //implementation ("com.google.firebase:firebase-database-ktx:20.3.0")
+    implementation ("com.google.firebase:firebase-analytics-ktx")
 
 
 }

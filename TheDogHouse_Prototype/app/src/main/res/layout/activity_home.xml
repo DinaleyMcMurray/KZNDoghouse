@@ -196,6 +196,13 @@
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
                         android:text="The KZN Doghouse is a registered NPO and PBO, proudly operating as a no-kill shelter in Queensburgh, Durban. Since its establishment in 2021, the organization has provided care for over hundreds of dogs and puppies annually, assisting more then 650 animals in need to date."/>
+
+                    <Button
+                        android:id="@+id/button7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Button" />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val mainLayout = findViewById<android.view.View>(R.id.main)
 
         mainLayout.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
