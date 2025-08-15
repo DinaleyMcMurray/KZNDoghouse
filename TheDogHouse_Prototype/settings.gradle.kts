@@ -19,6 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TheDogHouse_Prototype"
+rootProject.name = "KZNDoghouse"
 include(":app")
- 

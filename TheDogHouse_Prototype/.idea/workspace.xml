@@ -5,14 +5,39 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_newsletter.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_login.xml">
         <config>
-          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+          <theme>@style/Theme.KZNDoghouse</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/newsletterrecyclerview.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adoption_history.xml">
         <config>
-          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+          <theme>@style/Theme.KZNDoghouse</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_donation_history.xml">
+        <config>
+          <theme>@style/Theme.KZNDoghouse</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_volunteer_management.xml">
+        <config>
+          <theme>@style/Theme.KZNDoghouse</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/recycleradoptionhistory.xml">
+        <config>
+          <theme>@style/Theme.KZNDoghouse</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/recyclerdonation.xml">
+        <config>
+          <theme>@style/Theme.KZNDoghouse</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/recyclervolunteers.xml">
+        <config>
+          <theme>@style/Theme.KZNDoghouse</theme>
         </config>
       </layout>
     </layouts>
@@ -21,9 +46,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af88688e-a865-42a7-b32e-4b6e6be0c3e1" name="Changes" comment="Updating screens">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9be45286-9ebf-41cb-8b23-a03f1283924b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +55,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\dinal\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -45,74 +68,31 @@
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;DinaleyMcMurray&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/DinaleyMcMurray/KZNDoghouse.git&quot;,
-    &quot;accountId&quot;: &quot;948c21b0-50f1-47c0-8ae9-5ec2cdd2f4c5&quot;
-  }
-}</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="_Designer_Tab" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
+  &quot;associatedIndex&quot;: 7
 }</component>
-  <component name="ProjectId" id="2x82tiRxaN8fMVfYQviLtxZ2OhS" />
+  <component name="ProjectId" id="31FJU2dAl2ZmvTUP60UaFnfmzcA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/lab_services_student/Desktop/KZNDoghouse-Dianca&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/dinal/OneDrive/Desktop/KZNDoghouse-Dianca&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\lab_services_student\AndroidStudioProjects\TheDogHouse_Prototype\app\src\main\res\drawable" />
-    </key>
-    <key name="android.template.1970364681">
-      <recent name="vcmsa.projects.thedoghouse_prototype" />
-    </key>
-    <key name="android.template.-828119705">
-      <recent name="vcmsa.projects.thedoghouse_prototype" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\lab_services_student\Desktop\KZNDoghouse\TheDogHouse_Prototype\app\src\main\res\drawable" />
-      <recent name="C:\Users\lab_services_student\AndroidStudioProjects\TheDogHouse_Prototype\app\src\main\res\drawable" />
-      <recent name="C:\Users\lab_services_student\AndroidStudioProjects\TheDogHouse_Prototype\app\src\main\res\raw" />
-    </key>
-    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
-      <recent name="vcmsa.projects.thedoghouse_prototype" />
-    </key>
-    <key name="android.template.1157891944">
-      <recent name="vcmsa.projects.thedoghouse_prototype" />
-    </key>
-    <key name="android.template.-1593729782">
-      <recent name="vcmsa.projects.thedoghouse_prototype" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="TheDogHouse_Prototype.app" />
+      <module name="KZNDoghouse.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -187,66 +167,25 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="af88688e-a865-42a7-b32e-4b6e6be0c3e1" name="Changes" comment="" />
-      <created>1747305596814</created>
+      <changelist id="9be45286-9ebf-41cb-8b23-a03f1283924b" name="Changes" comment="" />
+      <created>1755113900250</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1747305596814</updated>
+      <updated>1755113900250</updated>
     </task>
-    <task id="LOCAL-00001" summary="Updating screens">
-      <option name="closed" value="true" />
-      <created>1752580753670</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1752580753670</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updating screens" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updating screens" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
-        <entry key="vcmsa.projects.thedoghouse_prototype">
+        <entry key="com.dianca.kzndoghouse">
           <value>
-            <CheckInfo lastCheckTimestamp="1753257722898" />
+            <CheckInfo lastCheckTimestamp="1755245352957" />
           </value>
         </entry>
-        <entry key="vcmsa.projects.thedoghouse_prototype.test">
+        <entry key="com.dianca.kzndoghouse.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1753257722896" />
+            <CheckInfo lastCheckTimestamp="1755245352960" />
           </value>
         </entry>
       </map>
