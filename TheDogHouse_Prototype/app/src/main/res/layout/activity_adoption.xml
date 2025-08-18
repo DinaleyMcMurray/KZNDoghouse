@@ -65,7 +65,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Application_Form.zip"
+                        android:text="Application_Form.pdf"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:typeface="serif"
