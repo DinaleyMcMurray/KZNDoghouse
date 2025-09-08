@@ -33,7 +33,7 @@
                 android:id="@+id/textDogName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name: Charlie"
+                android:text="Name:"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -43,7 +43,7 @@
                 android:id="@+id/textSex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sex: Male"
+                android:text="Sex: "
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:paddingBottom="4dp" />
@@ -52,7 +52,7 @@
                 android:id="@+id/textBreed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Breed: Labrador"
+                android:text="Breed:"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:paddingBottom="4dp" />
@@ -61,7 +61,7 @@
                 android:id="@+id/textVac"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vaccination Status: Complete"
+                android:text="Vaccination Status: "
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:paddingBottom="4dp" />
@@ -70,7 +70,7 @@
                 android:id="@+id/textSter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sterilization Status: Yes"
+                android:text="Sterilization Status: "
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:paddingBottom="16dp" />
