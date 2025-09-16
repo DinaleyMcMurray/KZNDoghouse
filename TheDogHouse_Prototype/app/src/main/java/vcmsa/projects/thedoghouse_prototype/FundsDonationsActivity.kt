@@ -1,6 +1,9 @@
 package vcmsa.projects.thedoghouse_prototype
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +19,20 @@ class FundsDonationsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val DogFoodButton = findViewById<Button>(R.id.DogFoodBtn)
+        val MedsButton = findViewById<Button>(R.id.MedsBtn)
+
+        DogFoodButton.setOnClickListener {
+            val intent = Intent(this, DogFoodActivity::class.java)
+            startActivity(intent)
+        }
+
+        MedsButton.setOnClickListener {
+            val intent = Intent(this, MedsDonationActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }

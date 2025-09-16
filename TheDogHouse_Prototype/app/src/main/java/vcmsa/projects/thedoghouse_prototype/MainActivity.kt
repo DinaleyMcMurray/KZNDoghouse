@@ -1,5 +1,4 @@
 package vcmsa.projects.thedoghouse_prototype
-package vcmsa.projects.thedoghouse_prototype
 
 import android.content.Intent
 import android.net.Uri
@@ -31,11 +30,11 @@ class MainActivity : AppCompatActivity() {
         videoView.start()
 
         // Button to go to MedsActivity
-        val medsButton = findViewById<Button>(R.id.btnMeds)
-        medsButton.setOnClickListener {
-            val intent = Intent(this, MedsActivity::class.java)
-            startActivity(intent)
-        }
+//        val medsButton = findViewById<Button>(R.id.btnMeds)
+//        medsButton.setOnClickListener {
+//            val intent = Intent(this, MedsActivity::class.java)
+//            startActivity(intent)
+//        }
 
         // on main layout -> Go to RegisterActivity
         val mainLayout = findViewById<android.view.View>(R.id.main)

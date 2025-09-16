@@ -25,6 +25,13 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
 
+        val signInButton = findViewById<Button>(R.id.signinBtn )
+
+        signInButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
+
         auth = FirebaseAuth.getInstance()
 
         val nameEditText = findViewById<EditText>(R.id.etRegName)
