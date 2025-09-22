@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "762436254012",
+    "project_id": "kzn-doghouse",
+    "storage_bucket": "kzn-doghouse.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762436254012:android:c76ad9c6d5739db552c639",
+        "android_client_info": {
+          "package_name": "vcmsa.projects.thedoghouse_prototype"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBloR6JUT7zhYeQZheCBr2TM1qWV58Vpew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
