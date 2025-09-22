@@ -49,8 +49,44 @@
                     android:textStyle="bold"
                     android:layout_marginTop="30dp"/>
 
+<<<<<<< HEAD
                 <TextView
                     android:id="@+id/mission"
+=======
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Application_Form.pdf"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:typeface="serif"
+                        android:textColor="@android:color/black"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upload document"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="20dp"
+                android:backgroundTint="@color/pink"
+                android:padding="20dp">
+
+                <LinearLayout
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Download application form"

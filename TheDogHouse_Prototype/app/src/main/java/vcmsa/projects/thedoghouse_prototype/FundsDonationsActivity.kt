@@ -1,12 +1,18 @@
 package vcmsa.projects.thedoghouse_prototype
 
 import android.content.Intent
+<<<<<<< HEAD
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+=======
+import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -28,6 +34,7 @@ class FundsDonationsActivity : AppCompatActivity() {
             insets
         }
 
+<<<<<<< HEAD
         // Find views
         val etAmount = findViewById<EditText>(R.id.editAmount)
         val btn100 = findViewById<Button>(R.id.buttonR100)
@@ -79,6 +86,22 @@ class FundsDonationsActivity : AppCompatActivity() {
         linkEft.setOnClickListener {
             openPayment("https://www.bank.com/eft?amount=$selectedAmount")
         }
+=======
+        val DogFoodButton = findViewById<Button>(R.id.DogFoodBtn)
+        val MedsButton = findViewById<Button>(R.id.MedsBtn)
+
+        DogFoodButton.setOnClickListener {
+            val intent = Intent(this, DogFoodActivity::class.java)
+            startActivity(intent)
+        }
+
+        MedsButton.setOnClickListener {
+            val intent = Intent(this, MedsDonationActivity::class.java)
+            startActivity(intent)
+        }
+
+
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
     }
 
     // Open browser with payment link

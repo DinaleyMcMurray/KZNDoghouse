@@ -36,23 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/border" />
-
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_weight="3"
                 android:layout_marginTop="25dp"
                 android:gravity="center_horizontal">
@@ -141,7 +124,7 @@
                         android:textColorHighlight="@color/cardview_dark_background" />
 
                     <EditText
-                        android:id="@+id/DogFoodName"
+                        android:id="@+id/MedicationName"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="Meds type or name"
@@ -151,6 +134,16 @@
                         android:typeface="serif"
                         android:textColorHighlight="@color/cardview_dark_background" />
 
+                    <EditText
+                        android:id="@+id/Quantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Quantity"
+                        android:padding="8dp"
+                        android:backgroundTint="@color/purple"
+                        android:textColor="@color/black"
+                        android:typeface="serif"
+                        android:textColorHighlight="@color/cardview_dark_background" />
 
 
                     <EditText

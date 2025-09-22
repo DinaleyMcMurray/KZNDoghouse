@@ -50,7 +50,11 @@
                     android:text="Funds" />
 
                 <Button
+<<<<<<< HEAD
                     android:id="@+id/buttonDogFood"
+=======
+                    android:id="@+id/DogFoodBtn"
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
                     android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/ButtonColour"
@@ -58,7 +62,11 @@
                     android:text="Dog Food" />
 
                 <Button
+<<<<<<< HEAD
                     android:id="@+id/buttonMedication"
+=======
+                    android:id="@+id/MedsBtn"
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
                     android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/ButtonColour"

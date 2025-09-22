@@ -8,6 +8,20 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+<<<<<<< HEAD
+=======
+data class AdoptionHistory(
+    val dogName: String = "",
+    val sex: String = "",
+    val age: String = "",
+    val ownerName: String = "",
+    val address: String = "",
+    val contactNumber: String = "",
+    val email: String = "",
+    val idNumber: String = ""
+)
+
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
 class AdoptionHistoryAdapter(
     private val context: Context,
     private val adoptionList: List<AdoptionHistory>
@@ -16,10 +30,16 @@ class AdoptionHistoryAdapter(
     class DynamicViewHolder(val layout: LinearLayout) : RecyclerView.ViewHolder(layout)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DynamicViewHolder {
+<<<<<<< HEAD
         val layout = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(16, 16, 16, 16)
         }
+=======
+        val layout = LinearLayout(context)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.setPadding(16, 16, 16, 16)
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
         return DynamicViewHolder(layout)
     }
 
@@ -31,7 +51,11 @@ class AdoptionHistoryAdapter(
         fun addTextView(label: String, value: String, bold: Boolean = false) {
             val tv = TextView(context)
             tv.text = "$label $value"
+<<<<<<< HEAD
             tv.textSize = 16f
+=======
+            tv.textSize = 18f
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
             if (bold) tv.setTypeface(null, Typeface.BOLD)
             layout.addView(tv)
         }
@@ -46,9 +70,14 @@ class AdoptionHistoryAdapter(
         addTextView("ID Number:", adoption.idNumber)
 
         // Add a download button
+<<<<<<< HEAD
         val btn = Button(context).apply {
             text = "Download Documents"
         }
+=======
+        val btn = Button(context)
+        btn.text = "Download Documents"
+>>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
         layout.addView(btn)
     }
 

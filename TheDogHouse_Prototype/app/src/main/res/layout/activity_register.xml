@@ -124,6 +124,20 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Already registered? SignIn Now"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:id="@+id/signinBtn"
+            android:backgroundTint="@color/SecondaryBtnColour"
+            android:textColor="@color/black"
+            android:typeface="serif"
+            android:layout_marginBottom="20dp"/>
+
     </LinearLayout>
 
 </layout>
