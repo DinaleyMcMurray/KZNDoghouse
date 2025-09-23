@@ -24,5 +24,11 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, DogFoodActivity::class.java)
             startActivity(intent)
         }
+
+        val volButton = findViewById<Button>(R.id.button8)
+        volButton.setOnClickListener {
+            val intent = Intent(this, VolunteerActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
