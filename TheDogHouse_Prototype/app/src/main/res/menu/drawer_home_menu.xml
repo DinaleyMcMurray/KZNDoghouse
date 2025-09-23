@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Home -->
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home" />
+
+    <!-- Adoptions -->
+    <item
+        android:id="@+id/nav_adoption"
+        android:title="Adoption"
+        android:icon="@drawable/ic_pets" />
+
+    <item
+        android:id="@+id/nav_view_adoption"
+        android:title="View Adoption"
+        android:icon="@drawable/ic_list" />
+
+    <item
+        android:id="@+id/nav_adoption_history"
+        android:title="Adoption History"
+        android:icon="@drawable/ic_history" />
+
+    <!-- Donations -->
+    <item
+        android:id="@+id/nav_funds"
+        android:title="Funds Donation"
+        android:icon="@drawable/ic_money" />
+
+    <item
+        android:id="@+id/nav_dog_food"
+        android:title="Dog Food Donation"
+        android:icon="@drawable/ic_food" />
+
+    <item
+        android:id="@+id/nav_meds"
+        android:title="Medication Donation"
+        android:icon="@drawable/ic_medical" />
+
+    <item
+        android:id="@+id/nav_donation_history"
+        android:title="Donation History"
+        android:icon="@drawable/ic_history" />
+
+    <!-- Volunteers -->
+    <item
+        android:id="@+id/nav_volunteer"
+        android:title="Volunteer"
+        android:icon="@drawable/ic_people" />
+
+    <item
+        android:id="@+id/nav_volunteer_management"
+        android:title="Volunteer Management"
+        android:icon="@drawable/ic_manage_accounts" />
+
+    <!-- Newsletter -->
+    <item
+        android:id="@+id/nav_newsletter"
+        android:title="Newsletter"
+        android:icon="@drawable/ic_email" />
+
+    <!-- Register / Login -->
+    <item
+        android:id="@+id/nav_register"
+        android:title="Register"
+        android:icon="@drawable/ic_person_add" />
+
+    <item
+        android:id="@+id/nav_login"
+        android:title="Login"
+        android:icon="@drawable/ic_login" />
+
+    <item
+        android:id="@+id/nav_admin_login"
+        android:title="Admin Login"
+        android:icon="@drawable/ic_admin_panel_settings" />
+    <item
+    android:id="@+id/nav_uploads"
+    android:title="My Uploads"
+    android:icon="@drawable/ic_folder" />
+
+    <item
+    android:id="@+id/nav_settings"
+    android:title="Settings"
+    android:icon="@drawable/ic_settings" />
+
+</menu>

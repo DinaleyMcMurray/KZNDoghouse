@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,175 +8,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/LightBrown"
-    tools:context=".VolunteerActivity">
+    tools:context=".ViewAdoptionActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/heading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Kindly Volunteer"
-                android:textAlignment="center"
-                android:typeface="serif"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginTop="30dp"/>
+            android:text="Volunteer"
+            android:textAlignment="center"
+            android:typeface="serif"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
 
 
-            <TextView
-                android:id="@+id/mission"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Please fill out your details to sign up as a volunteer. And we will contact you."
-                android:textAlignment="center"
-                android:typeface="serif"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="25dp"/>
-
-            <ImageView
-                android:id="@+id/imageView16"
-                android:paddingTop="10dp"
-                android:layout_width="375dp"
-                android:layout_height="96dp"
-                app:srcCompat="@drawable/volunteer" />
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="30dp"
-                            app:cardCornerRadius="30dp"
-                            app:cardElevation="20dp"
-                            >
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:background="@color/LightBrown"
-                                android:layout_gravity="center_vertical"
-                                android:backgroundTint="@color/Green"
-                                android:padding="10dp">
-
-                            <!-- Volunteer Name -->
-                            <EditText
-                                android:id="@+id/volNameEditText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textPersonName"
-                                android:hint="Enter name" />
-
-                            <!-- Sex -->
-                            <EditText
-                                android:id="@+id/editTextGender"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textCapWords"
-                                android:hint="Enter Gender" />
-
-                            <!-- Age -->
-
-                            <EditText
-                                android:id="@+id/editTextAge"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:hint="Enter age" />
-
-                            <!-- Volunteer Number -->
-                            <EditText
-                                android:id="@+id/editTextVolunteerNumber"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="phone"
-                                android:hint="Enter mobile number" />
-
-                            <!-- Email -->
-                            <EditText
-                                android:id="@+id/editTextEmail"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textEmailAddress"
-                                android:hint="Enter email" />
-
-                                <Button
-                                    android:id="@+id/button4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:backgroundTint="@color/purple"
-                                    android:text="Submit" />
-
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </ScrollView>
-
-            </LinearLayout>
-
-            <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<ScrollView-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:id="@+id/main"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:gravity="center"-->
-<!--    tools:context=".ViewAdoptionActivity">-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical"-->
-<!--        android:padding="10dp">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/heading"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Volunteer"-->
-<!--            android:textAlignment="center"-->
-<!--            android:typeface="serif"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="30sp"-->
-<!--            android:textStyle="bold"/>-->
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/subheading"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Please fill out your details to sign up as a volunteer."-->
-<!--            android:textAlignment="center"-->
-<!--            android:typeface="serif"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="18sp"/>-->
+        <TextView
+            android:id="@+id/subheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please fill out your details to sign up as a volunteer."
+            android:textAlignment="center"
+            android:typeface="serif"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
 
 
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/recycler_volunteer"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="20dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_volunteer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-<!--    </LinearLayout>-->
-<!--</ScrollView>-->
+    </LinearLayout>
+</ScrollView>
