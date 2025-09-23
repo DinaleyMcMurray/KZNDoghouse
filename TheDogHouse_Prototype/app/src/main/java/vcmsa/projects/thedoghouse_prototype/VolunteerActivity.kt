@@ -36,8 +36,8 @@ class VolunteerActivity : AppCompatActivity() {
 
 //        FirebaseApp.initializeApp(this)
 //        db = FirebaseFirestore.getInstance()
-//        auth = FirebaseAuth.getInstance()
-//
+        auth = FirebaseAuth.getInstance()
+
         val currentUser = auth.currentUser
         if (currentUser == null) {
             Toast.makeText(this, "Not authenticated. Please log in again.", Toast.LENGTH_LONG).show()
