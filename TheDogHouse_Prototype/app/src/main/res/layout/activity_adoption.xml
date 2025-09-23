@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
@@ -8,14 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".AdoptionActivity">
 
-    <!-- Main content with toolbar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/LightBrown">
 
-        <!-- Top app bar (hamburger will show here) -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -25,7 +22,6 @@
             app:titleTextColor="@android:color/white"
             app:navigationIconTint="@android:color/white" />
 
-        <!-- Your original scrollable content -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -41,69 +37,33 @@
                     android:id="@+id/heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
                     android:text="Kindly Donate"
                     android:textAlignment="center"
-                    android:typeface="serif"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="30dp"/>
+                    android:typeface="serif" />
 
-<<<<<<< HEAD
                 <TextView
-                    android:id="@+id/mission"
-=======
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Application_Form.pdf"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:typeface="serif"
-                        android:textColor="@android:color/black"/>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/upload"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Upload document"
-                android:textAlignment="center"
-                android:typeface="serif"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="20dp"
-                android:backgroundTint="@color/pink"
-                android:padding="20dp">
-
-                <LinearLayout
->>>>>>> d50d9fb5fe108f7b409db4de23e2609b01338cb7
+                    android:id="@+id/downloadTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:text="Download application form"
                     android:textAlignment="center"
-                    android:typeface="serif"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="25dp"/>
+                    android:typeface="serif" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="30dp"
+                    android:backgroundTint="@color/pink"
                     app:cardCornerRadius="30dp"
                     app:cardElevation="20dp"
-                    android:backgroundTint="@color/Green"
                     android:padding="20dp">
 
                     <LinearLayout
@@ -116,7 +76,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Application_Form.zip"
+                            android:text="Application_Form.pdf"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -125,36 +85,37 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/upload"
+                    android:id="@+id/uploadTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:text="Upload document"
                     android:textAlignment="center"
-                    android:typeface="serif"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:typeface="serif" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="30dp"
+                    android:backgroundTint="@color/pink"
                     app:cardCornerRadius="30dp"
                     app:cardElevation="20dp"
-                    android:backgroundTint="@color/pink"
                     android:padding="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="20dp">
 
                         <ImageView
                             android:layout_width="150dp"
                             android:layout_height="150dp"
-                            app:srcCompat="@drawable/uploaddoc"/>
+                            app:srcCompat="@drawable/uploaddoc" />
 
                         <TextView
                             android:id="@+id/dropdoc"
@@ -162,10 +123,10 @@
                             android:layout_height="wrap_content"
                             android:text="Drag and Drop doc to Upload"
                             android:textAlignment="center"
-                            android:typeface="serif"
                             android:textColor="@color/black"
                             android:textSize="15sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:typeface="serif" />
 
                         <TextView
                             android:id="@+id/or"
@@ -173,18 +134,18 @@
                             android:layout_height="wrap_content"
                             android:text="or"
                             android:textAlignment="center"
-                            android:typeface="serif"
                             android:textColor="@color/black"
                             android:textSize="15sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:typeface="serif" />
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="30dp"
+                            android:backgroundTint="@color/ButtonColour"
                             app:cardCornerRadius="30dp"
                             app:cardElevation="20dp"
-                            android:backgroundTint="@color/ButtonColour"
                             android:padding="20dp">
 
                             <TextView
@@ -193,10 +154,10 @@
                                 android:layout_height="wrap_content"
                                 android:text="+ Select Doc to upload"
                                 android:textAlignment="center"
-                                android:typeface="serif"
                                 android:textColor="@color/black"
                                 android:textSize="15sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:typeface="serif" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -204,32 +165,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="3"
                     android:layout_marginTop="25dp"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/button1"
                         android:layout_width="120dp"
                         android:layout_height="45dp"
                         android:backgroundTint="@color/ButtonColour"
-                        android:textColor="@color/black"
-                        android:text="Cancel" />
+                        android:text="Cancel"
+                        android:textColor="@color/black" />
 
                     <Button
                         android:id="@+id/button2"
                         android:layout_width="120dp"
                         android:layout_height="45dp"
                         android:backgroundTint="@color/ButtonColour"
-                        android:textColor="@color/black"
-                        android:text="Upload" />
+                        android:text="Upload"
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
 
-    <!-- Left navigation drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
