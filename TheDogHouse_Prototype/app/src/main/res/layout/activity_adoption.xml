@@ -24,7 +24,7 @@
                 android:id="@+id/heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kindly Donate"
+                android:text="Adoption"
                 android:textAlignment="center"
                 android:typeface="serif"
                 android:textColor="@color/black"
