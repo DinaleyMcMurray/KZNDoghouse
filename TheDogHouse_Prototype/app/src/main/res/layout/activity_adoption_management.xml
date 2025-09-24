@@ -51,7 +51,6 @@
                 android:layout_margin="30dp"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="20dp"
-                android:backgroundTint="@color/pink"
                 android:padding="20dp">
 
                         <LinearLayout
@@ -60,7 +59,7 @@
                             android:orientation="vertical"
                             android:background="@color/LightBrown"
                             android:layout_gravity="center_vertical"
-                            android:backgroundTint="@color/Green"
+                            android:backgroundTint="@color/pink"
                             android:padding="24dp">
 
                             <TextView
@@ -111,6 +110,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Fertilization"
+                                android:textSize="18dp"
                                 android:paddingBottom="15dp"
                                 android:paddingTop="15dp"/>
 
@@ -118,6 +118,8 @@
                                 android:id="@+id/textSterilization"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+
+                                android:textSize="18dp"
                                 android:text="Sterilization" />
 
                             <EditText
