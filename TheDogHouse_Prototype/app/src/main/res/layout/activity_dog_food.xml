@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/LightBrown"
+    tools:context=".FundsDonationsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kindly Donate"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"/>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="3"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Funds" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/pink"
+                    android:textColor="@color/black"
+                    android:text="Dog Food" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Medication" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/mission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dog Food Donation"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="25dp"/>
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="375dp"
+                android:layout_height="96dp"
+                app:srcCompat="@drawable/dogfood" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="20dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/LightBrown"
+                    android:layout_gravity="center_vertical"
+                    android:backgroundTint="@color/Green"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/textDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:typeface="serif"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:text="Please fill out the following" />
+
+
+                    <EditText
+                        android:id="@+id/DonorName"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Name of donor"
+                        android:padding="8dp"
+                        android:backgroundTint="@color/purple"
+                        android:textColor="@color/black"
+                        android:typeface="serif"
+                        android:textColorHighlight="@color/cardview_dark_background" />
+
+                    <EditText
+                        android:id="@+id/DogFoodName"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Dog food type or name"
+                        android:padding="8dp"
+                        android:backgroundTint="@color/purple"
+                        android:textColor="@color/black"
+                        android:typeface="serif"
+                        android:textColorHighlight="@color/cardview_dark_background" />
+
+
+
+                    <EditText
+                        android:id="@+id/editTextDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/purple"
+                        android:ems="10"
+                        android:hint="Date of drop off"
+                        android:inputType="date" />
+
+                    <EditText
+                        android:id="@+id/editTextTime2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Time of drop off"
+                        android:backgroundTint="@color/purple"
+                        android:inputType="time" />
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/purple"
+                        android:text="Submit" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:typeface="serif"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_marginTop="25dp"
+                        android:text="Where to find us" />
+
+                    <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="271dp"
+                        android:layout_height="200dp"
+                        app:srcCompat="@drawable/address" />
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:typeface="serif"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_marginTop="25dp"
+                        android:text="80 Carrick Rd, Queensburgh, Durban, 4093" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

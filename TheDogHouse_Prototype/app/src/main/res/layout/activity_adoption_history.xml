@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/adoption_history"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/LightBrown"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adoption History"
+        android:textSize="26sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!--    &lt;!&ndash; Row of Buttons &ndash;&gt;-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:gravity="center"-->
+    <!--        android:layout_marginBottom="16dp"-->
+    <!--        android:weightSum="3">-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btnInfo"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text="Information"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:backgroundTint="@color/SecondaryBtnColour"-->
+    <!--            android:layout_marginEnd="6dp"/>-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btnAdoptedDogs"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text="Adopted Dogs"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:backgroundTint="@color/SecondaryBtnColour"-->
+    <!--            android:layout_marginHorizontal="3dp"/>-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btnDocuments"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text="View Documents"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:backgroundTint="@color/SecondaryBtnColour"-->
+    <!--            android:layout_marginStart="6dp"/>-->
+    <!--    </LinearLayout>-->
+
+    <!-- Search Bar -->
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search adoptions..."
+        android:inputType="text"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/purple"
+        android:textColor="@android:color/black"/>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleradoptionhistory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/LightBrown"
+    tools:context=".FundsDonationsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Heading -->
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kindly Donate"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"/>
+
+            <!-- Category buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/buttonFunds"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/pink"
+                    android:textColor="@color/black"
+                    android:text="Funds" />
+
+                <Button
+                    android:id="@+id/buttonDogFood"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Dog Food" />
+
+                <Button
+                    android:id="@+id/buttonMedication"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Medication" />
+            </LinearLayout>
+
+            <!-- Donation section -->
+            <TextView
+                android:id="@+id/mission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Funds Donation"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="25dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/buttonR100"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/LightGreen"
+                    android:textColor="@color/black"
+                    android:text="R100" />
+
+                <Button
+                    android:id="@+id/buttonR500"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/LightGreen"
+                    android:textColor="@color/black"
+                    android:text="R500" />
+
+                <Button
+                    android:id="@+id/buttonR1000"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/LightGreen"
+                    android:textColor="@color/black"
+                    android:text="R1000" />
+            </LinearLayout>
+
+            <!-- Other Amount field -->
+            <EditText
+                android:id="@+id/editAmount"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Other Amount"
+                android:inputType="number"
+                android:padding="8dp"
+                android:backgroundTint="@color/purple"
+                android:textColor="@color/black"
+                android:typeface="serif"
+                android:textColorHighlight="@color/cardview_dark_background" />
+
+            <!-- Illustration -->
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/fundsdonation" />
+
+            <!-- Payment method section -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/Green"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:text="Choose Payment Method"/>
+
+                    <!-- Payment Options -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:paddingTop="12dp">
+
+                        <!-- PayPal -->
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:id="@+id/btnPayPal"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:srcCompat="@drawable/paypal" />
+
+                            <TextView
+                                android:id="@+id/linkPayPal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pay with PayPal"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <!-- Visa -->
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:id="@+id/btnVisa"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:srcCompat="@drawable/visa" />
+
+                            <TextView
+                                android:id="@+id/linkVisa"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pay with Visa"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <!-- EFT -->
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:id="@+id/btnEft"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:srcCompat="@drawable/eft_blue" />
+
+                            <TextView
+                                android:id="@+id/linkEft"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pay with EFT"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
