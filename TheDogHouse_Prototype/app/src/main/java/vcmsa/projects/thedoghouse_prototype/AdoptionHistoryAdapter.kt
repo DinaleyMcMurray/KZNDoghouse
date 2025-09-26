@@ -8,17 +8,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-data class AdoptionHistory(
-    val dogName: String = "",
-    val sex: String = "",
-    val age: String = "",
-    val ownerName: String = "",
-    val address: String = "",
-    val contactNumber: String = "",
-    val email: String = "",
-    val idNumber: String = ""
-)
-
 class AdoptionHistoryAdapter(
     private val context: Context,
     private val adoptionList: List<AdoptionHistory>
@@ -27,9 +16,6 @@ class AdoptionHistoryAdapter(
     class DynamicViewHolder(val layout: LinearLayout) : RecyclerView.ViewHolder(layout)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DynamicViewHolder {
-        val layout = LinearLayout(context)
-        layout.orientation = LinearLayout.VERTICAL
-        layout.setPadding(16, 16, 16, 16)
         return DynamicViewHolder(layout)
     }
 
@@ -41,7 +27,6 @@ class AdoptionHistoryAdapter(
         fun addTextView(label: String, value: String, bold: Boolean = false) {
             val tv = TextView(context)
             tv.text = "$label $value"
-            tv.textSize = 18f
             if (bold) tv.setTypeface(null, Typeface.BOLD)
             layout.addView(tv)
         }
@@ -56,8 +41,6 @@ class AdoptionHistoryAdapter(
         addTextView("ID Number:", adoption.idNumber)
 
         // Add a download button
-        val btn = Button(context)
-        btn.text = "Download Documents"
         layout.addView(btn)
     }
 

@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subscribe to Our Newsletter"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etNewsletterEmail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Enter your email"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
+        android:backgroundTint="@color/purple"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/btnSubscribe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Events"
-        android:textStyle="bold"
-        android:textSize="36sp"
-        android:textAlignment="center"
-        android:paddingBottom="50dp"/>
+        android:text="Subscribe"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/LightGreen"
+        android:textColor="@color/black" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginVertical="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerNewsletters"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/newsletterrecyclerview"
-        android:layout_margin="20dp" />
-
-
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

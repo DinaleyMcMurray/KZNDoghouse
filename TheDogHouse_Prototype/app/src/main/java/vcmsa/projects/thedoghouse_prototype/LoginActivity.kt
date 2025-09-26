@@ -1,5 +1,6 @@
 package vcmsa.projects.thedoghouse_prototype
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
@@ -7,12 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
-import vcmsa.projects.thedoghouse_prototype.R
+import vcmsa.projects.thedoghouse_prototype.R // NOTE: This import of R is usually unnecessary and should be avoided
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -55,11 +57,13 @@ class LoginActivity : AppCompatActivity() {
         signUpButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
+
+        // --- Resolved Conflict: Added Admin Login Button Logic (from HEAD) ---
         val adminLoginButton = findViewById<Button>(R.id.adminLoginBtn)
 
         adminLoginButton.setOnClickListener {
             startActivity(Intent(this, AdminLoginActivity::class.java))
         }
-
+        // --------------------------------------------------------------------
     }
 }

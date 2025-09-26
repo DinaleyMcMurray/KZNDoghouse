@@ -102,6 +102,7 @@
         android:textColor="@color/black"
         android:typeface="serif"
         android:layout_marginBottom="20dp"/>
+
     <Button
         android:id="@+id/adminLoginBtn"
         android:layout_width="wrap_content"
@@ -114,6 +115,5 @@
         android:backgroundTint="@color/SecondaryBtnColour"
         android:textColor="@color/black"
         android:typeface="serif"/>
-
 
 </LinearLayout>
