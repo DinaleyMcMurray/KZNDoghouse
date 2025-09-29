@@ -1,6 +1,7 @@
 package vcmsa.projects.thedoghouse_prototype
 
 import android.app.Application
+import android.content.Context
 import com.google.firebase.FirebaseApp
 
 class MyApplication : Application() {

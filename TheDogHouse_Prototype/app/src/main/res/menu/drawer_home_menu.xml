@@ -4,86 +4,70 @@
     <!-- Home -->
     <item
         android:id="@+id/nav_home"
-        android:title="Home"
-        android:icon="@drawable/ic_home" />
+        android:title="Home" />
 
     <!-- Adoptions -->
     <item
         android:id="@+id/nav_adoption"
-        android:title="Adoption"
-        android:icon="@drawable/ic_pets" />
+        android:title="Adoption" />
 
     <item
         android:id="@+id/nav_view_adoption"
-        android:title="View Adoption"
-        android:icon="@drawable/ic_list" />
+        android:title="View Adoption" />
 
     <item
         android:id="@+id/nav_adoption_history"
-        android:title="Adoption History"
-        android:icon="@drawable/ic_history" />
+        android:title="Adoption History" />
 
     <!-- Donations -->
     <item
         android:id="@+id/nav_funds"
-        android:title="Funds Donation"
-        android:icon="@drawable/ic_money" />
+        android:title="Funds Donation" />
 
     <item
         android:id="@+id/nav_dog_food"
-        android:title="Dog Food Donation"
-        android:icon="@drawable/ic_food" />
+        android:title="Dog Food Donation" />
 
     <item
         android:id="@+id/nav_meds"
-        android:title="Medication Donation"
-        android:icon="@drawable/ic_medical" />
+        android:title="Medication Donation" />
 
     <item
         android:id="@+id/nav_donation_history"
-        android:title="Donation History"
-        android:icon="@drawable/ic_history" />
+        android:title="Donation History" />
 
     <!-- Volunteers -->
     <item
         android:id="@+id/nav_volunteer"
-        android:title="Volunteer"
-        android:icon="@drawable/ic_people" />
+        android:title="Volunteer" />
 
     <item
         android:id="@+id/nav_volunteer_management"
-        android:title="Volunteer Management"
-        android:icon="@drawable/ic_manage_accounts" />
+        android:title="Volunteer Management" />
 
     <!-- Newsletter -->
     <item
         android:id="@+id/nav_newsletter"
-        android:title="Newsletter"
-        android:icon="@drawable/ic_email" />
+        android:title="Newsletter" />
 
     <!-- Register / Login -->
     <item
         android:id="@+id/nav_register"
-        android:title="Register"
-        android:icon="@drawable/ic_person_add" />
+        android:title="Register" />
 
     <item
         android:id="@+id/nav_login"
-        android:title="Login"
-        android:icon="@drawable/ic_login" />
+        android:title="Login" />
 
     <item
         android:id="@+id/nav_admin_login"
-        android:title="Admin Login"
-        android:icon="@drawable/ic_admin_panel_settings" />
+        android:title="Admin Login" />
     <item
     android:id="@+id/nav_uploads"
-    android:title="My Uploads"
-    android:icon="@drawable/ic_folder" />
+    android:title="My Uploads" />
 
     <item
     android:id="@+id/nav_settings"
-    android:title="Settings"
-    android:icon="@drawable/ic_settings" />
+    android:title="Settings"/>
 
 </menu>

@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil.setContentView
 import com.google.firebase.auth.FirebaseAuth
 import vcmsa.projects.thedoghouse_prototype.R // NOTE: This import of R is usually unnecessary and should be avoided
 

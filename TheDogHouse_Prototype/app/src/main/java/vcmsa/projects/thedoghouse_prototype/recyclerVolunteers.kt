@@ -1,5 +1,6 @@
 package vcmsa.projects.thedoghouse_prototype
 
+import VolunteerRecord
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ class recyclerVolunteers(private val volunteers: List<VolunteerRecord>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VolunteerViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recycler_volunteer, parent, false)
+            .inflate(R.layout.recycler_volunteers, parent, false)
         return VolunteerViewHolder(view)
     }
 
