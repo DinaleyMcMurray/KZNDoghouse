@@ -61,9 +61,15 @@
     <!--    </LinearLayout>-->
 
     <!-- Search Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
     <EditText
         android:id="@+id/etSearch"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="Search adoptions..."
         android:inputType="text"
@@ -72,6 +78,15 @@
         android:backgroundTint="@color/purple"
         android:textColor="@android:color/black"/>
 
+        <Button
+            android:id="@+id/AddDogBtn"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/purple"
+            android:textColor="@color/black"
+            android:text="Add Dog" />
+
+    </LinearLayout>
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleradoptionhistory"

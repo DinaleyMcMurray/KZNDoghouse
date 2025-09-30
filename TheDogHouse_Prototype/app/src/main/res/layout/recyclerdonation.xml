@@ -36,7 +36,7 @@
                 android:id="@+id/textDonationType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Donation: "
+                android:text="Donation Type: "
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:paddingBottom="8dp" />
@@ -68,13 +68,40 @@
                 android:textSize="20sp"
                 android:paddingBottom="8dp" />
 
-            <Button
-                android:id="@+id/btnDocuments"
+            <TextView
+                android:id="@+id/textDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/Green"
-                android:textColor="@color/black"
-                android:text="Download Documents" />
+                android:text="Date: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:paddingBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="3"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/buttonEdit"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Edit" />
+
+                <Button
+                    android:id="@+id/buttonAdopted"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Adopted" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
