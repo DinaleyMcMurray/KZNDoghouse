@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.databinding:databinding-runtime:8.9.1@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/17d5c33e0592bae96d87fbbb545c40fc/transformed/databinding-runtime-8.9.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/17d5c33e0592bae96d87fbbb545c40fc/transformed/databinding-runtime-8.9.1/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/17d5c33e0592bae96d87fbbb545c40fc/transformed/databinding-runtime-8.9.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/androidx.databinding/databinding-runtime/8.9.1/6b97d41147204db40e54e7e522d2e20eaf99d787/databinding-runtime-8.9.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

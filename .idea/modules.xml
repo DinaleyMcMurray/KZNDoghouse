@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/KZNDoghouse (3).iml" filepath="$PROJECT_DIR$/.idea/KZNDoghouse (3).iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TheDogHouse_Prototype.iml" filepath="$PROJECT_DIR$/.idea/modules/TheDogHouse_Prototype.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TheDogHouse_Prototype.app.unitTest.iml" />
     </modules>
   </component>
 </project>

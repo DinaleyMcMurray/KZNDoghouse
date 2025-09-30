@@ -62,7 +62,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/mission"
+                android:id="@+id/subheading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Funds Donation"
@@ -71,6 +71,18 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:layout_marginTop="25dp"/>
+
+            <TextView
+                android:id="@+id/subheading2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter an amount for our records and then make the payment using paypal of EFT."
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginTop="25dp"/>
 
             <LinearLayout
@@ -101,8 +113,17 @@
                     android:text="R1000" />
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_horizontal">
+
             <EditText
-                android:id="@+id/editAmount" android:layout_width="match_parent"
+                android:id="@+id/editAmount"
+                android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:hint="Other Amount"
                 android:padding="8dp"
@@ -111,6 +132,17 @@
                 android:textColor="@color/black"
                 android:typeface="serif"
                 android:textColorHighlight="@color/cardview_dark_background" />
+
+            <Button
+                android:id="@+id/enterAmountBtn"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:backgroundTint="@color/purple"
+                android:textColor="@color/black"
+                android:text="Funds" />
+
+
+        </LinearLayout>
 
             <ImageView
                 android:id="@+id/imageView10"

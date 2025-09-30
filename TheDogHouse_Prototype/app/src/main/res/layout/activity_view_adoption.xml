@@ -34,13 +34,6 @@
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/border"-->
-<!--                android:layout_width="391dp"-->
-<!--                android:layout_height="24dp"-->
-<!--                android:layout_weight="1"-->
-<!--                app:srcCompat="@drawable/border" />-->
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/viewadoptionrecyclerview"
                 android:layout_width="match_parent"
@@ -53,7 +46,3 @@
 
         </LinearLayout>
         </ScrollView>
-
-<!--    </ScrollView>-->
-
-<!--</LinearLayout>-->

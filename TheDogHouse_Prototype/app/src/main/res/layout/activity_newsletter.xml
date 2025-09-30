@@ -1,48 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:gravity="center"
+    android:background="@color/LightBrown"
+    tools:context=".NewsletterActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Subscribe to Our Newsletter"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp" />
-
-    <EditText
-        android:id="@+id/etNewsletterEmail"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Enter your email"
-        android:inputType="textEmailAddress"
-        android:padding="8dp"
-        android:backgroundTint="@color/purple"
-        android:textColor="@color/black" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnSubscribe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Subscribe"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/LightGreen"
-        android:textColor="@color/black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginVertical="16dp" />
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upcoming Events"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="30dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerNewsletters"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerNewsletters"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
