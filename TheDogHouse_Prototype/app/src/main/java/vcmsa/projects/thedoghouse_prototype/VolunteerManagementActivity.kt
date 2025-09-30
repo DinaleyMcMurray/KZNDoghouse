@@ -43,5 +43,30 @@ class VolunteerManagementActivity : AppCompatActivity() {
 
         adapter = VolunteerAdapter(volunteerList)
         recyclerView.adapter = adapter
+
+        //        // Intent to open the app when user taps the notification
+//        val intent = Intent(this, MainActivity::class.java)
+//        val pendingIntent = PendingIntent.getActivity(
+//            this,
+//            0,
+//            intent,
+//            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+//        )
+
+        // Channel
+
     }
+//        // Notification design
+//        val builder = NotificationCompat.Builder(this, channelId)
+//            .setSmallIcon(R.drawable.volunteer) // replace with your own icon
+//            .setContentTitle("We have a new volunteer!")
+//            .setContentText("Volunteer name: $volunteername, Volunteer age: $volunteerage")
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            .setContentIntent(pendingIntent)
+//            .setAutoCancel(true)
+//
+//        // Show notification
+//        val notificationManager = NotificationManagerCompat.from(this)
+//        notificationManager.notify(System.currentTimeMillis().toInt(), builder.build())
+
 }
