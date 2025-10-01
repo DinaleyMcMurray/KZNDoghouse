@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home" android:title="Home"/>
+    <item android:id="@+id/nav_uploads" android:title="My Uploads"/>
+    <item android:id="@+id/nav_settings" android:title="Settings"/>
+    <item android:id="@+id/nav_register" android:title="Register"/>
+    <item android:id="@+id/nav_newsletter" android:title="Newsletter"/>
+    <item android:id="@+id/nav_meds" android:title="Meds Donation"/>
+    <item android:id="@+id/nav_funds" android:title="Funds"/>
+    <item android:id="@+id/nav_volunteer" android:title="Volunteer"/>
+</menu>

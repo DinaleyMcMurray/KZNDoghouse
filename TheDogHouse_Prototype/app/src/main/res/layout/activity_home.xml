@@ -1,378 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/LightBrown"
     tools:context=".HomeActivity">
 
-
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:padding="10dp">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/heading"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="The KZN Doghouse"-->
-<!--                android:textAlignment="center"-->
-<!--                android:typeface="serif"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="30sp"-->
-<!--                android:textStyle="bold"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/heading2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Dog Sanctuary in South Africa"-->
-<!--                android:textAlignment="center"-->
-<!--                android:typeface="serif"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="20sp"/>-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:gravity="center_horizontal">-->
-
-
-<!--            </LinearLayout>-->
-
-
-
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:padding="10dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:gravity="center_horizontal">-->
-
-
-
-<!--            </LinearLayout>-->
-
-
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:padding="10dp"-->
-<!--                android:gravity="center_horizontal">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/imageView7"-->
-<!--                    android:layout_width="193dp"-->
-<!--                    android:layout_height="182dp"-->
-<!--                    app:srcCompat="@drawable/dog1" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/imageView8"-->
-<!--                    android:layout_width="200dp"-->
-<!--                    android:layout_height="175dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    app:srcCompat="@drawable/dog2" />-->
-
-<!--            </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:padding="10dp"-->
-<!--            android:gravity="center_horizontal">-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView9"-->
-<!--                android:layout_width="210dp"-->
-<!--                android:layout_height="175dp"-->
-<!--                android:layout_weight="1"-->
-<!--                app:srcCompat="@drawable/dog3" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView11"-->
-<!--                android:layout_width="186dp"-->
-<!--                android:layout_height="181dp"-->
-<!--                android:layout_weight="1"-->
-<!--                app:srcCompat="@drawable/dog4" />-->
-<!--        </LinearLayout>-->
-
-<!--        <TextView-->
-<!--                android:id="@+id/help"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Theres no place like home"-->
-<!--                android:textAlignment="center"-->
-<!--                android:typeface="serif"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textStyle="italic"-->
-<!--                android:layout_margin="100dp"/>-->
-
-
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
-
-    <ScrollView
+    <!-- Main content -->
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/LightBrown">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/heading"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="The KZN Doghouse"
-                        android:textAlignment="center"
-                        android:typeface="serif"
-                        android:textColor="@color/black"
-                        android:textSize="30sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/heading2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Dog Sanctuary in South Africa"
-                        android:textAlignment="center"
-                        android:typeface="serif"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"/>
-
-
-        <LinearLayout
+        <!-- Top app bar with built-in nav icon (opens drawer) -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="The KZN Doghouse"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView2"-->
-<!--                android:layout_width="300dp"-->
-<!--                android:layout_height="98dp"-->
-<!--                android:layout_gravity="center_horizontal"-->
-<!--                app:srcCompat="@drawable/aboutus" />-->
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="20dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/LightBrown"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="@color/LightGreen"
-                    android:padding="24dp">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/black"
-                        android:text="The KZN Doghouse is a registered NPO and PBO, proudly operating as a no-kill shelter in Queensburgh, Durban. Since its establishment in 2021, the organization has provided care for over hundreds of dogs and puppies annually, assisting more then 650 animals in need to date."/>
-
-                    <Button
-                        android:id="@+id/button7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Button" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/mission"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="Our Mission"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:typeface="serif" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/Lightpurple"
-                    android:padding="24dp">
-
-                    <!-- Image + Text Row -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-
-                        <!-- Rescue -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                app:srcCompat="@drawable/img" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Rescue"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <!-- Rehabilitate -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                app:srcCompat="@drawable/rehabilitate" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Rehabilitate"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <!-- Rehome -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                app:srcCompat="@drawable/rehome" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Rehome"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
+        <!-- Your original content -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <!--        <ImageView-->
-                <!--            android:id="@+id/imageView3"-->
-                <!--            android:layout_width="wrap_content"-->
-                <!--            android:layout_height="wrap_content"-->
-                <!--            android:layout_weight="1"-->
-                <!--            app:srcCompat="@drawable/border" />-->
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="The KZN Doghouse"
+                    android:textAlignment="center"
+                    android:typeface="serif"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"/>
 
-                <!--        <ImageView-->
-                <!--            android:id="@+id/imageView4"-->
-                <!--            android:layout_width="wrap_content"-->
-                <!--            android:layout_height="wrap_content"-->
-                <!--            android:layout_weight="1"-->
-                <!--            app:srcCompat="@drawable/border" />-->
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/help"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="How you can help?"
-                android:textAlignment="center"
-                android:typeface="serif"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="35dp"/>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="20dp"
-                >
+                <TextView
+                    android:id="@+id/heading2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dog Sanctuary in South Africa"
+                    android:textAlignment="center"
+                    android:typeface="serif"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/LightBrown"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="@color/pink"
-                    android:padding="24dp">
+                    android:padding="16dp">
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="30dp"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@color/LightBrown"
+                            android:layout_gravity="center_horizontal"
+                            android:backgroundTint="@color/LightGreen"
+                            android:padding="24dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/black"
+                                android:text="The KZN Doghouse is a registered NPO and PBO, proudly operating as a no-kill shelter in Queensburgh, Durban. Since its establishment in 2021, the organization has provided care for over hundreds of dogs and puppies annually, assisting more then 650 animals in need to date."/>
+
+                            <Button
+                                android:id="@+id/button7"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Button" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
+                        android:id="@+id/mission"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="Our Mission"
+                        android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:text="Shelter is currently at capacity, with high operating costs, which limits our ability in new rescues. Your support, no matter how small, can make a big difference."/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
 
-                </LinearLayout>
-    </ScrollView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="30dp"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="20dp">
 
-</LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@color/Lightpurple"
+                            android:padding="24dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        app:srcCompat="@drawable/img" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Rescue"
+                                        android:textSize="16sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        app:srcCompat="@drawable/rehabilitate" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Rehabilitate"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        app:srcCompat="@drawable/rehome" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Rehome"
+                                        android:textSize="16sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/help"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="How you can help?"
+                        android:textAlignment="center"
+                        android:typeface="serif"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="35dp"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="30dp"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@color/LightBrown"
+                            android:layout_gravity="center_horizontal"
+                            android:backgroundTint="@color/pink"
+                            android:padding="24dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/black"
+                                android:text="Shelter is currently at capacity, with high operating costs, which limits our ability in new rescues. Your support, no matter how small, can make a big difference."/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Slide-out left drawer with your items -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/drawer_home_menu"/>
+</androidx.drawerlayout.widget.DrawerLayout>
