@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvDogName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dog's Name:"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvSex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sex:" />
+
+    <TextView
+        android:id="@+id/tvAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Age:" />
+
+    <TextView
+        android:id="@+id/tvOwnerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Owner's Name:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Address:" />
+
+    <TextView
+        android:id="@+id/tvContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact Number:" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email:" />
+
+    <TextView
+        android:id="@+id/tvIdNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID Number:" />
+
+    <Button
+        android:id="@+id/btnDownload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Download Documents"
+        android:backgroundTint="@color/Green"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

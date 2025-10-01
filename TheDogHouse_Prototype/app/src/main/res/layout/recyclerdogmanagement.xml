@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textDogName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dog's Name: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textSex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dog's Sex: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dog's Age:"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:paddingBottom="20dp" />
+
+            <TextView
+                android:id="@+id/textVac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vac Status: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textSterlStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sterilization Status: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textBio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bio: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:paddingBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="3"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/buttonEdit"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Edit" />
+
+                <Button
+                    android:id="@+id/buttonAdopted"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Adopted" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
