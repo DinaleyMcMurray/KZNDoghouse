@@ -103,4 +103,17 @@
         android:typeface="serif"
         android:layout_marginBottom="20dp"/>
 
+    <Button
+        android:id="@+id/adminLoginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Admin Login"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:backgroundTint="@color/SecondaryBtnColour"
+        android:textColor="@color/black"
+        android:typeface="serif"/>
+
 </LinearLayout>

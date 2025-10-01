@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/LightBrown"
+    tools:context=".HelpActivity">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Help"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="30dp"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="20dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/LightBrown"
+                        android:layout_gravity="center_horizontal"
+                        android:backgroundTint="@color/LightGreen"
+                        android:padding="24dp">
+
+
+                        <TextView
+                            android:id="@+id/helpContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="4dp"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:text="• You can adopt or sponsor a dog. 🐶 "
+                            android:padding="15dp"/>
+
+
+                    <TextView
+                        android:id="@+id/helpContent2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="4dp"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:text="• You can also donate food, medicine, or funds to support them. 💊 "
+                        android:padding="15dp"/>
+
+                        <TextView
+                            android:id="@+id/helpContent3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="4dp"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:text="• To move around the app, tap the menu (☰) icon at the top of your screen.  "
+                            android:padding="15dp"/>
+
+                        <TextView
+                            android:id="@+id/helpContent4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="4dp"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:text="• A side panel will open with icons and labels for each feature.  "
+                            android:padding="15dp"/>
+
+
+                        <TextView
+                            android:id="@+id/helpContent5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="4dp"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:text="• Tap any icon to go directly to that page."
+                            android:padding="15dp"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="30dp"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/Lightpurple"
+                        android:padding="24dp">
+
+                        <TextView
+                            android:id="@+id/mission"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:text="Please click the button bellow to contact a manager."
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:typeface="serif" />
+
+                        <Button
+                            android:id="@+id/btnContactManager"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/ButtonColour"
+                            android:textColor="@color/black"
+                            android:text="Contact a manager" />
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Home -->
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home" />
+
+    <!-- Adoptions -->
+    <item
+        android:id="@+id/nav_adoption"
+        android:title="Adoption" />
+
+    <item
+        android:id="@+id/nav_view_adoption"
+        android:title="View Adoption" />
+
+    <item
+        android:id="@+id/nav_adoption_history"
+        android:title="Adoption History" />
+
+    <!-- Donations -->
+    <item
+        android:id="@+id/nav_funds"
+        android:title="Funds Donation" />
+
+    <item
+        android:id="@+id/nav_dog_food"
+        android:title="Dog Food Donation" />
+
+    <item
+        android:id="@+id/nav_meds"
+        android:title="Medication Donation" />
+
+    <item
+        android:id="@+id/nav_donation_history"
+        android:title="Donation History" />
+
+    <!-- Volunteers -->
+    <item
+        android:id="@+id/nav_volunteer"
+        android:title="Volunteer" />
+
+    <item
+        android:id="@+id/nav_volunteer_management"
+        android:title="Volunteer Management" />
+
+    <!-- Newsletter -->
+    <item
+        android:id="@+id/nav_newsletter"
+        android:title="Newsletter" />
+
+    <!-- Register / Login -->
+    <item
+        android:id="@+id/nav_register"
+        android:title="Register" />
+
+    <item
+        android:id="@+id/nav_login"
+        android:title="Login" />
+
+    <item
+        android:id="@+id/nav_admin_login"
+        android:title="Admin Login" />
+    <item
+    android:id="@+id/nav_uploads"
+    android:title="My Uploads" />
+
+    <item
+    android:id="@+id/nav_settings"
+    android:title="Settings"/>
+
+</menu>

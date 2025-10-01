@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.gms.google-services")
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -48,8 +49,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.room.common.jvm)
-    implementation(libs.androidx.room.compiler)
+    //implementation(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime.android)
+    implementation(libs.androidx.media3.common.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,7 +74,8 @@ dependencies {
 
 
 }
-
+// TEMPORARILY COMMENT OUT THIS ENTIRE BLOCK
+/*
 configurations.all {
     resolutionStrategy {
         force("org.jetbrains:annotations:23.0.0")
@@ -79,3 +83,4 @@ configurations.all {
 
     exclude(group = "com.intellij", module = "annotations")
 }
+*/
