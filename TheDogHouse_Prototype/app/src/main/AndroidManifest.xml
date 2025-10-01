@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -17,39 +16,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheDogHouse_Prototype"
         tools:targetApi="31">
-        <activity
-            android:name=".AdoptionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ViewAdoptionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MedsDonationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DogFoodActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FundsDonationsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".AboutUs"-->
-<!--            android:exported="false" />-->
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+
+        <!-- Adoption -->
+        <activity android:name=".AdoptionActivity" android:exported="false" />
+        <activity android:name=".ViewAdoptionActivity" android:exported="false" />
+
+        <!-- Donations -->
+        <activity android:name=".MedsDonationActivity" android:exported="false" />
+        <activity android:name=".DogFoodActivity" android:exported="false" />
+        <activity android:name=".FundsDonationsActivity" android:exported="false" />
+
+        <!-- Volunteers -->
+        <activity android:name=".VolunteerActivity" android:exported="false" />
+        <activity android:name=".VolunteerManagementActivity" android:exported="false" />
+
+        <!-- Other -->
+        <activity android:name=".HomeActivity" android:exported="false" />
+        <activity android:name=".LoginActivity" android:exported="false" />
+        <activity android:name=".RegisterActivity" android:exported="false" />
+
+        <!-- Main Entry Point -->
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
