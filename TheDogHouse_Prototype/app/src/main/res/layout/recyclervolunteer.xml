@@ -22,71 +22,69 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <ImageView
-                    android:id="@+id/imageEvent"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:scaleType="centerCrop"
-                    android:layout_marginBottom="12dp"/>
-
                 <TextView
-                    android:id="@+id/textEventName"
+                    android:id="@+id/textVolunteerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name:"
+                    android:text="Name: "
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:paddingBottom="8dp" />
 
                 <TextView
-                    android:id="@+id/textWhere"
+                    android:id="@+id/textSex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Where: "
+                    android:text="Sex: "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="4dp" />
+                    android:textSize="20sp"
+                    android:paddingBottom="8dp" />
 
                 <TextView
-                    android:id="@+id/textWhen"
+                    android:id="@+id/textAge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="When: "
-                    android:textStyle="bold"
+                    android:text="Age:"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:paddingBottom="4dp" />
+                    android:textSize="20sp"
+                    android:paddingBottom="8dp" />
+
 
                 <TextView
-                    android:id="@+id/textSter"
+                    android:id="@+id/textHours"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cost: "
-                    android:textStyle="bold"
+                    android:text="Hours: "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:paddingBottom="16dp" />
+                    android:textSize="20sp"
+                    android:paddingBottom="8dp" />
 
                 <TextView
-                    android:id="@+id/textAbout"
+                    android:id="@+id/textVolunteerNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="About: "
+                    android:text="Contact Number: "
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:paddingBottom="16dp" />
+                    android:textSize="20sp"
+                    android:paddingBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/textVolunteerEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email: "
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:paddingBottom="8dp" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btnDocuments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/LightGreen"
+                    android:backgroundTint="@color/Green"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="RSVP" />
+                    android:text="Download Documents" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

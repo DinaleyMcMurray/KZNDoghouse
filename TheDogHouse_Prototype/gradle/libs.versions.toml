@@ -1,5 +1,6 @@
 [versions]
 agp = "8.9.1"
+googleGms = "4.4.2"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -31,4 +32,6 @@ androidx-media3-common-ktx = { group = "androidx.media3", name = "media3-common-
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGms" }
 
