@@ -6,17 +6,17 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.databinding.DataBindingUtil.setContentView
-import com.google.firebase.FirebaseApp // Note: This import is usually not needed in Activity but is kept from the original snippet
 import com.google.firebase.auth.FirebaseAuth
-import vcmsa.projects.thedoghouse_prototype.R // Note: This import of R is usually unnecessary and should be avoided
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import vcmsa.projects.thedoghouse_prototype.R
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
@@ -26,15 +26,8 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
 
-        // --- Resolved Conflict: Added Sign In Button Logic (from HEAD) ---
-        val signInButton = findViewById<Button>(R.id.signinBtn )
-
-        signInButton.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-        // ------------------------------------------------------------------
-
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         val nameEditText = findViewById<EditText>(R.id.etRegName)
         val emailEditText = findViewById<EditText>(R.id.etRegEmail)
@@ -42,6 +35,11 @@ class RegisterActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.etRegPassword)
         val confirmPasswordEditText = findViewById<EditText>(R.id.etRegConfirmPassword)
         val registerButton = findViewById<Button>(R.id.btnRegister)
+        val signInButton = findViewById<Button>(R.id.signinBtn)
+
+        signInButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
 
         registerButton.setOnClickListener {
             val name = nameEditText.text.toString().trim()
@@ -63,10 +61,28 @@ class RegisterActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
-                        // You can navigate to another screen here
-                        startActivity(Intent(this, LoginActivity::class.java))
-                        finish()
+                        val user = auth.currentUser
+                        user?.let {
+                            val userData = hashMapOf(
+                                "uid" to it.uid,
+                                "name" to name,
+                                "email" to email,
+                                "contact" to contact,
+                                "role" to "donor", // default role
+                                "createdAt" to FieldValue.serverTimestamp()
+                            )
+
+                            db.collection("users").document(it.uid)
+                                .set(userData)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
+                                    startActivity(Intent(this, LoginActivity::class.java))
+                                    finish()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(this, "Error saving user: ${e.message}", Toast.LENGTH_LONG).show()
+                                }
+                        }
                     } else {
                         Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }

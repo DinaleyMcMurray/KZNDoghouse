@@ -20,6 +20,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Heading -->
             <TextView
                 android:id="@+id/heading"
                 android:layout_width="match_parent"
@@ -32,6 +33,7 @@
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"/>
 
+            <!-- Navigation Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,27 +42,31 @@
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/FundsBtn" android:layout_width="120dp"
+                    android:id="@+id/FundsBtn"
+                    android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/pink"
                     android:textColor="@color/black"
                     android:text="Funds" />
 
                 <Button
-                    android:id="@+id/DogFoodBtn" android:layout_width="120dp"
+                    android:id="@+id/DogFoodBtn"
+                    android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/ButtonColour"
                     android:textColor="@color/black"
                     android:text="Dog Food" />
 
                 <Button
-                    android:id="@+id/MedsBtn" android:layout_width="120dp"
+                    android:id="@+id/MedsBtn"
+                    android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/ButtonColour"
                     android:textColor="@color/black"
                     android:text="Medication" />
             </LinearLayout>
 
+            <!-- Subheading -->
             <TextView
                 android:id="@+id/subheading"
                 android:layout_width="match_parent"
@@ -73,158 +79,58 @@
                 android:textStyle="bold"
                 android:layout_marginTop="25dp"/>
 
-            <TextView
-                android:id="@+id/subheading2"
+            <!-- Input Fields -->
+            <EditText
+                android:id="@+id/DonorNameFunds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please enter an amount for our records and then make the payment using paypal of EFT."
-                android:textAlignment="center"
-                android:typeface="serif"
+                android:hint="Donor Full Name"
+                android:padding="12dp"
+                android:backgroundTint="@color/purple"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="25dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/buttonR100" android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:backgroundTint="@color/LightGreen"
-                    android:textColor="@color/black"
-                    android:text="R100" />
-
-                <Button
-                    android:id="@+id/buttonR500" android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:backgroundTint="@color/LightGreen"
-                    android:textColor="@color/black"
-                    android:text="R500" />
-
-                <Button
-                    android:id="@+id/buttonR1000" android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:backgroundTint="@color/LightGreen"
-                    android:textColor="@color/black"
-                    android:text="R1000" />
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:gravity="center_horizontal">
+                android:layout_marginTop="20dp" />
 
             <EditText
-                android:id="@+id/editAmount"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:hint="Other Amount"
-                android:padding="8dp"
+                android:id="@+id/DonationAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Donation Amount"
                 android:inputType="numberDecimal"
+                android:padding="12dp"
                 android:backgroundTint="@color/purple"
                 android:textColor="@color/black"
-                android:typeface="serif"
-                android:textColorHighlight="@color/cardview_dark_background" />
+                android:layout_marginTop="12dp" />
 
+            <EditText
+                android:id="@+id/PaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Payment Method (PayPal, Visa, EFT)"
+                android:padding="12dp"
+                android:backgroundTint="@color/purple"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/ReferenceNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Reference Number"
+                android:padding="12dp"
+                android:backgroundTint="@color/purple"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp" />
+
+            <!-- Submit Button -->
             <Button
-                android:id="@+id/enterAmountBtn"
-                android:layout_width="120dp"
-                android:layout_height="45dp"
-                android:backgroundTint="@color/purple"
+                android:id="@+id/SubmitFundsBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/LightGreen"
+                android:text="Submit Donation"
                 android:textColor="@color/black"
-                android:text="Funds" />
-
-
-        </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/fundsdonation" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                app:cardCornerRadius="30dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:text="Choose Payment Method"
-                        android:layout_height="wrap_content"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_horizontal"> <ImageView
-                        android:id="@+id/btnPayPal" android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginEnd="8dp" app:srcCompat="@drawable/paypal" />
-
-
-                        <ImageView
-                            android:id="@+id/btnVisa" app:srcCompat="@drawable/visa"
-                            android:layout_height="70dp"
-                            android:layout_width="70dp"
-                            android:layout_marginEnd="8dp"/> <ImageView
-                            android:id="@+id/btnEft" app:srcCompat="@drawable/eft_blue"
-                            android:layout_height="70dp"
-                            android:layout_width="70dp"/> </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_horizontal"
-                        android:layout_marginTop="8dp">
-
-                        <TextView
-                            android:id="@+id/linkPayPal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="PayPal"
-                            android:layout_marginEnd="8dp"
-                            android:textColor="@color/purple"
-                            android:textStyle="italic" />
-
-                        <TextView
-                            android:id="@+id/linkVisa"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Visa"
-                            android:layout_marginEnd="8dp"
-                            android:textColor="@color/purple"
-                            android:textStyle="italic" />
-
-                        <TextView
-                            android:id="@+id/linkEft"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="EFT"
-                            android:textColor="@color/purple"
-                            android:textStyle="italic" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                android:textStyle="bold"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

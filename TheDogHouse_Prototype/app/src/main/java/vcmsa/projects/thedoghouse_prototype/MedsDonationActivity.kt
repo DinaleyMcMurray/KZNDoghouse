@@ -1,16 +1,12 @@
 package vcmsa.projects.thedoghouse_prototype
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.databinding.DataBindingUtil.setContentView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MedsDonationActivity : AppCompatActivity() {
@@ -22,28 +18,18 @@ class MedsDonationActivity : AppCompatActivity() {
     private lateinit var dropOffTimeEditText: EditText
     private lateinit var submitButton: Button
 
-    // Navigation buttons
     private lateinit var fundsButton: Button
     private lateinit var dogFoodButton: Button
     private lateinit var medicationButton: Button
 
     private val firestore = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Integrated minimal setup from Ntobeko2
-        enableEdgeToEdge()
         setContentView(R.layout.activity_meds_donation)
 
-        // Edge-to-edge padding logic (from Ntobeko2)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        // Linking XML views (from HEAD)
+        // Link XML views
         donorNameEditText = findViewById(R.id.DonorName)
         medicationNameEditText = findViewById(R.id.MedicationName)
         quantityEditText = findViewById(R.id.Quantity)
@@ -55,46 +41,18 @@ class MedsDonationActivity : AppCompatActivity() {
         dogFoodButton = findViewById(R.id.button2)
         medicationButton = findViewById(R.id.button3)
 
-        // Submit data to Firestore (from HEAD)
+        // Handle submit
         submitButton.setOnClickListener {
-            val donorName = donorNameEditText.text.toString().trim()
-            val medicationName = medicationNameEditText.text.toString().trim()
-            val quantity = quantityEditText.text.toString().trim()
-            val date = dropOffDateEditText.text.toString().trim()
-            val time = dropOffTimeEditText.text.toString().trim()
-
-            if (donorName.isEmpty() || medicationName.isEmpty() || quantity.isEmpty() || date.isEmpty() || time.isEmpty()) {
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-            } else {
-                val donationData = hashMapOf(
-                    "donorName" to donorName,
-                    "medicationName" to medicationName,
-                    "quantity" to quantity,
-                    "dropOffDate" to date,
-                    "dropOffTime" to time
-                )
-
-                firestore.collection("MedicationDonations")
-                    .add(donationData)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Medication donation submitted!", Toast.LENGTH_LONG).show()
-                        clearFields()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "Failed to submit. Try again.", Toast.LENGTH_SHORT).show()
-                    }
-            }
+            saveMedicationDonation()
         }
 
-        // Navigation buttons (from HEAD)
+        // Navigation buttons
         fundsButton.setOnClickListener {
-            val intent = Intent(this, FundsDonationsActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, FundsDonationsActivity::class.java))
         }
 
         dogFoodButton.setOnClickListener {
-            val intent = Intent(this, DogFoodActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, DogFoodActivity::class.java))
         }
 
         medicationButton.setOnClickListener {
@@ -102,7 +60,44 @@ class MedsDonationActivity : AppCompatActivity() {
         }
     }
 
-    // clearFields function (from HEAD)
+    private fun saveMedicationDonation() {
+        val donorName = donorNameEditText.text.toString().trim()
+        val medicationName = medicationNameEditText.text.toString().trim()
+        val quantity = quantityEditText.text.toString().trim()
+        val date = dropOffDateEditText.text.toString().trim()
+        val time = dropOffTimeEditText.text.toString().trim()
+
+        if (donorName.isEmpty() || medicationName.isEmpty() || quantity.isEmpty() || date.isEmpty() || time.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val userId = auth.currentUser?.uid ?: "anonymous"
+
+        // Data structure for Firestore
+        val donationData = hashMapOf(
+            "donorName" to donorName,
+            "medicationName" to medicationName,
+            "quantity" to quantity,
+            "dropOffDate" to date,
+            "dropOffTime" to time,
+            "timestamp" to System.currentTimeMillis()
+        )
+
+
+        firestore.collection("users")
+            .document(userId)
+            .collection("MedicationDonations")
+            .add(donationData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Medication donation submitted!", Toast.LENGTH_LONG).show()
+                clearFields()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Failed to submit. Try again.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun clearFields() {
         donorNameEditText.text.clear()
         medicationNameEditText.text.clear()
