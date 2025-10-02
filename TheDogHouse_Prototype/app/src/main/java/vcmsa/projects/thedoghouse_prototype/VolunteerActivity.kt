@@ -105,7 +105,7 @@ class VolunteerActivity : AppCompatActivity() {
         }
     }
 
-    // Function should be outside onCreate
+
     private fun clearFields() {
         volName.text.clear()
         volGender.text.clear()
