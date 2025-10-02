@@ -124,7 +124,8 @@
                         android:text="Does the user need to RSVP?"
                         android:textSize="18dp"
                         android:paddingBottom="15dp"
-                        android:paddingTop="15dp"/>
+                        android:paddingTop="15dp"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                     <EditText
                         android:id="@+id/editTextTextMultiLine"

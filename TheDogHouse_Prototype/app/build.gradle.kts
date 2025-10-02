@@ -74,7 +74,7 @@ dependencies {
     //implementation ("com.google.firebase:firebase-database-ktx:20.3.0")
     implementation ("com.google.firebase:firebase-analytics-ktx")
 
-
+    implementation("com.cloudinary:cloudinary-android:2.0.0")
 }
 // TEMPORARILY COMMENT OUT THIS ENTIRE BLOCK
 /*

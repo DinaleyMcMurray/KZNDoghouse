@@ -2,22 +2,26 @@ package vcmsa.projects.thedoghouse_prototype
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri // From Ntobeko2
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText // From Ntobeko2
-import android.widget.ImageView // From Ntobeko2
-import android.widget.TextView // From Ntobeko2
-import android.widget.Toast // From main
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.databinding.DataBindingUtil.setContentView
+import com.google.firebase.auth.FirebaseAuth // ADDED: Import for Firebase Auth
+import com.google.firebase.firestore.FirebaseFirestore // ADDED: Import for Firestore
+import java.util.Date // ADDED: Import for timestamp
 
 class FundsDonationsActivity : AppCompatActivity() {
 
-    private var selectedAmount: String = "" // From Ntobeko2
+    private var selectedAmount: String = ""
+    private lateinit var auth: FirebaseAuth // ADDED: Auth instance
+    private val firestore = FirebaseFirestore.getInstance() // ADDED: Firestore instance
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,14 +29,17 @@ class FundsDonationsActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_funds_donations)
 
-        // Handle system insets (From Ntobeko2/Combined)
+        // ADDED: Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        // Handle system insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // NAVIGATION BUTTONS (From main/HEAD)
+        // NAVIGATION BUTTONS
         val DogFoodButton = findViewById<Button>(R.id.DogFoodBtn)
         val MedsButton = findViewById<Button>(R.id.MedsBtn)
 
@@ -46,12 +53,14 @@ class FundsDonationsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // FUND DONATION LOGIC (From Ntobeko2)
-        // Find views
+        // FUND DONATION LOGIC
         val etAmount = findViewById<EditText>(R.id.editAmount)
         val btn100 = findViewById<Button>(R.id.buttonR100)
         val btn500 = findViewById<Button>(R.id.buttonR500)
         val btn1000 = findViewById<Button>(R.id.buttonR1000)
+
+        // NEW BUTTON
+        val enterAmountButton = findViewById<Button>(R.id.enterAmountBtn)
 
         val btnPayPal = findViewById<ImageView>(R.id.btnPayPal)
         val btnVisa = findViewById<ImageView>(R.id.btnVisa)
@@ -77,7 +86,22 @@ class FundsDonationsActivity : AppCompatActivity() {
             selectedAmount = "1000"
         }
 
-        // ==== Payment Options ====
+        // ==== NEW: Enter Amount Button Listener for Firestore Save ====
+        enterAmountButton.setOnClickListener {
+            val amountText = etAmount.text.toString().trim()
+            if (amountText.isEmpty()) {
+                Toast.makeText(this, "Please enter an amount or select a button.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Set the selected amount to whatever is in the EditText
+            selectedAmount = amountText
+
+            // Validate and Save to Firestore
+            saveFundsDonationToFirestore(selectedAmount)
+        }
+
+        // ==== Payment Options (now use selectedAmount which is set either by buttons or enterAmountButton) ====
         btnPayPal.setOnClickListener {
             openPayment("https://www.paypal.com/pay?amount=$selectedAmount")
         }
@@ -100,15 +124,58 @@ class FundsDonationsActivity : AppCompatActivity() {
         }
     }
 
-    // Open browser with payment link (From Ntobeko2)
+    // Open browser with payment link
     private fun openPayment(url: String) {
-        if (selectedAmount.isEmpty()) {
-            // fallback: let user type amount manually
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url.replace("amount=", "amount=0")))
-            startActivity(intent)
+        // If the user hasn't pressed the 'Funds' button (enterAmountBtn), use the currently entered text.
+        val finalAmount = if (selectedAmount.isEmpty()) {
+            findViewById<EditText>(R.id.editAmount)?.text?.toString()?.trim() ?: "0"
         } else {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            selectedAmount
         }
+
+        if (finalAmount.toDoubleOrNull() ?: 0.0 <= 0.0) {
+            Toast.makeText(this, "Please enter a valid amount before proceeding to payment.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url.replace("amount=$selectedAmount", "amount=$finalAmount")))
+        startActivity(intent)
+
+        // NOTE: We do not save to Firestore here, as the payment might fail.
+        // The previous design saves the intent to pay, not the payment confirmation.
+    }
+
+    // ADDED: Function to save donation to Firestore
+    private fun saveFundsDonationToFirestore(amount: String) {
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "Please log in to record your donation.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (amount.toDoubleOrNull() ?: 0.0 <= 0.0) {
+            Toast.makeText(this, "Invalid donation amount.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val donationData = hashMapOf(
+            "amount" to amount,
+            "type" to "Funds",
+            "dateSubmitted" to Date(),
+            "status" to "Pending Payment" // Important for fund tracking
+        )
+
+        // Save to the desired nested structure: Users/{uid}/FundsDonations/{auto_ID}
+        firestore.collection("Users")
+            .document(currentUser.uid)
+            .collection("FundsDonations")
+            .add(donationData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Donation of R$amount recorded. Proceed to payment!", Toast.LENGTH_LONG).show()
+                // Do NOT clear the amount field yet, as the user needs it for the payment links
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Failed to record donation. Try again.", Toast.LENGTH_SHORT).show()
+            }
     }
 }

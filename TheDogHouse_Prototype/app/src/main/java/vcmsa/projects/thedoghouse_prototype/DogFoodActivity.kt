@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil.setContentView
+// Removed redundant DataBindingUtil.setContentView import
+import com.google.firebase.auth.FirebaseAuth // ADDED: Import for Firebase Auth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Date // ADDED: Import for timestamp
 
 class DogFoodActivity : AppCompatActivity() {
 
@@ -19,11 +21,15 @@ class DogFoodActivity : AppCompatActivity() {
     private lateinit var dogFoodButton: Button
     private lateinit var medicationButton: Button
 
+    private lateinit var auth: FirebaseAuth // ADDED: Authentication instance
     private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dog_food)
+
+        // ADDED: Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
 
         donorNameEditText = findViewById(R.id.DonorName)
         dogFoodNameEditText = findViewById(R.id.DogFoodName)
@@ -36,6 +42,14 @@ class DogFoodActivity : AppCompatActivity() {
         medicationButton = findViewById(R.id.button3)
 
         submitButton.setOnClickListener {
+            // ADDED: Get current user and check authentication
+            val currentUser = auth.currentUser
+            if (currentUser == null) {
+                Toast.makeText(this, "Please log in to submit a donation.", Toast.LENGTH_LONG).show()
+                // You might want to navigate to LoginActivity here
+                return@setOnClickListener
+            }
+
             val donorName = donorNameEditText.text.toString().trim()
             val dogFoodName = dogFoodNameEditText.text.toString().trim()
             val date = dropOffDateEditText.text.toString().trim()
@@ -48,13 +62,18 @@ class DogFoodActivity : AppCompatActivity() {
                     "donorName" to donorName,
                     "dogFoodName" to dogFoodName,
                     "dropOffDate" to date,
-                    "dropOffTime" to time
+                    "dropOffTime" to time,
+                    "timestamp" to Date() // Added timestamp for historical tracking
                 )
 
-                firestore.collection("DogFoodDonations")
+                // CRITICAL CHANGE: Saving to the 'DogFoodDonations' subcollection
+                // under the current user's document in the 'Users' collection.
+                firestore.collection("Users")
+                    .document(currentUser.uid)
+                    .collection("DogFoodDonations") // Subcollection under the user document
                     .add(donationData)
                     .addOnSuccessListener {
-                        Toast.makeText(this, "Donation submitted!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Dog food donation submitted and saved to your history!", Toast.LENGTH_LONG).show()
                         clearFields()
                     }
                     .addOnFailureListener {
@@ -69,7 +88,6 @@ class DogFoodActivity : AppCompatActivity() {
         }
 
         dogFoodButton.setOnClickListener {
-            // Already on this screen, maybe show a Toast or do nothing
             Toast.makeText(this, "You are already on Dog Food page", Toast.LENGTH_SHORT).show()
         }
 
