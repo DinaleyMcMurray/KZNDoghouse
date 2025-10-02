@@ -13,10 +13,13 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+    // Hardcoded admin credentials (temporary)
+    private val ADMIN_EMAIL = "admin@gmail.com"
+    private val ADMIN_PASSWORD = "AdminPassword123"
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Ensure you are using the correct setContentView for the Activity
         setContentView(R.layout.activity_login)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -31,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.etPassword)
         val loginButton = findViewById<Button>(R.id.btnLogin)
         val signUpButton = findViewById<Button>(R.id.signupBtn)
-        val adminLoginButton = findViewById<Button>(R.id.adminLoginBtn) // Already present
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -42,31 +44,33 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // Admin Login Check
+            if (email == ADMIN_EMAIL && password == ADMIN_PASSWORD) {
+                Toast.makeText(this, "Admin login successful", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, DogManagementActivity::class.java))
+                finish()
+                return@setOnClickListener
+            }
+
+            // Regular User Login with Firebase
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-
-                        // *** UPDATED CODE: Pass IS_ADMIN = false ***
-                        val intent = Intent(this, HomeActivity::class.java).apply {
-                            putExtra("IS_ADMIN", false)
-                        }
-                        startActivity(intent)
-
+                        startActivity(Intent(this, HomeActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            "Login failed: ${task.exception?.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
         }
 
         signUpButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
-        }
-
-        // Admin Login Button Logic
-        adminLoginButton.setOnClickListener {
-            startActivity(Intent(this, AdminLoginActivity::class.java))
         }
     }
 }

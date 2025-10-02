@@ -12,16 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/LightBrown">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="The KZN Doghouse"
-            app:titleTextColor="@android:color/white"
-            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
+        android:background="@color/LightBrown"> <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="The KZN Doghouse"
+        app:titleTextColor="@android:color/white"
+        app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -139,15 +137,13 @@
                                     <ImageView
                                         android:layout_width="50dp"
                                         android:layout_height="50dp"
-                                        app:srcCompat="@drawable/img" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="Rescue"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold" />
+                                        app:srcCompat="@drawable/img" /> <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Rescue"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -240,5 +236,4 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        />
-</androidx.drawerlayout.widget.DrawerLayout>
+        app:menu="@menu/navigation_menu_admin" /> </androidx.drawerlayout.widget.DrawerLayout>
