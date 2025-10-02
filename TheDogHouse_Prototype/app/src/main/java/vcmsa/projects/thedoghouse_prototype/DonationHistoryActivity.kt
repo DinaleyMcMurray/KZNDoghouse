@@ -17,7 +17,7 @@ class DonationHistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_donation_history)
 
         // Setup RecyclerView
-        recyclerView = findViewById(R.id.recyclerDonationHistory)
+        recyclerView = findViewById(R.id.donationHistoryRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Dummy data (replace with database or Firebase later)

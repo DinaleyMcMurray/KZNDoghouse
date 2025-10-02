@@ -45,18 +45,18 @@ class NewsletterActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         // Subscription form
-        val etEmail = findViewById<EditText>(R.id.etNewsletterEmail)
-        val btnSubscribe = findViewById<Button>(R.id.btnSubscribe)
+      //  val etEmail = findViewById<EditText>(R.id.etNewsletterEmail)
+        //val btnSubscribe = findViewById<Button>(R.id.btnSubscribe)
 
-        btnSubscribe.setOnClickListener {
-            val email = etEmail.text.toString().trim()
+       // btnSubscribe.setOnClickListener {
+         //   val email = etEmail.text.toString().trim()
 
-            if (email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(this, "Subscribed with: $email", Toast.LENGTH_LONG).show()
-                etEmail.text.clear()
-            } else {
-                Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_LONG).show()
-            }
-        }
+           // if (email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+               // Toast.makeText(this, "Subscribed with: $email", Toast.LENGTH_LONG).show()
+             //   etEmail.text.clear()
+           // } else {
+             //   Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_LONG).show()
+            //}
+       // }
     }
 }
