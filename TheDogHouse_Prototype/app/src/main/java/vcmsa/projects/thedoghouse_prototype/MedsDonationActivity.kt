@@ -10,8 +10,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.databinding.DataBindingUtil.setContentView
+import com.google.firebase.auth.FirebaseAuth // Import for Auth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Date // Used for timestamp, good practice for donations
 
 class MedsDonationActivity : AppCompatActivity() {
 
@@ -27,23 +28,26 @@ class MedsDonationActivity : AppCompatActivity() {
     private lateinit var dogFoodButton: Button
     private lateinit var medicationButton: Button
 
+    private lateinit var auth: FirebaseAuth // Authentication instance
     private val firestore = FirebaseFirestore.getInstance()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Integrated minimal setup from Ntobeko2
         enableEdgeToEdge()
         setContentView(R.layout.activity_meds_donation)
 
-        // Edge-to-edge padding logic (from Ntobeko2)
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        // Edge-to-edge padding logic
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Linking XML views (from HEAD)
+        // Linking XML views
         donorNameEditText = findViewById(R.id.DonorName)
         medicationNameEditText = findViewById(R.id.MedicationName)
         quantityEditText = findViewById(R.id.Quantity)
@@ -55,8 +59,16 @@ class MedsDonationActivity : AppCompatActivity() {
         dogFoodButton = findViewById(R.id.button2)
         medicationButton = findViewById(R.id.button3)
 
-        // Submit data to Firestore (from HEAD)
+        // Submit data to Firestore
         submitButton.setOnClickListener {
+            // Check if user is logged in
+            val currentUser = auth.currentUser
+            if (currentUser == null) {
+                Toast.makeText(this, "Please log in to submit a donation.", Toast.LENGTH_LONG).show()
+                // Optionally redirect to login
+                return@setOnClickListener
+            }
+
             val donorName = donorNameEditText.text.toString().trim()
             val medicationName = medicationNameEditText.text.toString().trim()
             val quantity = quantityEditText.text.toString().trim()
@@ -71,13 +83,18 @@ class MedsDonationActivity : AppCompatActivity() {
                     "medicationName" to medicationName,
                     "quantity" to quantity,
                     "dropOffDate" to date,
-                    "dropOffTime" to time
+                    "dropOffTime" to time,
+                    "timestamp" to Date() // Saves the time of submission
                 )
 
-                firestore.collection("MedicationDonations")
+                // CRITICAL CHANGE: Saving to the 'MedsDonations' subcollection
+                // within the current user's document in the 'Users' collection.
+                firestore.collection("Users")
+                    .document(currentUser.uid)
+                    .collection("MedsDonations") // Subcollection under the user document
                     .add(donationData)
                     .addOnSuccessListener {
-                        Toast.makeText(this, "Medication donation submitted!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Medication donation submitted and saved to your history!", Toast.LENGTH_LONG).show()
                         clearFields()
                     }
                     .addOnFailureListener {
@@ -86,7 +103,7 @@ class MedsDonationActivity : AppCompatActivity() {
             }
         }
 
-        // Navigation buttons (from HEAD)
+        // Navigation buttons
         fundsButton.setOnClickListener {
             val intent = Intent(this, FundsDonationsActivity::class.java)
             startActivity(intent)
@@ -98,11 +115,11 @@ class MedsDonationActivity : AppCompatActivity() {
         }
 
         medicationButton.setOnClickListener {
-            Toast.makeText(this, "You are already on Medication page", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You are already on the Medication page", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // clearFields function (from HEAD)
+    // clearFields function
     private fun clearFields() {
         donorNameEditText.text.clear()
         medicationNameEditText.text.clear()

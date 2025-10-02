@@ -88,7 +88,7 @@ class VolunteerActivity : AppCompatActivity() {
                 )
 
                 // Save to /users/{userId}/volunteer
-                firestore.collection("users").document(userId).collection("volunteer")
+                firestore.collection("Users").document(userId).collection("Volunteer")
                     .add(volunteerData)
                     .addOnSuccessListener { documentReference ->
                         // Changed Log.d source to match Android standard (Assuming androidx.media3.common.util.Log is being used as android.util.Log)
