@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/a719a39d48c6e42aa18c6787e957df2a/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/a719a39d48c6e42aa18c6787e957df2a/transformed/ads-adservices-1.0.0-beta05/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/a719a39d48c6e42aa18c6787e957df2a/transformed/ads-adservices-1.0.0-beta05/res" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/910fdb0489845eb34c2c8f52d7633d01/transformed/ads-adservices-1.0.0-beta05/res" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/910fdb0489845eb34c2c8f52d7633d01/transformed/ads-adservices-1.0.0-beta05/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/910fdb0489845eb34c2c8f52d7633d01/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!--activity_donation_history-->
+    <item
+        android:id="@+id/nav_donation_history"
+        android:title="Donation History" />
+
+    <!--activity_adoption_history-->
+    <item
+        android:id="@+id/nav_adoption_history"
+        android:title="Adoption History" />
+
+    <item
+        android:id="@+id/nav_volunteer_management"
+        android:title="Volunteer Management" />
+
+    <!--activity_adoption_history-->
+    <item
+        android:id="@+id/nav_uploads"
+        android:title="Upload Event" />
+
+    <!--activity_donation_history-->
+    <item
+        android:id="@+id/nav_dog_management"
+        android:title="Dog Mnagement" />
+
+
+</menu>

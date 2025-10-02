@@ -58,6 +58,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.databinding:databinding-runtime:8.1.0")
+
 
     //firebase database
     //use platform() with the BOM version

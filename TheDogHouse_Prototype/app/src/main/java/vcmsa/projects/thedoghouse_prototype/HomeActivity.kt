@@ -57,23 +57,23 @@ class HomeActivity : AppCompatActivity() {
                 R.id.nav_adoption -> {
                     startActivity(Intent(this, AdoptionActivity::class.java))
                 }
-                R.id.nav_view_adoption -> {
-                    startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                }
+//                R.id.nav_view_adoption -> {
+//                    startActivity(Intent(this, ViewAdoptionActivity::class.java))
+//                }
                 R.id.nav_adoption_history -> {
                     startActivity(Intent(this, AdoptionHistoryActivity::class.java))
                 }
 
                 // === Donations ===
-                R.id.nav_funds -> {
-                    startActivity(Intent(this, FundsDonationsActivity::class.java))
-                }
-                R.id.nav_dog_food -> {
-                    startActivity(Intent(this, DogFoodActivity::class.java))
-                }
-                R.id.nav_meds -> {
-                    startActivity(Intent(this, MedsDonationActivity::class.java))
-                }
+//                R.id.nav_funds -> {
+//                    startActivity(Intent(this, FundsDonationsActivity::class.java))
+//                }
+//                R.id.nav_dog_food -> {
+//                    startActivity(Intent(this, DogFoodActivity::class.java))
+//                }
+//                R.id.nav_meds -> {
+//                    startActivity(Intent(this, MedsDonationActivity::class.java))
+//                }
                 R.id.nav_donation_history -> {
                     startActivity(Intent(this, DonationHistoryActivity::class.java))
                 }
@@ -91,16 +91,16 @@ class HomeActivity : AppCompatActivity() {
                     startActivity(Intent(this, NewsletterActivity::class.java))
                 }
 
-                // === Register / Login ===
-                R.id.nav_register -> {
-                    startActivity(Intent(this, RegisterActivity::class.java))
-                }
-                R.id.nav_login -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }
-                R.id.nav_admin_login -> {
-                    startActivity(Intent(this, AdminLoginActivity::class.java))
-                }
+//                // === Register / Login ===
+//                R.id.nav_register -> {
+//                    startActivity(Intent(this, RegisterActivity::class.java))
+//                }
+//                R.id.nav_login -> {
+//                    startActivity(Intent(this, LoginActivity::class.java))
+//                }
+//                R.id.nav_admin_login -> {
+//                    startActivity(Intent(this, AdminLoginActivity::class.java))
+//                }
             }
 
             drawerLayout.closeDrawers()

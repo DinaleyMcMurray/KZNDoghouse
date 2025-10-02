@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.media3:media3-common:1.8.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/a382e89ced295dd86e3863a956ac66fd/transformed/media3-common-1.8.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/2bc6d192596cfc61ff7316b46ce14256/transformed/media3-common-1.8.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/a382e89ced295dd86e3863a956ac66fd/transformed/media3-common-1.8.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/a382e89ced295dd86e3863a956ac66fd/transformed/media3-common-1.8.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/2bc6d192596cfc61ff7316b46ce14256/transformed/media3-common-1.8.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/8.11.1/transforms/2bc6d192596cfc61ff7316b46ce14256/transformed/media3-common-1.8.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

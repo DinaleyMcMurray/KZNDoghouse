@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <item
+        android:id="@+id/nav_account"
+        android:title="My Account" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Logout" />
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_newsletter"
+        android:title="Events" />
+
+    <item
+        android:id="@+id/nav_medsdonation"
+        android:title="Donations" />
+
+    <item
+        android:id="@+id/nav_volunteer"
+        android:title="Volunteering" />
+
+    <item
+        android:id="@+id/nav_adoption"
+        android:title="Adoption" />
+
+    <item
+        android:id="@+id/nav_donation_history"
+        android:title="Donation History" />
+
+</menu>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<menu xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <item android:id="@+id/nav_register"    android:title="@string/nav_register"/>-->
+<!--    <item android:id="@+id/nav_newsletter"  android:title="@string/nav_newsletter"/>-->
+<!--    <item android:id="@+id/nav_meds"        android:title="@string/nav_meds"/>-->
+<!--    <item android:id="@+id/nav_funds"       android:title="@string/nav_funds"/>-->
+<!--    <item android:id="@+id/nav_volunteer"   android:title="@string/nav_volunteer"/>-->
+<!--</menu>-->

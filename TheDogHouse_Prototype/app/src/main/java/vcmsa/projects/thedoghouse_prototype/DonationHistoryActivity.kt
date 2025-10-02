@@ -12,22 +12,22 @@ class DonationHistoryActivity : AppCompatActivity() {
     private lateinit var adapter: DonationHistoryAdapter
     private lateinit var donationList: MutableList<DonationRecord>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_donation_history)
-
-        // Setup RecyclerView
-        recyclerView = findViewById(R.id.donationHistoryRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // Dummy data (replace with database or Firebase later)
-        donationList = mutableListOf(
-            DonationRecord("John Doe", "Funds", 500, "2025-09-15"),
-            DonationRecord("Jane Smith", "Dog Food", 2, "2025-09-16"),
-            DonationRecord("Mike Johnson", "Medication", 3, "2025-09-17")
-        )
-
-        adapter = DonationHistoryAdapter(donationList)
-        recyclerView.adapter = adapter
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_donation_history)
+//
+//        // Setup RecyclerView
+//        recyclerView = findViewById(R.id.recyclerdonation)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//
+//        // Dummy data (replace with database or Firebase later)
+//        donationList = mutableListOf(
+//            DonationRecord("John Doe", "Funds", 500, "2025-09-15"),
+//            DonationRecord("Jane Smith", "Dog Food", 2, "2025-09-16"),
+//            DonationRecord("Mike Johnson", "Medication", 3, "2025-09-17")
+//        )
+//
+//        adapter = DonationHistoryAdapter(donationList)
+//        recyclerView.adapter = adapter
+//    }
 }
