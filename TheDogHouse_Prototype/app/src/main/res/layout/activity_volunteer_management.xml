@@ -1,92 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/volunteer_management"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/LightBrown"
-    android:orientation="vertical"
-    android:padding="20dp">
+    tools:context=".VolunteerManagementActivity">
 
-    <!-- Title -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Volunteer Management"
-        android:textSize="26sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:gravity="center"
-        android:layout_marginBottom="20dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/LightBrown">
 
-    <!-- Search Bar -->
-    <EditText
-        android:id="@+id/etSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Search donations..."
-        android:inputType="text"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/purple"
-        android:textColor="@android:color/black"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Volunteer Management"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
-    <!--    &lt;!&ndash; Row of Buttons &ndash;&gt;-->
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:gravity="center"-->
-    <!--        android:layout_marginBottom="20dp"-->
-    <!--        android:weightSum="3">-->
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search volunteers..."
+            android:padding="12dp"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/purple"
+            android:textColor="@android:color/black" />
 
-    <!--        <Button-->
-    <!--            android:id="@+id/btnInformation"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="Information"-->
-    <!--            android:textColor="@android:color/black"-->
-    <!--            android:backgroundTint="@color/SecondaryBtnColour"-->
-    <!--            android:layout_marginEnd="6dp"/>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclervolunteers"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp" />
 
-    <!--        <Button-->
-    <!--            android:id="@+id/btnMembers"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="Members"-->
-    <!--            android:textColor="@android:color/black"-->
-    <!--            android:backgroundTint="@color/SecondaryBtnColour"-->
-    <!--            android:layout_marginHorizontal="3dp"/>-->
+        <Button
+            android:id="@+id/btnAddVolunteer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Add New Volunteer"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/ButtonColour"
+            android:layout_margin="16dp" />
+    </LinearLayout>
 
-    <!--        <Button-->
-    <!--            android:id="@+id/btnDocuments"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="View Documents"-->
-    <!--            android:textColor="@android:color/black"-->
-    <!--            android:backgroundTint="@color/SecondaryBtnColour"-->
-    <!--            android:layout_marginStart="6dp"/>-->
-    <!--    </LinearLayout>-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu_admin" />
+</androidx.drawerlayout.widget.DrawerLayout>
 
-    <!-- RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclervolunteers"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
 
-    <!-- Add Volunteer Button -->
-    <Button
-        android:id="@+id/btnAddVolunteer"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Add New Volunteer"
-        android:textColor="@color/black"
-        android:typeface="serif"
-        android:backgroundTint="@color/ButtonColour"
-        android:layout_marginTop="10dp"/>
-</LinearLayout>
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout-->
+<!--    android:id="@+id/volunteer_management"-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/LightBrown"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="20dp">-->
+
+<!--    &lt;!&ndash; Title &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Volunteer Management"-->
+<!--        android:textSize="26sp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textStyle="bold"-->
+<!--        android:typeface="serif"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginBottom="20dp"/>-->
+
+<!--    &lt;!&ndash; Search Bar &ndash;&gt;-->
+<!--    <EditText-->
+<!--        android:id="@+id/etSearch"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Search donations..."-->
+<!--        android:inputType="text"-->
+<!--        android:padding="12dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:backgroundTint="@color/purple"-->
+<!--        android:textColor="@android:color/black"/>-->
+
+<!--    &lt;!&ndash;    &lt;!&ndash; Row of Buttons &ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;    <LinearLayout&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:orientation="horizontal"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:gravity="center"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_marginBottom="20dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:weightSum="3">&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        <Button&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:id="@+id/btnInformation"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_weight="1"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:text="Information"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:textColor="@android:color/black"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:backgroundTint="@color/SecondaryBtnColour"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_marginEnd="6dp"/>&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        <Button&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:id="@+id/btnMembers"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_weight="1"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:text="Members"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:textColor="@android:color/black"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:backgroundTint="@color/SecondaryBtnColour"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_marginHorizontal="3dp"/>&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        <Button&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:id="@+id/btnDocuments"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_weight="1"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:text="View Documents"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:textColor="@android:color/black"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:backgroundTint="@color/SecondaryBtnColour"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_marginStart="6dp"/>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </LinearLayout>&ndash;&gt;-->
+
+<!--    &lt;!&ndash; RecyclerView &ndash;&gt;-->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclervolunteers"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"/>-->
+
+<!--    &lt;!&ndash; Add Volunteer Button &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/btnAddVolunteer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:text="Add New Volunteer"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:typeface="serif"-->
+<!--        android:backgroundTint="@color/ButtonColour"-->
+<!--        android:layout_marginTop="10dp"/>-->
+<!--</LinearLayout>-->

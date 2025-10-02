@@ -63,7 +63,7 @@ class AdoptionActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
-                R.id.nav_uploads -> Toast.makeText(this, "My Uploads", Toast.LENGTH_SHORT).show()
+                R.id.nav_events_management -> Toast.makeText(this, "My Uploads", Toast.LENGTH_SHORT).show()
 //                R.id.nav_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
             }
             drawerLayout.closeDrawer(GravityCompat.START) // Fixed: use GravityCompat.START
