@@ -7,9 +7,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.databinding.DataBindingUtil.setContentView
 import com.google.firebase.auth.FirebaseAuth
-import vcmsa.projects.thedoghouse_prototype.R // NOTE: This import of R is usually unnecessary and should be avoided
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,6 +16,7 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Ensure you are using the correct setContentView for the Activity
         setContentView(R.layout.activity_login)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -32,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.etPassword)
         val loginButton = findViewById<Button>(R.id.btnLogin)
         val signUpButton = findViewById<Button>(R.id.signupBtn)
+        val adminLoginButton = findViewById<Button>(R.id.adminLoginBtn) // Already present
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -46,8 +46,13 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                        // Navigate to main/home screen
-                        startActivity(Intent(this, HomeActivity::class.java)) // Replace with your destination
+
+                        // *** UPDATED CODE: Pass IS_ADMIN = false ***
+                        val intent = Intent(this, HomeActivity::class.java).apply {
+                            putExtra("IS_ADMIN", false)
+                        }
+                        startActivity(intent)
+
                         finish()
                     } else {
                         Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
@@ -59,12 +64,9 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        // --- Resolved Conflict: Added Admin Login Button Logic (from HEAD) ---
-        val adminLoginButton = findViewById<Button>(R.id.adminLoginBtn)
-
+        // Admin Login Button Logic
         adminLoginButton.setOnClickListener {
             startActivity(Intent(this, AdminLoginActivity::class.java))
         }
-        // --------------------------------------------------------------------
     }
 }

@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil.setContentView
 
 class AdminLoginActivity : AppCompatActivity() {
 
@@ -20,6 +19,7 @@ class AdminLoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Ensure you are using the correct setContentView for the Activity
         setContentView(R.layout.activity_admin_login)
 
         emailEditText = findViewById(R.id.etEmail)
@@ -32,8 +32,13 @@ class AdminLoginActivity : AppCompatActivity() {
 
             if (email == adminEmail && password == adminPassword) {
                 Toast.makeText(this, "Admin login successful", Toast.LENGTH_SHORT).show()
-                // Go to admin dashboard (replace with your Activity)
-                startActivity(Intent(this, HomeActivity::class.java))
+
+                // *** UPDATED CODE: Pass IS_ADMIN = true ***
+                val intent = Intent(this, HomeActivity::class.java).apply {
+                    putExtra("IS_ADMIN", true)
+                }
+                startActivity(intent)
+
                 finish()
             } else {
                 Toast.makeText(this, "Invalid admin credentials", Toast.LENGTH_LONG).show()
