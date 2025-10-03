@@ -3,9 +3,9 @@
 
 
     <!--activity_donation_history-->
-    <item
-        android:id="@+id/nav_donation_history"
-        android:title="Donation History" />
+<!--    <item-->
+<!--        android:id="@+id/nav_donation_history"-->
+<!--        android:title="Donation History" />-->
 
     <!--activity_adoption_history-->
     <item
@@ -24,7 +24,7 @@
     <!--activity_donation_history-->
     <item
         android:id="@+id/nav_dog_management"
-        android:title="Dog Mnagement" />
+        android:title="Dog Management" />
 
 
 </menu>

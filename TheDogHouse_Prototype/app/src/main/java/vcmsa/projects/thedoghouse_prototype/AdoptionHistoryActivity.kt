@@ -46,7 +46,7 @@ class AdoptionHistoryActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // ✅ Handle navigation clicks
+        //  Handle navigation clicks
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dog_management -> {

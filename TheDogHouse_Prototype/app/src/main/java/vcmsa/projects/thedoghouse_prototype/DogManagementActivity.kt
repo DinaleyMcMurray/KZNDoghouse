@@ -2,6 +2,7 @@ package vcmsa.projects.thedoghouse_prototype
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
@@ -30,10 +31,10 @@ class DogManagementActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dog_management -> {
-                    startActivity(Intent(this, DogManagementActivity::class.java))
+                    startActivity(Intent(this, AddDogActivity::class.java))
                 }
                 R.id.nav_volunteer_management -> {
-                    startActivity(Intent(this, VolunteerManagementActivity::class.java))
+                   startActivity(Intent(this, VolunteerManagementActivity::class.java))
                 }
                 R.id.nav_events_management -> {
                     startActivity(Intent(this, EventsManagementActivity::class.java))
