@@ -1,40 +1,41 @@
 package vcmsa.projects.thedoghouse_prototype
 
 import VolunteerRecord
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query // Import for querying
 
 class VolunteerManagementActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: VolunteerAdapter
     private lateinit var volunteerList: MutableList<VolunteerRecord>
+    private lateinit var progressBar: ProgressBar // We'll assume you add a ProgressBar to your XML
 
-    @SuppressLint("MissingInflatedId")
+    // Firestore instance
+    private val db = FirebaseFirestore.getInstance()
+    private val TAG = "VolunteerMgt"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_volunteer_management)
+        setContentView(R.layout.activity_volunteer_management) // Your XML with DrawerLayout
 
-        // Apply system insets once
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        // Initialize ProgressBar (Add <ProgressBar> to your activity_volunteer_management.xml)
+        progressBar = findViewById(R.id.progressBar)
 
-        // Drawer + Toolbar setup
+        // 1. Drawer + Toolbar setup
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
         val navView: NavigationView = findViewById(R.id.navigation_view)
@@ -45,139 +46,80 @@ class VolunteerManagementActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // Setup RecyclerView
+        // 2. Setup RecyclerView
         recyclerView = findViewById(R.id.recyclervolunteers)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Dummy volunteer data
-        volunteerList = mutableListOf(
-            VolunteerRecord("Alice Brown", "Weekly Dog Walking", "2025-09-15"),
-            VolunteerRecord("David Green", "Food Donations", "2025-09-16"),
-            VolunteerRecord("Sophia White", "Medical Support", "2025-09-17")
-        )
-
+        // Initialize the list and adapter
+        volunteerList = mutableListOf()
         adapter = VolunteerAdapter(volunteerList)
         recyclerView.adapter = adapter
 
-        //  Handle navigation clicks
+        // 3. Fetch Data from Firestore
+        fetchVolunteerData()
+
+        // 4. Handle navigation clicks
         navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_dog_management -> {
-                    startActivity(Intent(this, DogManagementActivity::class.java))
-                }
-                R.id.nav_events_management -> {
-                    startActivity(Intent(this, EventsManagementActivity::class.java))
-                }
-                R.id.nav_adoption_history -> {
-                    // already here, just close drawer
-                }
+            val intent: Intent? = when (menuItem.itemId) {
+                R.id.nav_dog_management -> Intent(this, DogManagementActivity::class.java)
+                R.id.nav_events_management -> Intent(this, EventsManagementActivity::class.java)
+                R.id.nav_adoption_history -> Intent(this, AdoptionHistoryActivity::class.java)
+                R.id.nav_volunteer_management -> null // Already here, close drawer
                 R.id.nav_logout -> {
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
+                    null
                 }
+                else -> null
             }
+            intent?.let { startActivity(it) }
             drawerLayout.closeDrawers()
             true
         }
+    }
 
+    // Function to query Firestore for volunteers
+    private fun fetchVolunteerData() {
+        progressBar.visibility = View.VISIBLE
+        volunteerList.clear()
 
+        db.collectionGroup("Volunteer")
+            // FIX: The field name in the database for sorting is "Name" (Capital N)
+            .orderBy("Name", Query.Direction.ASCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                progressBar.visibility = View.GONE
+                for (document in result) {
+                    try {
+                        // ------------------------------------------------------------------
+                        // FIX: Map using the correct capitalization/names from Firestore document
+                        // ------------------------------------------------------------------
+                        val volunteer = VolunteerRecord(
+                            // Field names MUST match capitalization: "Name", "Gender", "Phone", "Email"
+                            name = document.getString("Name") ?: "N/A",
+                            gender = document.getString("Gender") ?: "N/A",
+                            age = document.getString("Age") ?: "N/A",
+                            contactNumber = document.getString("Phone") ?: "N/A",
+                            email = document.getString("Email") ?: "N/A"
+                        )
+                        volunteerList.add(volunteer)
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Error mapping volunteer data: ${e.message}")
+                    }
+                }
+                if (volunteerList.isEmpty()) {
+                    Toast.makeText(this, "No volunteers found.", Toast.LENGTH_LONG).show()
+                }
+                adapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                progressBar.visibility = View.GONE
+                Log.w(TAG, "Error getting documents: ", exception)
+                Toast.makeText(
+                    this,
+                    "Failed to load volunteer data. Check Firebase Index.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
     }
 }
-
-
-//package vcmsa.projects.thedoghouse_prototype
-//
-//import VolunteerRecord
-//import android.annotation.SuppressLint
-//import android.os.Bundle
-//import androidx.activity.enableEdgeToEdge
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.core.view.GravityCompat
-//import androidx.core.view.ViewCompat
-//import androidx.core.view.WindowInsetsCompat
-//import androidx.databinding.DataBindingUtil.setContentView
-//import androidx.drawerlayout.widget.DrawerLayout
-//import androidx.recyclerview.widget.LinearLayoutManager
-//import androidx.recyclerview.widget.RecyclerView
-//import com.google.android.material.appbar.MaterialToolbar
-//import com.google.android.material.navigation.NavigationView
-//
-//class VolunteerManagementActivity : AppCompatActivity() {
-//
-//    private lateinit var recyclerView: RecyclerView
-//    private lateinit var adapter: VolunteerAdapter
-//    private lateinit var volunteerList: MutableList<VolunteerRecord>
-//
-//    @SuppressLint("MissingInflatedId")
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-//        setContentView(R.layout.activity_volunteer_management)
-//
-//        // Apply edge-to-edge insets to your root view
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
-//
-//        // ===== Drawer + Toolbar setup (From Ntobeko2) =====
-//        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-//        val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
-//        val navView: NavigationView = findViewById(R.id.navigation_view)
-//
-//        setSupportActionBar(toolbar)
-//
-//        // Open drawer on nav icon or swipe
-//        toolbar.setNavigationOnClickListener {
-//            drawerLayout.openDrawer(GravityCompat.START)
-//        }
-//
-//
-//        // Apply system insets
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
-//
-//        // Setup RecyclerView
-//        recyclerView = findViewById(R.id.recyclervolunteers)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//
-//        // Dummy volunteer data for management
-//        volunteerList = mutableListOf(
-//            VolunteerRecord("Alice Brown", "Weekly Dog Walking", "2025-09-15"),
-//            VolunteerRecord("David Green", "Food Donations", "2025-09-16"),
-//            VolunteerRecord("Sophia White", "Medical Support", "2025-09-17")
-//        )
-//
-//        adapter = VolunteerAdapter(volunteerList)
-//        recyclerView.adapter = adapter
-//
-//        //        // Intent to open the app when user taps the notification
-////        val intent = Intent(this, MainActivity::class.java)
-////        val pendingIntent = PendingIntent.getActivity(
-////            this,
-////            0,
-////            intent,
-////            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-////        )
-//
-//        // Channel
-//
-//    }
-////        // Notification design
-////        val builder = NotificationCompat.Builder(this, channelId)
-////            .setSmallIcon(R.drawable.volunteer) // replace with your own icon
-////            .setContentTitle("We have a new volunteer!")
-////            .setContentText("Volunteer name: $volunteername, Volunteer age: $volunteerage")
-////            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-////            .setContentIntent(pendingIntent)
-////            .setAutoCancel(true)
-////
-////        // Show notification
-////        val notificationManager = NotificationManagerCompat.from(this)
-////        notificationManager.notify(System.currentTimeMillis().toInt(), builder.build())
-//
-//}

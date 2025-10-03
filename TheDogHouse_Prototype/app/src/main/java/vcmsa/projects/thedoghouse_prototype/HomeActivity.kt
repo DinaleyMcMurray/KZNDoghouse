@@ -72,7 +72,7 @@ class HomeActivity : AppCompatActivity() {
             when (item.itemId) {
                 // Shared/User Menu Items
                 R.id.nav_home -> navigateTo(HomeActivity::class.java, clearStack = true)
-                R.id.nav_adoption -> navigateTo(AdoptionActivity::class.java)
+                R.id.nav_adoption -> navigateTo(ViewAdoptionActivity::class.java)
                 R.id.nav_adoption_history -> navigateTo(AdoptionHistoryActivity::class.java)
                 R.id.nav_donation_history -> navigateTo(DonationHistoryActivity::class.java)
                 R.id.nav_volunteer -> navigateTo(VolunteerActivity::class.java)

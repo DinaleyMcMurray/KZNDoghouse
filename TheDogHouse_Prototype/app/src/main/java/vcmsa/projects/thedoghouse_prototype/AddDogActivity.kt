@@ -22,9 +22,10 @@ import android.util.Log
 class AddDogActivity : AppCompatActivity() {
 
     // --- Cloudinary Configuration (REPLACE with your actual credentials) ---
-    private val CLOUDINARY_CLOUD_NAME = "dyuieeirb" // e.g., "d12345678"
-    private val CLOUDINARY_UPLOAD_PRESET = "KZNDoghouse" // e.g., "android_upload"
-    // Note: API Key/Secret are often safer to configure via server, but can be done here for simplicity
+    private val CLOUDINARY_CLOUD_NAME = "dyuieeirb"
+    private val CLOUDINARY_UPLOAD_PRESET = "KZNDoghouse"
+    private val CLOUDINARY_API_KEY = "959111626652188"
+    private val CLOUDINARY_API_SECRET = "MPC45jC70zK656BiiADN-0ULohs"
 
     // --- Image Upload Variables ---
     private var imageUri: Uri? = null
@@ -69,7 +70,9 @@ class AddDogActivity : AppCompatActivity() {
         // to ensure it is only set up once per application run.
         try {
             val config = mapOf(
-                "cloud_name" to CLOUDINARY_CLOUD_NAME
+                "cloud_name" to CLOUDINARY_CLOUD_NAME,
+                "api_key" to CLOUDINARY_API_KEY,
+                "secret_key" to CLOUDINARY_API_SECRET
             )
             // Use applicationContext as previously established
             MediaManager.init(applicationContext, config)
@@ -160,7 +163,7 @@ class AddDogActivity : AppCompatActivity() {
                 }
 
                 override fun onSuccess(requestId: String, resultData: Map<*, *>) {
-                    imageUrl = resultData["url"] as String
+                    imageUrl = resultData["secure_url"] as String
                     Log.d("Cloudinary", "Upload successful. URL: $imageUrl")
                     // Proceed to save the dog details to Firestore
                     saveDogToFirestore()

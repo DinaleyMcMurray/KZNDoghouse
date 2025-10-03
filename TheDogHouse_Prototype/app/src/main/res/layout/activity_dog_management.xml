@@ -7,22 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".DogManagementActivity">
 
-    <!-- MAIN CONTENT AREA -->
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/LightBrown"> <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:title="The KZN Doghouse"
-        app:titleTextColor="@android:color/white"
-        app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
+        android:background="@color/LightBrown">
 
-        <!-- Scrollable content -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="The KZN Doghouse"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -58,7 +58,7 @@
                     android:layout_marginTop="25dp" />
 
                 <Button
-                    android:id="@+id/button1"
+                    android:id="@+id/AddDogBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -68,7 +68,6 @@
                     android:text="Add Dog"
                     android:textColor="@color/white" />
 
-                <!-- RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerdogmanagement"
                     android:layout_width="match_parent"
@@ -84,83 +83,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/navigation_menu_admin" /> </androidx.drawerlayout.widget.DrawerLayout>
+        app:menu="@menu/navigation_menu_admin" />
 
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:id="@+id/main"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:gravity="center"-->
-<!--    android:background="@color/LightBrown">-->
-
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:padding="16dp">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/heading"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Dog Management"-->
-<!--                android:textAlignment="center"-->
-<!--                android:typeface="serif"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="30sp"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_marginTop="30dp"/>-->
-
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/mission"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="View Dog details"-->
-<!--                android:textAlignment="center"-->
-<!--                android:typeface="serif"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_marginTop="25dp"/>-->
-
-<!--            <Button-->
-<!--                android:id="@+id/button1"-->
-<!--                android:layout_width="120dp"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:layout_marginTop="25dp"-->
-<!--                android:layout_marginBottom="25dp"-->
-<!--                android:layout_marginStart="250dp"-->
-<!--                android:backgroundTint="@color/Lightpurple"-->
-<!--                android:text="Add Dog"-->
-<!--                android:textColor="@color/white" />-->
-
-<!--            <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:background="@color/LightBrown"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:padding="24dp">-->
-
-
-<!--                    <androidx.recyclerview.widget.RecyclerView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:id="@+id/recyclerdogmanagement"/>-->
-
-<!--                </LinearLayout>-->
-
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
-
-<!--</LinearLayout>-->
+</androidx.drawerlayout.widget.DrawerLayout>

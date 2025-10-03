@@ -1,6 +1,5 @@
 package vcmsa.projects.thedoghouse_prototype
 
-// COMBINED IMPORTS
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -100,10 +99,6 @@ class AdoptionActivity : AppCompatActivity() {
             }
         }
     }
-
-    // =========================================================================
-    // FIX FOR ERROR: Overriding method should call super.onActivityResult
-    // =========================================================================
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // Must call the super implementation first

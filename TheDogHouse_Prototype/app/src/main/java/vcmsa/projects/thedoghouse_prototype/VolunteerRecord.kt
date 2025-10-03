@@ -1,8 +1,7 @@
 data class VolunteerRecord(
     val name: String,
-    val sex: String,
+    val gender: String,
     val age: String,
-    val hours: String = "",
     val contactNumber: String = "",
     val email: String = ""
 )

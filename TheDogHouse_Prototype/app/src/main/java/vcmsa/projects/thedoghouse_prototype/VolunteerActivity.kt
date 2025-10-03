@@ -38,7 +38,6 @@ class VolunteerActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_volunteer)
 
-        // Apply system insets (from Ntobeko2 and HEAD)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -79,11 +78,11 @@ class VolunteerActivity : AppCompatActivity() {
             } else {
 
                 val volunteerData = hashMapOf(
-                    "Volunteer Name" to volunteerName,
-                    "Volunteer Gender" to volunteerGender,
-                    "Volunteer Age" to volunteerAge,
-                    "Volunteer Phone" to volunteerPhone,
-                    "Volunteer Email" to volunteerEmail,
+                    "Name" to volunteerName,
+                    "Gender" to volunteerGender,
+                    "Age" to volunteerAge,
+                    "Phone" to volunteerPhone,
+                    "Email" to volunteerEmail,
                     "userId" to userId // Include the user ID for reference
                 )
 

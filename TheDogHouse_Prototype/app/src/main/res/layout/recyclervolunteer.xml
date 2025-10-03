@@ -33,10 +33,10 @@
                     android:paddingBottom="8dp" />
 
                 <TextView
-                    android:id="@+id/textSex"
+                    android:id="@+id/textGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sex: "
+                    android:text="Gender: "
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:paddingBottom="8dp" />
@@ -46,16 +46,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Age:"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:paddingBottom="8dp" />
-
-
-                <TextView
-                    android:id="@+id/textHours"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Hours: "
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:paddingBottom="8dp" />
@@ -78,13 +68,6 @@
                     android:textSize="20sp"
                     android:paddingBottom="8dp" />
 
-                <Button
-                    android:id="@+id/btnDocuments"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/Green"
-                    android:textColor="@color/black"
-                    android:text="Download Documents" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

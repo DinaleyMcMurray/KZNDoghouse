@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
             // Admin Login Check
             if (email == ADMIN_EMAIL && password == ADMIN_PASSWORD) {
                 Toast.makeText(this, "Admin login successful", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, DogManagementActivity::class.java))
+                startActivity(Intent(this, AdminHomeActivity::class.java))
                 finish()
                 return@setOnClickListener
             }

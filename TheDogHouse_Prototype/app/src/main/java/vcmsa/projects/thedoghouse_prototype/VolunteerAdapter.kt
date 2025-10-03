@@ -13,7 +13,7 @@ class VolunteerAdapter(private val volunteers: List<VolunteerRecord>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VolunteerViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recycler_volunteers, parent, false) // ✅ correct file name
+            .inflate(R.layout.recyclervolunteer, parent, false) // ✅ correct file name
         return VolunteerViewHolder(view)
     }
 
@@ -22,27 +22,20 @@ class VolunteerAdapter(private val volunteers: List<VolunteerRecord>) :
 
         // Bind volunteer data
         holder.name.text = "Name: ${volunteer.name}"
-        holder.sex.text = "Sex: ${volunteer.sex}"
+        holder.gender.text = "Sex: ${volunteer.gender}"
         holder.age.text = "Age: ${volunteer.age}"
-        holder.hours.text = "Hours: ${volunteer.hours}"
         holder.contact.text = "Contact: ${volunteer.contactNumber}"
         holder.email.text = "Email: ${volunteer.email}"
 
-        // Handle button
-        holder.btnDocuments.setOnClickListener {
-            // TODO: Add your document download logic here
-        }
     }
 
     override fun getItemCount(): Int = volunteers.size
 
     class VolunteerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.textVolunteerName)
-        val sex: TextView = itemView.findViewById(R.id.textSex)
+        val gender: TextView = itemView.findViewById(R.id.textGender)
         val age: TextView = itemView.findViewById(R.id.textAge)
-        val hours: TextView = itemView.findViewById(R.id.textHours)
         val contact: TextView = itemView.findViewById(R.id.textVolunteerNo)
         val email: TextView = itemView.findViewById(R.id.textVolunteerEmail)
-        val btnDocuments: Button = itemView.findViewById(R.id.btnDocuments)
     }
 }
