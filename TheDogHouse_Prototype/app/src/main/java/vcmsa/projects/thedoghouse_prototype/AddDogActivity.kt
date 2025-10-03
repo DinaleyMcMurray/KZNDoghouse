@@ -35,6 +35,7 @@ class AddDogActivity : AppCompatActivity() {
     private lateinit var dogNameEditText: EditText
     private lateinit var breedEditText: EditText
     private lateinit var sexEditText: EditText
+    private lateinit var ageEditText: EditText
     private lateinit var bioEditText: EditText
     private lateinit var vaccinatedSwitch: Switch
     private lateinit var sterilizedSwitch: Switch
@@ -72,7 +73,7 @@ class AddDogActivity : AppCompatActivity() {
             val config = mapOf(
                 "cloud_name" to CLOUDINARY_CLOUD_NAME,
                 "api_key" to CLOUDINARY_API_KEY,
-                "secret_key" to CLOUDINARY_API_SECRET
+                "api_secret" to CLOUDINARY_API_SECRET
             )
             // Use applicationContext as previously established
             MediaManager.init(applicationContext, config)
@@ -91,7 +92,8 @@ class AddDogActivity : AppCompatActivity() {
         // 1. Link Views
         dogNameEditText = findViewById(R.id.textDogName)
         breedEditText = findViewById(R.id.textBreed)
-        sexEditText = findViewById(R.id.Quantity)
+        sexEditText = findViewById(R.id.Gender)
+        ageEditText = findViewById(R.id.Age)
         bioEditText = findViewById(R.id.editTextTextMultiLine)
         vaccinatedSwitch = findViewById(R.id.textVac)
         sterilizedSwitch = findViewById(R.id.textSterilization)
@@ -128,6 +130,7 @@ class AddDogActivity : AppCompatActivity() {
         if (dogNameEditText.text.toString().trim().isEmpty() ||
             breedEditText.text.toString().trim().isEmpty() ||
             sexEditText.text.toString().trim().isEmpty() ||
+            ageEditText.text.toString().trim().isEmpty() ||
             bioEditText.text.toString().trim().isEmpty()) {
             Toast.makeText(this, "Please fill in all text fields", Toast.LENGTH_SHORT).show()
             return
@@ -188,6 +191,7 @@ class AddDogActivity : AppCompatActivity() {
         val dogName = dogNameEditText.text.toString().trim()
         val breed = breedEditText.text.toString().trim()
         val sex = sexEditText.text.toString().trim()
+        val age = ageEditText.text.toString().trim()
         val bio = bioEditText.text.toString().trim()
 
         val finalImageUrl = imageUrl ?: ""
@@ -197,6 +201,7 @@ class AddDogActivity : AppCompatActivity() {
             "breed" to breed,
             "sex" to sex,
             "bio" to bio,
+            "age" to age,
             "isVaccinated" to vaccinatedSwitch.isChecked,
             "isSterilized" to sterilizedSwitch.isChecked,
             "status" to "Available for Adoption",
@@ -229,6 +234,7 @@ class AddDogActivity : AppCompatActivity() {
         breedEditText.text.clear()
         sexEditText.text.clear()
         bioEditText.text.clear()
+        ageEditText.text.clear()
         vaccinatedSwitch.isChecked = false
         sterilizedSwitch.isChecked = false
         imageUri = null

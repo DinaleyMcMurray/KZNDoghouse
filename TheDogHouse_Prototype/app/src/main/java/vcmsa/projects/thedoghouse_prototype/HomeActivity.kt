@@ -102,7 +102,7 @@ class HomeActivity : AppCompatActivity() {
         // ===== Direct Button Navigation (Keep as is) =====
         // Navigate to DogFoodActivity when button7 is clicked
         findViewById<Button>(R.id.button7).setOnClickListener {
-            startActivity(Intent(this, AddDogActivity::class.java))
+            startActivity(Intent(this, FundsDonationsActivity::class.java))
         }
 
         // Navigate to VolunteerActivity when button8 is clicked

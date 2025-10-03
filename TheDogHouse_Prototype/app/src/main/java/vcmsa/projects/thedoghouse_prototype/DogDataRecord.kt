@@ -1,5 +1,3 @@
-// DogData.kt
-
 import java.util.Date
 import com.google.firebase.firestore.ServerTimestamp // Recommended for Date
 
@@ -9,6 +7,7 @@ data class DogDataRecord(
     val breed: String = "",
     val sex: String = "",
     val bio: String = "",
+    val age: Int = 0,
     val isVaccinated: Boolean = false,
     val isSterilized: Boolean = false,
     val status: String = "Available for Adoption",

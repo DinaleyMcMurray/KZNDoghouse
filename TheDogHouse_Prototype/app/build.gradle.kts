@@ -75,7 +75,11 @@ dependencies {
     implementation ("com.google.firebase:firebase-analytics-ktx")
 
     implementation("com.cloudinary:cloudinary-android:2.0.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 }
+
 // TEMPORARILY COMMENT OUT THIS ENTIRE BLOCK
 /*
 configurations.all {
