@@ -12,7 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil.setContentView
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.media3.common.util.UnstableApi // Note: This import is specific to androidx.media3 and may be unneeded
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 // Removed unused imports from Ntobeko2: RecyclerView, LinearLayoutManager, VolunteerAdapter, VolunteerRecord
@@ -25,7 +28,9 @@ class VolunteerActivity : AppCompatActivity() {
     private lateinit var volNumber: EditText
     private lateinit var volEmail: EditText
     private lateinit var submitButton: Button
-
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var toolbar: MaterialToolbar
     // Use firestore consistently for the database instance
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var auth: FirebaseAuth
@@ -101,6 +106,46 @@ class VolunteerActivity : AppCompatActivity() {
                         Toast.makeText(this, "Error saving volunteer details", Toast.LENGTH_SHORT).show()
                     }
             }
+        }
+
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_medsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_donation_history -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
         }
     }
 

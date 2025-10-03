@@ -20,6 +20,8 @@ class HomeActivity : AppCompatActivity() {
 
     // Global references for the drawer components
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var toolbar: MaterialToolbar
     private lateinit var navView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,15 +101,44 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // ===== Direct Button Navigation (Keep as is) =====
-        // Navigate to DogFoodActivity when button7 is clicked
-        findViewById<Button>(R.id.button7).setOnClickListener {
-            startActivity(Intent(this, AddDogActivity::class.java))
-        }
-
-        // Navigate to VolunteerActivity when button8 is clicked
-        findViewById<Button>(R.id.button8).setOnClickListener {
-            startActivity(Intent(this, DogFoodActivity::class.java))
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_medsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_donation_history -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
         }
     }
 

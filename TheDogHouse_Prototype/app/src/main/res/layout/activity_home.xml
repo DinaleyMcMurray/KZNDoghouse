@@ -63,6 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="30dp"
                         app:cardCornerRadius="30dp"
+                        android:backgroundTint="@color/LightGreen"
                         app:cardElevation="20dp">
 
                         <LinearLayout
@@ -70,7 +71,6 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_gravity="center_horizontal"
-                            android:backgroundTint="@color/LightGreen"
                             android:padding="24dp">
 
                             <TextView
@@ -78,18 +78,6 @@
                                 android:layout_height="match_parent"
                                 android:textColor="@color/black"
                                 android:text="The KZN Doghouse is a registered NPO and PBO, proudly operating as a no-kill shelter in Queensburgh, Durban. Since its establishment in 2021, the organization has provided care for over hundreds of dogs and puppies annually, assisting more then 650 animals in need to date." />
-
-                            <Button
-                                android:id="@+id/button7"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Button" />
-
-                            <Button
-                                android:id="@+id/button8"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Volunteer" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -208,6 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="30dp"
                         app:cardCornerRadius="30dp"
+                        android:backgroundTint="@color/pink"
                         app:cardElevation="20dp">
 
                         <LinearLayout
@@ -215,7 +204,6 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_gravity="center_horizontal"
-                            android:backgroundTint="@color/pink"
                             android:padding="24dp">
 
                             <TextView
@@ -236,4 +224,5 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/navigation_menu_admin" /> </androidx.drawerlayout.widget.DrawerLayout>
+        app:menu="@menu/navigation_menu_user" />
+</androidx.drawerlayout.widget.DrawerLayout>

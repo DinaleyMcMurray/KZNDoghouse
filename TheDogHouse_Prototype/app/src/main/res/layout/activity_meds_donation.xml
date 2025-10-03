@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/LightBrown"
     tools:context=".FundsDonationsActivity">
 
-    <ScrollView
+    <!-- Main Content with AppBar -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <!-- Toolbar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Events Management"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
+
+
+        <!-- Scrollable Content -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/LightBrown">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
             <TextView
                 android:id="@+id/heading"
@@ -199,7 +215,16 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
-</LinearLayout>
+    <!-- NAV DRAWER -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu_user" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

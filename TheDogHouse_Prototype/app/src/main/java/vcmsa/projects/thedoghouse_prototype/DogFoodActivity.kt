@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 // Removed redundant DataBindingUtil.setContentView import
 import com.google.firebase.auth.FirebaseAuth // ADDED: Import for Firebase Auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,6 +23,10 @@ class DogFoodActivity : AppCompatActivity() {
     private lateinit var fundsButton: Button
     private lateinit var dogFoodButton: Button
     private lateinit var medicationButton: Button
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var toolbar: MaterialToolbar
 
     private lateinit var auth: FirebaseAuth // ADDED: Authentication instance
     private val firestore = FirebaseFirestore.getInstance()
@@ -94,6 +101,55 @@ class DogFoodActivity : AppCompatActivity() {
         medicationButton.setOnClickListener {
             val intent = Intent(this, MedsDonationActivity::class.java)
             startActivity(intent)
+        }
+
+        // Hook up toolbar icon to open drawer
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(navigationView)
+        }
+
+//        findViewById<Button>(R.id.AddDogBtn).setOnClickListener {
+//            startActivity(Intent(this, AddDogActivity::class.java))
+//        }
+
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_medsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_donation_history -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
         }
     }
 

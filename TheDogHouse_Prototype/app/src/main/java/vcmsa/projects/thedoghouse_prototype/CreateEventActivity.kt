@@ -18,11 +18,18 @@ import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
 import java.util.Date
 import android.util.Log
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 
 class CreateEventActivity : AppCompatActivity() {
 
     // --- Cloudinary Configuration (REPLACE with your actual credentials) ---
     // NOTE: These must match the values used in AddDogActivity.kt
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var toolbar: MaterialToolbar
     private val CLOUDINARY_CLOUD_NAME = "dyuieeirb"
     private val CLOUDINARY_UPLOAD_PRESET = "KZNDoghouse"
 
@@ -74,11 +81,11 @@ class CreateEventActivity : AppCompatActivity() {
             Log.e("Cloudinary", "Initialization failed: ${e.message}")
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         // 1. Link Views to Kotlin Variables
         nameEditText = findViewById(R.id.textName)
@@ -106,6 +113,33 @@ class CreateEventActivity : AppCompatActivity() {
         uploadImageButton.setOnClickListener {
             chooseImage()
         }
+
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_dog_management -> {
+                    startActivity(Intent(this, AddDogActivity::class.java))
+                }
+                R.id.nav_volunteer_management -> {
+                    startActivity(Intent(this, VolunteerManagementActivity::class.java))
+                }
+                R.id.nav_events_management -> {
+                    startActivity(Intent(this, EventsManagementActivity::class.java))
+                }
+                R.id.nav_adoption_history -> {
+                    startActivity(Intent(this, AdoptionHistoryActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
+        }
+
+
     }
 
     // --- Step 1: Image Selection ---

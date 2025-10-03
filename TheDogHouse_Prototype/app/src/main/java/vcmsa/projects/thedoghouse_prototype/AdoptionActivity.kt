@@ -98,6 +98,46 @@ class AdoptionActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please select a document first", Toast.LENGTH_SHORT).show()
             }
         }
+
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_medsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_donation_history -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
