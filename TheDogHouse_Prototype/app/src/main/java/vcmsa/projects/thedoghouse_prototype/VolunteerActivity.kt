@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.OptIn
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil.setContentView
@@ -18,7 +19,6 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-// Removed unused imports from Ntobeko2: RecyclerView, LinearLayoutManager, VolunteerAdapter, VolunteerRecord
 
 class VolunteerActivity : AppCompatActivity() {
 
@@ -43,25 +43,15 @@ class VolunteerActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_volunteer)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        auth = FirebaseAuth.getInstance()
-
-        val currentUser = auth.currentUser
-        if (currentUser == null) {
-            Toast.makeText(this, "Not authenticated. Please log in again.", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-            return
-        }
-
-        val userId = currentUser.uid
-
-        // Initialize views
         volName = findViewById(R.id.volNameEditText)
         volGender = findViewById(R.id.editTextGender)
         volAge = findViewById(R.id.editTextAge)
@@ -69,85 +59,187 @@ class VolunteerActivity : AppCompatActivity() {
         volEmail = findViewById(R.id.editTextEmail)
         submitButton = findViewById(R.id.button4)
 
-        submitButton.setOnClickListener {
-            val volunteerName = volName.text.toString().trim()
-            val volunteerGender = volGender.text.toString().trim()
-            val volunteerAge = volAge.text.toString().trim()
-            val volunteerPhone = volNumber.text.toString().trim()
-            val volunteerEmail = volEmail.text.toString().trim()
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "Not authenticated. Please log in.", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
 
-            if (volunteerName.isEmpty() || volunteerGender.isEmpty() || volunteerAge.isEmpty()
-                || volunteerPhone.isEmpty() || volunteerEmail.isEmpty()
-            ) {
+        submitButton.setOnClickListener {
+            val name = volName.text.toString().trim()
+            val gender = volGender.text.toString().trim()
+            val age = volAge.text.toString().trim()
+            val phone = volNumber.text.toString().trim()
+            val email = volEmail.text.toString().trim()
+
+            if (name.isEmpty() || gender.isEmpty() || age.isEmpty() || phone.isEmpty() || email.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else {
-
                 val volunteerData = hashMapOf(
-                    "Name" to volunteerName,
-                    "Gender" to volunteerGender,
-                    "Age" to volunteerAge,
-                    "Phone" to volunteerPhone,
-                    "Email" to volunteerEmail,
-                    "userId" to userId // Include the user ID for reference
+                    "Name" to name,
+                    "Gender" to gender,
+                    "Age" to age,
+                    "Phone" to phone,
+                    "Email" to email,
+                    "userId" to currentUser.uid
                 )
 
-                // Save to /users/{userId}/volunteer
-                firestore.collection("Users").document(userId).collection("Volunteer")
+                FirebaseFirestore.getInstance()
+                    .collection("Users")
+                    .document(currentUser.uid)
+                    .collection("Volunteer")
                     .add(volunteerData)
-                    .addOnSuccessListener { documentReference ->
-                        // Changed Log.d source to match Android standard (Assuming androidx.media3.common.util.Log is being used as android.util.Log)
-                        Log.d("FIRESTORE", "Volunteer details saved: ${documentReference.id}")
-                        Toast.makeText(this, "Volunteer Details saved!", Toast.LENGTH_SHORT).show()
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Volunteer details saved!", Toast.LENGTH_SHORT).show()
                         clearFields()
                     }
-                    .addOnFailureListener { e ->
-                        // Changed Log.w source to match Android standard
-                        Log.w("FIRESTORE", "Error saving volunteer details", e)
-                        Toast.makeText(this, "Error saving volunteer details", Toast.LENGTH_SHORT).show()
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Error saving details", Toast.LENGTH_SHORT).show()
                     }
             }
         }
 
-        // Handle nav item clicks
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
-                }
-                R.id.nav_logout -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }
-                R.id.nav_home -> {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                }
-                R.id.nav_newsletter -> {
-                    startActivity(Intent(this, NewsletterActivity::class.java))
-                }
-                R.id.nav_medsdonation -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
-                }
-                R.id.nav_volunteer -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, VolunteerActivity::class.java))
-                    finish()
-                }
-                R.id.nav_adoption -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, AdoptionActivity::class.java))
-                    finish()
-                }
-                R.id.nav_donation_history -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
-                    finish()
-                }
+                R.id.nav_home -> startActivity(Intent(this, HomeActivity::class.java))
+                R.id.nav_newsletter -> startActivity(Intent(this, NewsletterActivity::class.java))
+                R.id.nav_medsdonation -> startActivity(
+                    Intent(
+                        this,
+                        MedsDonationActivity::class.java
+                    )
+                )
+
+                R.id.nav_adoption -> startActivity(Intent(this, AdoptionActivity::class.java))
+                R.id.nav_donation_history -> startActivity(
+                    Intent(
+                        this,
+                        DonationHistoryActivity::class.java
+                    )
+                )
+
+                R.id.nav_volunteer -> drawerLayout.closeDrawers() // Already here
+                R.id.nav_account -> startActivity(Intent(this, EditProfileActivity::class.java))
+                R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
             }
             drawerLayout.closeDrawers()
             true
         }
     }
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        enableEdgeToEdge()
+//        setContentView(R.layout.activity_volunteer)
+//
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
+//
+//        auth = FirebaseAuth.getInstance()
+//
+//        val currentUser = auth.currentUser
+//        if (currentUser == null) {
+//            Toast.makeText(this, "Not authenticated. Please log in again.", Toast.LENGTH_LONG).show()
+//            startActivity(Intent(this, LoginActivity::class.java))
+//            finish()
+//            return
+//        }
+//
+//        val userId = currentUser.uid
+//
+//        // Initialize views
+//        volName = findViewById(R.id.volNameEditText)
+//        volGender = findViewById(R.id.editTextGender)
+//        volAge = findViewById(R.id.editTextAge)
+//        volNumber = findViewById(R.id.editTextVolunteerNumber)
+//        volEmail = findViewById(R.id.editTextEmail)
+//        submitButton = findViewById(R.id.button4)
+//
+//        submitButton.setOnClickListener {
+//            val volunteerName = volName.text.toString().trim()
+//            val volunteerGender = volGender.text.toString().trim()
+//            val volunteerAge = volAge.text.toString().trim()
+//            val volunteerPhone = volNumber.text.toString().trim()
+//            val volunteerEmail = volEmail.text.toString().trim()
+//
+//            if (volunteerName.isEmpty() || volunteerGender.isEmpty() || volunteerAge.isEmpty()
+//                || volunteerPhone.isEmpty() || volunteerEmail.isEmpty()
+//            ) {
+//                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+//            } else {
+//
+//                val volunteerData = hashMapOf(
+//                    "Name" to volunteerName,
+//                    "Gender" to volunteerGender,
+//                    "Age" to volunteerAge,
+//                    "Phone" to volunteerPhone,
+//                    "Email" to volunteerEmail,
+//                    "userId" to userId // Include the user ID for reference
+//                )
+//
+//                // Save to /users/{userId}/volunteer
+//                firestore.collection("Users").document(userId).collection("Volunteer")
+//                    .add(volunteerData)
+//                    .addOnSuccessListener { documentReference ->
+//                        // Changed Log.d source to match Android standard (Assuming androidx.media3.common.util.Log is being used as android.util.Log)
+//                        Log.d("FIRESTORE", "Volunteer details saved: ${documentReference.id}")
+//                        Toast.makeText(this, "Volunteer Details saved!", Toast.LENGTH_SHORT).show()
+//                        clearFields()
+//                    }
+//                    .addOnFailureListener { e ->
+//                        // Changed Log.w source to match Android standard
+//                        Log.w("FIRESTORE", "Error saving volunteer details", e)
+//                        Toast.makeText(this, "Error saving volunteer details", Toast.LENGTH_SHORT).show()
+//                    }
+//            }
+//        }
+//
+//        // Handle nav item clicks
+//        navigationView.setNavigationItemSelectedListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.nav_account -> {
+//                    startActivity(Intent(this, EditProfileActivity::class.java))
+//                }
+//                R.id.nav_logout -> {
+//                    startActivity(Intent(this, LoginActivity::class.java))
+//                }
+//                R.id.nav_home -> {
+//                    startActivity(Intent(this, HomeActivity::class.java))
+//                }
+//                R.id.nav_newsletter -> {
+//                    startActivity(Intent(this, NewsletterActivity::class.java))
+//                }
+//                R.id.nav_medsdonation -> {
+//                    // Optional: Handle logout
+//                    startActivity(Intent(this, MedsDonationActivity::class.java))
+//                    finish()
+//                }
+//                R.id.nav_volunteer -> {
+//                    // Optional: Handle logout
+//                    startActivity(Intent(this, VolunteerActivity::class.java))
+//                    finish()
+//                }
+//                R.id.nav_adoption -> {
+//                    // Optional: Handle logout
+//                    startActivity(Intent(this, AdoptionActivity::class.java))
+//                    finish()
+//                }
+//                R.id.nav_donation_history -> {
+//                    // Optional: Handle logout
+//                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+//                    finish()
+//                }
+//            }
+//            drawerLayout.closeDrawers()
+//            true
+//        }
+//    }
 
     // Function should be outside onCreate
     private fun clearFields() {

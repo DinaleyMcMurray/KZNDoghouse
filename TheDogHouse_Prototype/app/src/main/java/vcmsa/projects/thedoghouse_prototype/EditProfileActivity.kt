@@ -70,7 +70,7 @@ class EditProfileActivity : AppCompatActivity() {
                 }
                 R.id.nav_medsdonation -> {
                     // Optional: Handle logout
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    startActivity(Intent(this, MedsDonationActivity::class.java))
                     finish()
                 }
                 R.id.nav_volunteer -> {

@@ -37,6 +37,17 @@ class NewsletterActivity : AppCompatActivity() {
             insets
         }
 
+        // Initialize views
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        toolbar = findViewById(R.id.toolbar)
+
+        // Setup toolbar with drawer
+        setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.open()
+        }
+
         // Setup RecyclerView
         recyclerView = findViewById(R.id.recyclerNewsletters)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -68,7 +79,7 @@ class NewsletterActivity : AppCompatActivity() {
                 }
                 R.id.nav_medsdonation -> {
                     // Optional: Handle logout
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    startActivity(Intent(this, MedsDonationActivity::class.java))
                     finish()
                 }
                 R.id.nav_volunteer -> {

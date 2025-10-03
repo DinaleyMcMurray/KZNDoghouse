@@ -20,7 +20,10 @@ class HomeActivity : AppCompatActivity() {
 
     // Global references for the drawer components
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navView: NavigationView
+    private lateinit var navigationView: NavigationView
+
+    private lateinit var toolbar: MaterialToolbar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
         // ===== Drawer + Toolbar setup =====
         drawerLayout = findViewById(R.id.drawer_layout)
         val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
-        navView = findViewById(R.id.navigation_view)
+        navigationView = findViewById(R.id.navigation_view)
 
         setSupportActionBar(toolbar)
 
@@ -57,17 +60,17 @@ class HomeActivity : AppCompatActivity() {
         // Swap the menu XML based on the user's role
         if (isAdmin) {
             // R.menu.admin_nav_menu must be your admin menu XML file
-            navView.menu.clear()
-            navView.inflateMenu(R.menu.navigation_menu_admin)
+            navigationView.menu.clear()
+            navigationView.inflateMenu(R.menu.navigation_menu_admin)
         } else {
             // R.menu.user_nav_menu must be your standard user menu XML file
-            navView.menu.clear()
-            navView.inflateMenu(R.menu.navigation_menu_user)
+            navigationView.menu.clear()
+            navigationView.inflateMenu(R.menu.navigation_menu_user)
         }
         // ---------------------------------------------------------------------
 
         // 3. Handle navigation drawer clicks (UPDATED to cover both menus)
-        navView.setNavigationItemSelectedListener { item ->
+        navigationView.setNavigationItemSelectedListener { item ->
             // Use a 'when' statement to handle all possible menu item IDs from BOTH menus
             when (item.itemId) {
                 // Shared/User Menu Items
@@ -99,16 +102,46 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // ===== Direct Button Navigation (Keep as is) =====
-        // Navigate to DogFoodActivity when button7 is clicked
-        findViewById<Button>(R.id.button7).setOnClickListener {
-            startActivity(Intent(this, FundsDonationsActivity::class.java))
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_medsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, MedsDonationActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_donation_history -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
         }
 
-        // Navigate to VolunteerActivity when button8 is clicked
-        findViewById<Button>(R.id.button8).setOnClickListener {
-            startActivity(Intent(this, DogFoodActivity::class.java))
-        }
     }
 
     // Helper function for cleaner navigation code

@@ -22,42 +22,55 @@ class DonationHistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_history) // XML with DrawerLayout + Toolbar + RecyclerView
 
-//        // === Drawer + Toolbar setup ===
-//        drawerLayout = findViewById(R.id.drawer_layout)
-//        navigationView = findViewById(R.id.navigation_view)
-//        toolbar = findViewById(R.id.toolbar)
-//
-//        // Open drawer when toolbar nav icon is clicked
-//        toolbar.setNavigationOnClickListener {
-//            drawerLayout.openDrawer(navigationView)
-//        }
-//
-//        // Handle nav item clicks
-//        navigationView.setNavigationItemSelectedListener { menuItem ->
-//            when (menuItem.itemId) {
-//                R.id.nav_dog_management -> {
-//                    startActivity(Intent(this, DogManagementActivity::class.java))
-//                }
-//                R.id.nav_volunteer_management -> {
-//                    startActivity(Intent(this, VolunteerManagementActivity::class.java))
-//                }
-//                R.id.nav_events_management -> {
-//                    startActivity(Intent(this, EventsManagementActivity::class.java))
-//                }
-//                R.id.nav_adoption_history -> {
-//                    startActivity(Intent(this, AdoptionHistoryActivity::class.java))
-//                }
-//                R.id.nav_donation_history -> {
-//                    // Already here → do nothing
-//                }
-//                R.id.nav_logout -> {
-//                    startActivity(Intent(this, LoginActivity::class.java))
-//                    finish()
-//                }
-//            }
-//            drawerLayout.closeDrawers()
-//            true
-//        }
+        // === Drawer + Toolbar setup ===
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        toolbar = findViewById(R.id.toolbar)
+
+        // Open drawer when toolbar nav icon is clicked
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(navigationView)
+        }
+
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_medsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, MedsDonationActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_donation_history -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
+        }
 
         // === RecyclerView setup ===
         recyclerView = findViewById(R.id.recyclerdonation)

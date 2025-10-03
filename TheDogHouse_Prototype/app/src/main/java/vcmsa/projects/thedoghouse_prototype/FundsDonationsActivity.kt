@@ -13,6 +13,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth // ADDED: Import for Firebase Auth
 import com.google.firebase.firestore.FirebaseFirestore // ADDED: Import for Firestore
 import java.util.Date // ADDED: Import for timestamp
@@ -22,6 +25,10 @@ class FundsDonationsActivity : AppCompatActivity() {
     private var selectedAmount: String = ""
     private lateinit var auth: FirebaseAuth // ADDED: Auth instance
     private val firestore = FirebaseFirestore.getInstance() // ADDED: Firestore instance
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+
+    private lateinit var toolbar: MaterialToolbar
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -122,6 +129,47 @@ class FundsDonationsActivity : AppCompatActivity() {
         linkEft.setOnClickListener {
             openPayment("https://www.bank.com/eft?amount=$selectedAmount")
         }
+
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_medsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, MedsDonationActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_donation_history -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
+        }
+
     }
 
     // Open browser with payment link
