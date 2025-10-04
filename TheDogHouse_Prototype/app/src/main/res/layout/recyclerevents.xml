@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:padding="16dp"
+    android:padding="8dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -24,27 +24,65 @@
                 android:id="@+id/textEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Events's Name: "
+                android:text="Event Name: [Placeholder]"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:paddingBottom="8dp" />
 
             <TextView
-                android:id="@+id/textDate"
+                android:id="@+id/textDateAndTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date: "
+                android:text="When: [Date and Time Placeholder]"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:id="@+id/textLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Where: [Location Placeholder]"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:id="@+id/textCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cost: [Cost Placeholder]"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
                 android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About: [Short description snippet...]"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textRsvpStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RSVP Required: [Yes/No]"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:paddingTop="4dp" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="3"
                 android:layout_marginTop="25dp"
                 android:gravity="center_horizontal">
 
@@ -54,6 +92,7 @@
                     android:layout_height="45dp"
                     android:backgroundTint="@color/ButtonColour"
                     android:textColor="@color/black"
+                    android:layout_marginEnd="16dp"
                     android:text="Edit" />
 
                 <Button

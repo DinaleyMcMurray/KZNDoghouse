@@ -2,7 +2,7 @@
 
 package vcmsa.projects.thedoghouse_prototype
 
-import DogDataRecord
+
 import android.os.Bundle
 import android.util.Log
 import android.view.View

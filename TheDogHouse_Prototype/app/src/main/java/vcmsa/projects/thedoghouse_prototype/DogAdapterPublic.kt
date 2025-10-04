@@ -2,7 +2,6 @@
 
 package vcmsa.projects.thedoghouse_prototype
 
-import DogDataRecord
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
