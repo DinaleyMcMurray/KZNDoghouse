@@ -179,6 +179,11 @@ class FundsDonationsActivity : AppCompatActivity() {
                     startActivity(Intent(this, DonationHistoryActivity::class.java))
                     finish()
                 }
+                R.id.nav_help -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, HelpActivity::class.java))
+                    finish()
+                }
             }
             drawerLayout.closeDrawers()
             true

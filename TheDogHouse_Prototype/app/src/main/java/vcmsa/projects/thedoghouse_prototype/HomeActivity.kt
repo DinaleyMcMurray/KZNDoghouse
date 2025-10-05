@@ -69,7 +69,7 @@ class HomeActivity : AppCompatActivity() {
         }
         // ---------------------------------------------------------------------
 
-        // 3. Handle navigation drawer clicks (CONSOLIDATED AND CORRECTED)
+        // 3. Handle navigation drawer clicks (UPDATED to cover both menus)
         navigationView.setNavigationItemSelectedListener { item ->
             // Use a 'when' statement to handle all possible menu item IDs from BOTH menus
             when (item.itemId) {
@@ -80,16 +80,6 @@ class HomeActivity : AppCompatActivity() {
                 R.id.nav_donation_history -> navigateTo(DonationHistoryActivity::class.java)
                 R.id.nav_volunteer -> navigateTo(VolunteerActivity::class.java)
                 R.id.nav_newsletter -> navigateTo(NewsletterActivity::class.java)
-                R.id.nav_account -> navigateTo(EditProfileActivity::class.java) // Added missing account link
-                R.id.nav_logout -> {
-                    navigateTo(LoginActivity::class.java, clearStack = true)
-                }
-
-                // ⚡️ CORRECTED DONATION LINK (Uses direct Intent + finish() as requested in the original conflicting code) ⚡️
-                R.id.nav_fundsdonation -> {
-                    startActivity(Intent(this, FundsDonationsActivity::class.java))
-                    finish()
-                }
 
                 // Admin-Specific Menu Items
                 R.id.nav_volunteer_management -> navigateTo(VolunteerManagementActivity::class.java)
@@ -111,6 +101,52 @@ class HomeActivity : AppCompatActivity() {
                 onBackPressedDispatcher.onBackPressed()
             }
         }
+
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_medsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, MedsDonationActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, ViewAdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_donation_history -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+                R.id.nav_help -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, HelpActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
+        }
+
     }
 
     // Helper function for cleaner navigation code

@@ -106,24 +106,15 @@ class VolunteerActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.nav_home -> startActivity(Intent(this, HomeActivity::class.java))
                 R.id.nav_newsletter -> startActivity(Intent(this, NewsletterActivity::class.java))
-                R.id.nav_fundsdonation -> startActivity(
-                    Intent(
-                        this,
-                        FundsDonationsActivity::class.java
-                    )
-                )
-
+                R.id.nav_medsdonation -> startActivity(Intent(this,MedsDonationActivity::class.java))
                 R.id.nav_adoption -> startActivity(Intent(this, AdoptionActivity::class.java))
-                R.id.nav_donation_history -> startActivity(
-                    Intent(
-                        this,
-                        DonationHistoryActivity::class.java
-                    )
-                )
-
+                R.id.nav_donation_history -> startActivity(Intent(this,DonationHistoryActivity::class.java))
                 R.id.nav_volunteer -> drawerLayout.closeDrawers() // Already here
                 R.id.nav_account -> startActivity(Intent(this, EditProfileActivity::class.java))
                 R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
+                R.id.nav_help -> { startActivity(Intent(this, HelpActivity::class.java))
+                    finish()
+                }
             }
             drawerLayout.closeDrawers()
             true
