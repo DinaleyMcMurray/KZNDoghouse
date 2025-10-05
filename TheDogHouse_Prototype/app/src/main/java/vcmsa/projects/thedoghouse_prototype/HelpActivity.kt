@@ -59,9 +59,9 @@ class HelpActivity : AppCompatActivity() {
                 R.id.nav_newsletter -> {
                     startActivity(Intent(this, NewsletterActivity::class.java))
                 }
-                R.id.nav_medsdonation -> {
+                R.id.nav_fundsdonation -> {
                     // Optional: Handle logout
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    startActivity(Intent(this, FundsDonationsActivity::class.java))
                     finish()
                 }
                 R.id.nav_volunteer -> {

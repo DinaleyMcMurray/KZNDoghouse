@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat // Added for closeDrawers
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
-// Removed redundant DataBindingUtil.setContentView import
-import com.google.firebase.auth.FirebaseAuth // ADDED: Import for Firebase Auth
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Date // ADDED: Import for timestamp
+import java.util.Date
 
 class DogFoodActivity : AppCompatActivity() {
 
@@ -28,7 +28,7 @@ class DogFoodActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
 
-    private lateinit var auth: FirebaseAuth // ADDED: Authentication instance
+    private lateinit var auth: FirebaseAuth
     private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,16 @@ class DogFoodActivity : AppCompatActivity() {
 
         // ADDED: Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+
+        // ⚡️ CRITICAL FIX: INITIALIZE DRAWER COMPONENTS ⚡️
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        toolbar = findViewById(R.id.toolbar)
+
+        // IMPORTANT: Set the toolbar as the activity's action bar
+        setSupportActionBar(toolbar)
+        // ⚡️ END CRITICAL FIX ⚡️
+
 
         donorNameEditText = findViewById(R.id.DonorName)
         dogFoodNameEditText = findViewById(R.id.DogFoodName)
@@ -92,25 +102,25 @@ class DogFoodActivity : AppCompatActivity() {
         fundsButton.setOnClickListener {
             val intent = Intent(this, FundsDonationsActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         dogFoodButton.setOnClickListener {
             Toast.makeText(this, "You are already on Dog Food page", Toast.LENGTH_SHORT).show()
+
         }
 
         medicationButton.setOnClickListener {
             val intent = Intent(this, MedsDonationActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         // Hook up toolbar icon to open drawer
         toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(navigationView)
+            // Use GravityCompat.START for correct drawer opening
+            drawerLayout.openDrawer(GravityCompat.START)
         }
-
-//        findViewById<Button>(R.id.AddDogBtn).setOnClickListener {
-//            startActivity(Intent(this, AddDogActivity::class.java))
-//        }
 
         // Handle nav item clicks
         navigationView.setNavigationItemSelectedListener { menuItem ->
@@ -127,23 +137,19 @@ class DogFoodActivity : AppCompatActivity() {
                 R.id.nav_newsletter -> {
                     startActivity(Intent(this, NewsletterActivity::class.java))
                 }
-                R.id.nav_medsdonation -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, LoginActivity::class.java))
+                R.id.nav_fundsdonation -> {
+                    startActivity(Intent(this, FundsDonationsActivity::class.java))
                     finish()
                 }
                 R.id.nav_volunteer -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, VolunteerActivity::class.java))
                     finish()
                 }
                 R.id.nav_adoption -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, AdoptionActivity::class.java))
                     finish()
                 }
                 R.id.nav_donation_history -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, DonationHistoryActivity::class.java))
                     finish()
                 }

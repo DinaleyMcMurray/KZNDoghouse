@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".FundsDonationsActivity">
 
     <LinearLayout
         android:id="@+id/main"
@@ -52,21 +53,24 @@
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/FundsBtn" android:layout_width="120dp"
+                    android:id="@+id/FundsBtn"
+                    android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/pink"
                     android:textColor="@color/black"
                     android:text="Funds" />
 
                 <Button
-                    android:id="@+id/DogFoodBtn" android:layout_width="120dp"
+                    android:id="@+id/DogFoodBtn"
+                    android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/ButtonColour"
                     android:textColor="@color/black"
                     android:text="Dog Food" />
 
                 <Button
-                    android:id="@+id/MedsBtn" android:layout_width="120dp"
+                    android:id="@+id/MedsBtn"
+                    android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/ButtonColour"
                     android:textColor="@color/black"

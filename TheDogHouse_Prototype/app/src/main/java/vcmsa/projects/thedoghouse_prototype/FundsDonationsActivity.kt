@@ -11,23 +11,25 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth // ADDED: Import for Firebase Auth
-import com.google.firebase.firestore.FirebaseFirestore // ADDED: Import for Firestore
-import java.util.Date // ADDED: Import for timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Date
 
 class FundsDonationsActivity : AppCompatActivity() {
 
     private var selectedAmount: String = ""
-    private lateinit var auth: FirebaseAuth // ADDED: Auth instance
-    private val firestore = FirebaseFirestore.getInstance() // ADDED: Firestore instance
+    private lateinit var auth: FirebaseAuth
+    private val firestore = FirebaseFirestore.getInstance()
+
+    // Global properties for Navigation Drawer
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
-
     private lateinit var toolbar: MaterialToolbar
 
     @SuppressLint("MissingInflatedId")
@@ -36,7 +38,7 @@ class FundsDonationsActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_funds_donations)
 
-        // ADDED: Initialize Firebase Auth
+        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
         // Handle system insets
@@ -46,18 +48,35 @@ class FundsDonationsActivity : AppCompatActivity() {
             insets
         }
 
-        // NAVIGATION BUTTONS
-        val DogFoodButton = findViewById<Button>(R.id.DogFoodBtn)
-        val MedsButton = findViewById<Button>(R.id.MedsBtn)
+        // ⚡️ INITIALIZE DRAWER COMPONENTS ⚡️
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+
+        // Set Toolbar to open drawer
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        // ⚡️ END INITIALIZATION ⚡️
+
+
+        // NAVIGATION BUTTONS (Using the CORRECT IDs from your XML)
+        val DogFoodButton = findViewById<Button>(R.id.DogFoodBtn) // Correct ID
+        val MedsButton = findViewById<Button>(R.id.MedsBtn)       // Correct ID
+        // Note: The FundsBtn is not retrieved here as it is the current page, but it exists in the XML.
 
         DogFoodButton.setOnClickListener {
             val intent = Intent(this, DogFoodActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         MedsButton.setOnClickListener {
             val intent = Intent(this, MedsDonationActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         // FUND DONATION LOGIC
@@ -93,7 +112,7 @@ class FundsDonationsActivity : AppCompatActivity() {
             selectedAmount = "1000"
         }
 
-        // ==== NEW: Enter Amount Button Listener for Firestore Save ====
+        // ==== Enter Amount Button Listener for Firestore Save ====
         enterAmountButton.setOnClickListener {
             val amountText = etAmount.text.toString().trim()
             if (amountText.isEmpty()) {
@@ -108,7 +127,7 @@ class FundsDonationsActivity : AppCompatActivity() {
             saveFundsDonationToFirestore(selectedAmount)
         }
 
-        // ==== Payment Options (now use selectedAmount which is set either by buttons or enterAmountButton) ====
+        // ==== Payment Options ====
         btnPayPal.setOnClickListener {
             openPayment("https://www.paypal.com/pay?amount=$selectedAmount")
         }
@@ -145,23 +164,18 @@ class FundsDonationsActivity : AppCompatActivity() {
                 R.id.nav_newsletter -> {
                     startActivity(Intent(this, NewsletterActivity::class.java))
                 }
-                R.id.nav_medsdonation -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, MedsDonationActivity::class.java))
-                    finish()
+                R.id.nav_fundsdonation -> {
+                    // Current activity, just close the drawer
                 }
                 R.id.nav_volunteer -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, VolunteerActivity::class.java))
                     finish()
                 }
                 R.id.nav_adoption -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, AdoptionActivity::class.java))
                     finish()
                 }
                 R.id.nav_donation_history -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, DonationHistoryActivity::class.java))
                     finish()
                 }
@@ -174,7 +188,6 @@ class FundsDonationsActivity : AppCompatActivity() {
 
     // Open browser with payment link
     private fun openPayment(url: String) {
-        // If the user hasn't pressed the 'Funds' button (enterAmountBtn), use the currently entered text.
         val finalAmount = if (selectedAmount.isEmpty()) {
             findViewById<EditText>(R.id.editAmount)?.text?.toString()?.trim() ?: "0"
         } else {
@@ -188,12 +201,9 @@ class FundsDonationsActivity : AppCompatActivity() {
 
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url.replace("amount=$selectedAmount", "amount=$finalAmount")))
         startActivity(intent)
-
-        // NOTE: We do not save to Firestore here, as the payment might fail.
-        // The previous design saves the intent to pay, not the payment confirmation.
     }
 
-    // ADDED: Function to save donation to Firestore
+    // Function to save donation to Firestore
     private fun saveFundsDonationToFirestore(amount: String) {
         val currentUser = auth.currentUser
         if (currentUser == null) {
@@ -210,17 +220,15 @@ class FundsDonationsActivity : AppCompatActivity() {
             "amount" to amount,
             "type" to "Funds",
             "dateSubmitted" to Date(),
-            "status" to "Pending Payment" // Important for fund tracking
+            "status" to "Pending Payment"
         )
 
-        // Save to the desired nested structure: Users/{uid}/FundsDonations/{auto_ID}
         firestore.collection("Users")
             .document(currentUser.uid)
             .collection("FundsDonations")
             .add(donationData)
             .addOnSuccessListener {
                 Toast.makeText(this, "Donation of R$amount recorded. Proceed to payment!", Toast.LENGTH_LONG).show()
-                // Do NOT clear the amount field yet, as the user needs it for the payment links
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Failed to record donation. Try again.", Toast.LENGTH_SHORT).show()

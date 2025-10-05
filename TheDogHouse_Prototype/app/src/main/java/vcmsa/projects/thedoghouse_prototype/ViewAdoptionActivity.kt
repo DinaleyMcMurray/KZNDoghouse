@@ -63,8 +63,8 @@ class ViewAdoptionActivity : AppCompatActivity() {
                 R.id.nav_newsletter -> {
                     startActivity(Intent(this, NewsletterActivity::class.java))
                 }
-                R.id.nav_medsdonation -> {
-                    startActivity(Intent(this, MedsDonationActivity::class.java))
+                R.id.nav_fundsdonation -> {
+                    startActivity(Intent(this, FundsDonationsActivity::class.java))
                     finish()
                 }
                 R.id.nav_volunteer -> {

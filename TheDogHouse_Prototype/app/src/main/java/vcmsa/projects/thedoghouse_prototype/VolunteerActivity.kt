@@ -106,10 +106,10 @@ class VolunteerActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.nav_home -> startActivity(Intent(this, HomeActivity::class.java))
                 R.id.nav_newsletter -> startActivity(Intent(this, NewsletterActivity::class.java))
-                R.id.nav_medsdonation -> startActivity(
+                R.id.nav_fundsdonation -> startActivity(
                     Intent(
                         this,
-                        MedsDonationActivity::class.java
+                        FundsDonationsActivity::class.java
                     )
                 )
 
