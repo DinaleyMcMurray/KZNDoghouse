@@ -167,13 +167,18 @@
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogFoodActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogFoodActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationHistoryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationHistoryActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/EditProfileActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/EditProfileActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FundsDonationsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FundsDonationsActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/HelpActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/HelpActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/HomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/HomeActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/MedsDonationActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/MedsDonationActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/NewsletterActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/NewsletterActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_funds_donations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_funds_donations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/menu/navigation_menu_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/menu/navigation_menu_user.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +188,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=d25c93c6)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=228e4287)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$/TheDogHouse_Prototype">
       <ProjectState />
@@ -361,7 +366,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759527806616</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="adding navigation for user">
+      <option name="closed" value="true" />
+      <created>1759530982807</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759530982807</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -387,12 +400,12 @@
       <map>
         <entry key="vcmsa.projects.thedoghouse_prototype">
           <value>
-            <CheckInfo lastCheckTimestamp="1759520410514" />
+            <CheckInfo lastCheckTimestamp="1759659584420" />
           </value>
         </entry>
         <entry key="vcmsa.projects.thedoghouse_prototype.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1759520410513" />
+            <CheckInfo lastCheckTimestamp="1759659584403" />
           </value>
         </entry>
       </map>
