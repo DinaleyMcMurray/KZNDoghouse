@@ -74,33 +74,19 @@ class AdoptionHistoryAdapter(
     }
 
     // AdoptionHistoryAdapter.kt
-
-    // AdoptionHistoryAdapter.kt (Using Google Docs Viewer)
-
     private fun openFile(context: Context, url: String, clientName: String) {
         try {
             val cleanUrl = url.replace("http://", "https://").trim()
-            val viewerUrl = "https://docs.google.com/viewer?url=$cleanUrl&embedded=true"
+            val viewerUrl = "https://docs.google.com/viewer?url=$cleanUrl"
             val uri = Uri.parse(viewerUrl)
 
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                setData(uri)
+            // ✅ Force the link to open in a web browser instead of checking for a specific viewer app
+            val intent = Intent(Intent.ACTION_VIEW, uri).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
 
-            if (intent.resolveActivity(context.packageManager) != null) {
-
-                // --- ⚡️ NEW CODE: Introduce a non-blocking delay ⚡️ ---
-                CoroutineScope(Dispatchers.Main).launch {
-                    delay(500) // Wait 500 milliseconds (0.5 seconds)
-                    context.startActivity(intent)
-                    Toast.makeText(context, "Opening document for $clientName...", Toast.LENGTH_LONG).show()
-                }
-                // --------------------------------------------------------
-
-            } else {
-                Toast.makeText(context, "No app found to open the document link.", Toast.LENGTH_LONG).show()
-            }
+            context.startActivity(intent)
+            Toast.makeText(context, "Opening document for $clientName...", Toast.LENGTH_LONG).show()
 
         } catch (e: Exception) {
             Log.e("FileOpener", "Error opening document: ${e.message}", e)

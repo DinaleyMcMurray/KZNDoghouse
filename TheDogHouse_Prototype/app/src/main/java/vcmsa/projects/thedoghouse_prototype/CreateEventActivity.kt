@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -263,31 +264,37 @@ class CreateEventActivity : AppCompatActivity() {
             .option("resource_type", "image")
             .option("folder", "doghouse_app/events")
             .option("upload_preset", CLOUDINARY_UPLOAD_PRESET)
-            .callback(object : UploadCallback {
-                // ... (onStart, onProgress, onReschedule omitted for brevity) ...
 
+            // ⚡️ FIX: Add this option to request Cloudinary to provide the HTTPS link ⚡️
+            .option("secure", true)
+
+            .callback(object : UploadCallback {
                 override fun onSuccess(requestId: String, resultData: Map<*, *>) {
-                    imageUrl = resultData["url"] as String // Save the NEW URL
-                    Log.d("Cloudinary", "Event Upload successful. URL: $imageUrl")
+                    // This line is now safe because we requested the secure URL
+                    val secureUrl = resultData["secure_url"] as? String
+                    if (secureUrl != null) {
+                        imageUrl = secureUrl
+                        Log.d(TAG, "Upload successful. Secure URL: $imageUrl")
+                    } else {
+                        // Should not happen with 'secure: true' but provides a fallback
+                        imageUrl = resultData["url"] as? String
+                        Log.w(TAG, "Secure URL not found, falling back to non-secure.")
+                    }
                     saveEventToFirestore()
                 }
-
                 override fun onError(requestId: String, error: ErrorInfo) {
                     uploadButton.isEnabled = true
                     uploadImageButton.isEnabled = true
-                    Log.e("Cloudinary", "Event Upload failed: ${error.description}")
+                    Log.e(TAG, "Upload failed: ${error.description}")
                     Toast.makeText(this@CreateEventActivity, "Image upload failed: ${error.description}", Toast.LENGTH_LONG).show()
                 }
-                override fun onStart(requestId: String) { Log.d("Cloudinary", "Event Upload started: $requestId") }
-                override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) { /* ... */ }
-                override fun onReschedule(requestId: String, error: ErrorInfo) { /* ... */ }
+                override fun onStart(requestId: String) {}
+                override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {}
+                override fun onReschedule(requestId: String, error: ErrorInfo) {}
             })
             .dispatch()
     }
 
-    /**
-     * Handles both ADDING new events and UPDATING existing events.
-     */
     private fun saveEventToFirestore() {
         val eventName = nameEditText.text.toString().trim()
         val location = whereEditText.text.toString().trim()

@@ -2,19 +2,25 @@ package vcmsa.projects.thedoghouse_prototype
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 class NewsletterActivity : AppCompatActivity() {
 
@@ -24,6 +30,11 @@ class NewsletterActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
+
+    // ⚡️ Firebase setup ⚡️
+    private val firestore = FirebaseFirestore.getInstance()
+    private val EVENTS_COLLECTION_PATH = "Admin/AdminUserDocument/CreateEvents"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,24 +56,22 @@ class NewsletterActivity : AppCompatActivity() {
         // Setup toolbar with drawer
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
-            drawerLayout.open()
+            drawerLayout.openDrawer(GravityCompat.START)
         }
 
         // Setup RecyclerView
         recyclerView = findViewById(R.id.recyclerNewsletters)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Dummy data (replace with Firebase/DB later)
-        newsletterList = mutableListOf(
-            NewsletterItem("August Newsletter", "Highlights of adoptions and donations", "2025-08-30"),
-            NewsletterItem("July Newsletter", "Vaccination drive and volunteer spotlight", "2025-07-28"),
-            NewsletterItem("June Newsletter", "Shelter upgrades and rescue stories", "2025-06-25")
-        )
-
-        adapter = NewsletterAdapter(newsletterList)
+        // ⚡️ FIX 1: Pass the Activity context (this) to the adapter ⚡️
+        newsletterList = mutableListOf()
+        adapter = NewsletterAdapter(newsletterList, this)
         recyclerView.adapter = adapter
 
-        // Handle nav item clicks
+        // ⚡️ Start fetching data ⚡️
+        loadEvents()
+
+        // Handle nav item clicks (Your original logic)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_account -> {
@@ -75,36 +84,80 @@ class NewsletterActivity : AppCompatActivity() {
                     startActivity(Intent(this, HomeActivity::class.java))
                 }
                 R.id.nav_newsletter -> {
-                    startActivity(Intent(this, NewsletterActivity::class.java))
+                    // Current activity
                 }
                 R.id.nav_fundsdonation -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, FundsDonationsActivity::class.java))
                     finish()
                 }
                 R.id.nav_volunteer -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, VolunteerActivity::class.java))
                     finish()
                 }
                 R.id.nav_adoption -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, ViewAdoptionActivity::class.java))
                     finish()
                 }
                 R.id.nav_donation_history -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, DonationHistoryActivity::class.java))
                     finish()
                 }
                 R.id.nav_help -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, HelpActivity::class.java))
                     finish()
                 }
             }
             drawerLayout.closeDrawers()
             true
+        }
+    }
+
+    // ⚡️ Function to fetch events from Firestore with corrected field names ⚡️
+    private fun loadEvents() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // 1. Order by 'dateCreated' which is the actual timestamp field in your document
+                val snapshot = firestore.collection(EVENTS_COLLECTION_PATH)
+                    .orderBy("dateCreated", Query.Direction.DESCENDING)
+                    .get()
+                    .await()
+
+                val fetchedEvents = snapshot.documents.map { document ->
+                    NewsletterItem(
+                        // ⚡️ FIX: Look for 'name' (document field) ⚡️
+                        title = document.getString("name") ?: "N/A",
+
+                        location = document.getString("location") ?: "Online",
+
+                        // ⚡️ FIX: Look for 'dateAndTime' (document field) ⚡️
+                        date = document.getString("dateAndTime") ?: "N/A",
+
+                        cost = document.getString("cost") ?: "Free",
+
+                        // ⚡️ FIX: Look for 'about' (document field) ⚡️
+                        description = document.getString("about") ?: "No description provided.",
+
+                        imageUrl = document.getString("imageUrl") ?: "",
+
+                        // ⚡️ FIX: Use 'dateCreated' (document field) ⚡️
+                        timestamp = document.getDate("dateCreated")
+                    )
+                }
+
+                withContext(Dispatchers.Main) {
+                    newsletterList.clear()
+                    newsletterList.addAll(fetchedEvents)
+                    adapter.notifyDataSetChanged()
+                    // This toast should now reflect the correct count
+                    Toast.makeText(this@NewsletterActivity, "Loaded ${newsletterList.size} events.", Toast.LENGTH_SHORT).show()
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    // This will catch Indexing errors or other network failures
+                    Toast.makeText(this@NewsletterActivity, "Failed to load events: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 }
