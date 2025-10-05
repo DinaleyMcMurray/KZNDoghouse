@@ -172,7 +172,7 @@ class FundsDonationsActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.nav_adoption -> {
-                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    startActivity(Intent(this, ViewAdoptionActivity::class.java))
                     finish()
                 }
                 R.id.nav_donation_history -> {

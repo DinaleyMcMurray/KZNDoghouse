@@ -80,7 +80,7 @@ class EditProfileActivity : AppCompatActivity() {
                 }
                 R.id.nav_adoption -> {
                     // Optional: Handle logout
-                    startActivity(Intent(this, AdoptionActivity::class.java))
+                    startActivity(Intent(this, ViewAdoptionActivity::class.java))
                     finish()
                 }
                 R.id.nav_donation_history -> {

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import kotlinx.coroutines.*
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
@@ -51,7 +52,8 @@ class AdoptionHistoryAdapter(
         val fileName = adoption.documentUrl.substringAfterLast('/')
         holder.textDocUrl.text = "Document: $fileName"
 
-        holder.textUploadDate.text = "Upload Date: ${adoption.uploadDate?.let { dateFormat.format(it) } ?: "N/A"}"
+        holder.textUploadDate.text =
+            "Upload Date: ${adoption.uploadDate?.let { dateFormat.format(it) } ?: "N/A"}"
 
         // 3. Handle Download Button Click
         holder.btnDocuments.setOnClickListener {
@@ -71,48 +73,38 @@ class AdoptionHistoryAdapter(
         notifyDataSetChanged()
     }
 
-    /**
-     * Initiates a view request for the file URL using a browser or PDF viewer Intent.
-     * This avoids using the complex and unreliable Android DownloadManager.
-     */
-    // AdoptionHistoryAdapter.kt (inside openFile function)
+    // AdoptionHistoryAdapter.kt
+
+    // AdoptionHistoryAdapter.kt (Using Google Docs Viewer)
 
     private fun openFile(context: Context, url: String, clientName: String) {
         try {
-            // 1. Force URL to HTTPS
-            val secureUrl = url.replace("http://", "https://")
-            val uri = Uri.parse(secureUrl)
+            val cleanUrl = url.replace("http://", "https://").trim()
+            val viewerUrl = "https://docs.google.com/viewer?url=$cleanUrl&embedded=true"
+            val uri = Uri.parse(viewerUrl)
 
             val intent = Intent(Intent.ACTION_VIEW).apply {
+                setData(uri)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-                setDataAndType(uri, "application/pdf")
             }
 
-            // 3. Check if there's an app that can handle this Intent
             if (intent.resolveActivity(context.packageManager) != null) {
-                context.startActivity(intent)
-                Toast.makeText(context, "Opening document for: $clientName...", Toast.LENGTH_LONG).show()
-            } else {
-                // If setDataAndType fails (e.g., if the URL is not perfectly formed), try again with just setData
-                val fallbackIntent = Intent(Intent.ACTION_VIEW).apply {
-                    setData(uri)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
 
-                if (fallbackIntent.resolveActivity(context.packageManager) != null) {
-                    context.startActivity(fallbackIntent)
-                    Toast.makeText(context, "Opening document in browser/viewer...", Toast.LENGTH_LONG).show()
-                } else {
-                    // Final failure: show the user the URL to copy/paste
-                    Toast.makeText(context, "No app found. URL: $secureUrl", Toast.LENGTH_LONG).show()
-                    Log.w("FileOpener", "No activity found to handle ACTION_VIEW for PDF or generic URL.")
+                // --- ⚡️ NEW CODE: Introduce a non-blocking delay ⚡️ ---
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(500) // Wait 500 milliseconds (0.5 seconds)
+                    context.startActivity(intent)
+                    Toast.makeText(context, "Opening document for $clientName...", Toast.LENGTH_LONG).show()
                 }
+                // --------------------------------------------------------
+
+            } else {
+                Toast.makeText(context, "No app found to open the document link.", Toast.LENGTH_LONG).show()
             }
 
         } catch (e: Exception) {
-            Log.e("FileOpener", "Failed to open file: ${e.message}", e)
-            Toast.makeText(context, "Failed to open document. Check URL and try again.", Toast.LENGTH_LONG).show()
+            Log.e("FileOpener", "Error opening document: ${e.message}", e)
+            Toast.makeText(context, "Error opening document. Try again.", Toast.LENGTH_LONG).show()
         }
     }
 }
