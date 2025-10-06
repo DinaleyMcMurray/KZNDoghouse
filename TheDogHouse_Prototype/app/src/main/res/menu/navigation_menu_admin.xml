@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <!--activity_donation_history-->
-<!--    <item-->
-<!--        android:id="@+id/nav_donation_history"-->
-<!--        android:title="Donation History" />-->
-
     <!--activity_adoption_history-->
     <item
         android:id="@+id/nav_adoption_history"
@@ -26,5 +20,16 @@
         android:id="@+id/nav_dog_management"
         android:title="Dog Management" />
 
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Logout" />
+
+    <item
+        android:id="@+id/nav_dogfood"
+        android:title="Donation History" />
 
 </menu>

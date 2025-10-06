@@ -52,14 +52,6 @@
                     android:layout_weight="1"
                     android:padding="8dp" />
 
-                <Button
-                    android:id="@+id/btnAddVolunteer"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="Add New Volunteer"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/ButtonColour"
-                    android:layout_margin="16dp" />
             </LinearLayout>
 
             <ProgressBar

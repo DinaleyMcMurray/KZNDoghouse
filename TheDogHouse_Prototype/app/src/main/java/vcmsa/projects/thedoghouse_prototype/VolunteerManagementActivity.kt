@@ -19,6 +19,7 @@ import com.google.firebase.firestore.Query // Import for querying
 
 class VolunteerManagementActivity : AppCompatActivity() {
 
+    private lateinit var navigationView: NavigationView
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: VolunteerAdapter
     private lateinit var volunteerList: MutableList<VolunteerRecord>
@@ -58,24 +59,21 @@ class VolunteerManagementActivity : AppCompatActivity() {
         // 3. Fetch Data from Firestore
         fetchVolunteerData()
 
+        // 5. Handle Nav Clicks (unchanged)
         // 4. Handle navigation clicks
         navView.setNavigationItemSelectedListener { menuItem ->
-            val intent: Intent? = when (menuItem.itemId) {
-                R.id.nav_dog_management -> Intent(this, DogManagementActivity::class.java)
-                R.id.nav_events_management -> Intent(this, EventsManagementActivity::class.java)
-                R.id.nav_adoption_history -> Intent(this, AdoptionHistoryActivity::class.java)
-                R.id.nav_volunteer_management -> null // Already here, close drawer
-                R.id.nav_logout -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
-                    null
-                }
-                else -> null
+            when (menuItem.itemId) {
+                R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
+                R.id.nav_volunteer_management -> startActivity(Intent(this, VolunteerManagementActivity::class.java))
+                R.id.nav_events_management -> startActivity(Intent(this, EventsManagementActivity::class.java))
+                R.id.nav_adoption_history -> startActivity(Intent(this, AdoptionHistoryActivity::class.java))
+                R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
+                R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
             }
-            intent?.let { startActivity(it) }
             drawerLayout.closeDrawers()
             true
         }
+
     }
 
     // Function to query Firestore for volunteers

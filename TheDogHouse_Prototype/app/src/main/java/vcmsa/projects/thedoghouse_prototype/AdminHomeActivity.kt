@@ -27,7 +27,6 @@ class AdminHomeActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.navigation_view)
         toolbar = findViewById(R.id.toolbar)
-        logoutButton = findViewById(R.id.btn_admin_logout)
         dogManagementCard = findViewById(R.id.card_dog_management)
 
         // Set Toolbar as the Action Bar (optional, but good practice)
@@ -48,24 +47,19 @@ class AdminHomeActivity : AppCompatActivity() {
             performLogout()
         }
 
-        // 5. Handle Nav Item Clicks (Copied from DogManagementActivity)
-        navigationView.setNavigationItemSelectedListener { menuItem ->
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
+        val navView: NavigationView = findViewById(R.id.navigation_view)
+
+        // 4. Handle navigation clicks
+        navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_dog_management -> {
-                    startActivity(Intent(this, DogManagementActivity::class.java))
-                }
-                R.id.nav_volunteer_management -> {
-                    startActivity(Intent(this, VolunteerManagementActivity::class.java))
-                }
-                R.id.nav_events_management -> {
-                    startActivity(Intent(this, EventsManagementActivity::class.java))
-                }
-                R.id.nav_adoption_history -> {
-                    startActivity(Intent(this, AdoptionHistoryActivity::class.java))
-                }
-                R.id.nav_logout -> {
-                    performLogout()
-                }
+                R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
+                R.id.nav_volunteer_management -> startActivity(Intent(this, VolunteerManagementActivity::class.java))
+                R.id.nav_events_management -> startActivity(Intent(this, EventsManagementActivity::class.java))
+                R.id.nav_adoption_history -> startActivity(Intent(this, AdoptionHistoryActivity::class.java))
+                R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
+                R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
             }
             drawerLayout.closeDrawers()
             true

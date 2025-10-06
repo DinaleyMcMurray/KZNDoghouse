@@ -82,6 +82,8 @@ class DogManagementActivity : AppCompatActivity() {
                 R.id.nav_dog_management -> {
                     // Current activity, no action needed besides closing the drawer
                 }
+                R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
+                R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
                 R.id.nav_volunteer_management -> {
                     startActivity(Intent(this, VolunteerManagementActivity::class.java))
                 }
@@ -101,7 +103,6 @@ class DogManagementActivity : AppCompatActivity() {
             true
         }
 
-        // ❌ THE DUPLICATE LISTENER HAS BEEN REMOVED FROM HERE ❌
     }
 
     override fun onDestroy() {
