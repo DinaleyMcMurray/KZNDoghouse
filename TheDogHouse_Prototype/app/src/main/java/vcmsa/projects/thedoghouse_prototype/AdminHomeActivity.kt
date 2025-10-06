@@ -2,22 +2,22 @@ package vcmsa.projects.thedoghouse_prototype
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.widget.Button // NOTE: This import may no longer be necessary if you don't use 'Button' anywhere else.
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.drawerlayout.widget.DrawerLayout // Import DrawerLayout
-import com.google.android.material.appbar.MaterialToolbar // Import MaterialToolbar
-import com.google.android.material.navigation.NavigationView // Import NavigationView
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 
 class AdminHomeActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
-    private lateinit var logoutButton: Button // For the dashboard button
-    private lateinit var dogManagementCard: androidx.cardview.widget.CardView // For the CardView button
+    private lateinit var dogManagementCard: androidx.cardview.widget.CardView
+    // ⚡️ Removed: private lateinit var logoutButton: Button ⚡️
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +28,9 @@ class AdminHomeActivity : AppCompatActivity() {
         navigationView = findViewById(R.id.navigation_view)
         toolbar = findViewById(R.id.toolbar)
         dogManagementCard = findViewById(R.id.card_dog_management)
+        // ⚡️ Removed: logoutButton initialization ⚡️
 
-        // Set Toolbar as the Action Bar (optional, but good practice)
+        // Set Toolbar as the Action Bar
         setSupportActionBar(toolbar)
 
         // 2. Hook up toolbar icon to open drawer
@@ -37,35 +38,31 @@ class AdminHomeActivity : AppCompatActivity() {
             drawerLayout.openDrawer(navigationView)
         }
 
-        // 3. Handle Dashboard Card Click (e.g., the Image Card)
+        // 3. Handle Dashboard Card Click
         dogManagementCard.setOnClickListener {
             startActivity(Intent(this, DogManagementActivity::class.java))
         }
 
-        // 4. Handle Dashboard Logout Button
-        logoutButton.setOnClickListener {
-            performLogout()
-        }
-
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
-        val navView: NavigationView = findViewById(R.id.navigation_view)
+        // ⚡️ Removed: Dashboard Logout Button listener ⚡️
 
         // 4. Handle navigation clicks
-        navView.setNavigationItemSelectedListener { menuItem ->
+        navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
                 R.id.nav_volunteer_management -> startActivity(Intent(this, VolunteerManagementActivity::class.java))
                 R.id.nav_events_management -> startActivity(Intent(this, EventsManagementActivity::class.java))
                 R.id.nav_adoption_history -> startActivity(Intent(this, AdoptionHistoryActivity::class.java))
-                R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
-                R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
+                R.id.nav_donation_history -> {
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                }
+                R.id.nav_logout -> performLogout() // ⚡️ FIX: Call the clean function for logout ⚡️
+                R.id.nav_home -> { /* Stay on current screen */ }
             }
             drawerLayout.closeDrawers()
             true
         }
 
-        // Apply insets (Keep this at the end if you want)
+        // Apply insets
         ViewCompat.setOnApplyWindowInsetsListener(drawerLayout) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -77,6 +74,7 @@ class AdminHomeActivity : AppCompatActivity() {
     private fun performLogout() {
         Toast.makeText(this, "Admin Logged Out", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, LoginActivity::class.java)
+        // Ensure proper closure of the admin session/back stack
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
