@@ -52,7 +52,7 @@ class AdminHomeActivity : AppCompatActivity() {
                 R.id.nav_volunteer_management -> startActivity(Intent(this, VolunteerManagementActivity::class.java))
                 R.id.nav_events_management -> startActivity(Intent(this, EventsManagementActivity::class.java))
                 R.id.nav_adoption_history -> startActivity(Intent(this, AdoptionHistoryActivity::class.java))
-                R.id.nav_donation_history -> {
+                R.id.nav_dogfood -> {
                     startActivity(Intent(this, DonationHistoryActivity::class.java))
                 }
                 R.id.nav_logout -> performLogout() // ⚡️ FIX: Call the clean function for logout ⚡️

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -17,9 +18,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.Timestamp // Import Firebase Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Date
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await // Import .await() extension
 
 class FundsDonationsActivity : AppCompatActivity() {
 
@@ -48,7 +53,7 @@ class FundsDonationsActivity : AppCompatActivity() {
             insets
         }
 
-        // ⚡️ INITIALIZE DRAWER COMPONENTS ⚡️
+        // === INITIALIZE DRAWER COMPONENTS ===
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.navigation_view)
         toolbar = findViewById(R.id.toolbar)
@@ -59,23 +64,20 @@ class FundsDonationsActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
-        // ⚡️ END INITIALIZATION ⚡️
+        // === END INITIALIZATION ===
 
 
-        // NAVIGATION BUTTONS (Using the CORRECT IDs from your XML)
-        val DogFoodButton = findViewById<Button>(R.id.DogFoodBtn) // Correct ID
-        val MedsButton = findViewById<Button>(R.id.MedsBtn)       // Correct ID
-        // Note: The FundsBtn is not retrieved here as it is the current page, but it exists in the XML.
+        // NAVIGATION BUTTONS
+        val DogFoodButton = findViewById<Button>(R.id.DogFoodBtn)
+        val MedsButton = findViewById<Button>(R.id.MedsBtn)
 
         DogFoodButton.setOnClickListener {
-            val intent = Intent(this, DogFoodActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, DogFoodActivity::class.java))
             finish()
         }
 
         MedsButton.setOnClickListener {
-            val intent = Intent(this, MedsDonationActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MedsDonationActivity::class.java))
             finish()
         }
 
@@ -84,8 +86,6 @@ class FundsDonationsActivity : AppCompatActivity() {
         val btn100 = findViewById<Button>(R.id.buttonR100)
         val btn500 = findViewById<Button>(R.id.buttonR500)
         val btn1000 = findViewById<Button>(R.id.buttonR1000)
-
-        // NEW BUTTON
         val enterAmountButton = findViewById<Button>(R.id.enterAmountBtn)
 
         val btnPayPal = findViewById<ImageView>(R.id.btnPayPal)
@@ -128,32 +128,33 @@ class FundsDonationsActivity : AppCompatActivity() {
         }
 
         // ==== Payment Options ====
+        // NOTE: These listeners should ensure the final amount is passed correctly
         btnPayPal.setOnClickListener {
-            openPayment("https://www.paypal.com/pay?amount=$selectedAmount")
+            openPayment("https://www.paypal.com/pay")
         }
         linkPayPal.setOnClickListener {
-            openPayment("https://www.paypal.com/pay?amount=$selectedAmount")
+            openPayment("https://www.paypal.com/pay")
         }
 
         btnVisa.setOnClickListener {
-            openPayment("https://www.visa.com/pay?amount=$selectedAmount")
+            openPayment("https://www.visa.com/pay")
         }
         linkVisa.setOnClickListener {
-            openPayment("https://www.visa.com/pay?amount=$selectedAmount")
+            openPayment("https://www.visa.com/pay")
         }
 
         btnEft.setOnClickListener {
-            openPayment("https://www.bank.com/eft?amount=$selectedAmount")
+            openPayment("https://www.bank.com/eft")
         }
         linkEft.setOnClickListener {
-            openPayment("https://www.bank.com/eft?amount=$selectedAmount")
+            openPayment("https://www.bank.com/eft")
         }
 
         // Handle nav item clicks
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
+                    startActivity(Intent(this, UserProfileActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     startActivity(Intent(this, LoginActivity::class.java))
@@ -165,7 +166,7 @@ class FundsDonationsActivity : AppCompatActivity() {
                     startActivity(Intent(this, NewsletterActivity::class.java))
                 }
                 R.id.nav_fundsdonation -> {
-                    // Current activity, just close the drawer
+                    // Current activity
                 }
                 R.id.nav_volunteer -> {
                     startActivity(Intent(this, VolunteerActivity::class.java))
@@ -175,12 +176,7 @@ class FundsDonationsActivity : AppCompatActivity() {
                     startActivity(Intent(this, ViewAdoptionActivity::class.java))
                     finish()
                 }
-                R.id.nav_donation_history -> {
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
-                    finish()
-                }
                 R.id.nav_help -> {
-                    // Optional: Handle logout
                     startActivity(Intent(this, HelpActivity::class.java))
                     finish()
                 }
@@ -188,27 +184,26 @@ class FundsDonationsActivity : AppCompatActivity() {
             drawerLayout.closeDrawers()
             true
         }
-
     }
 
     // Open browser with payment link
-    private fun openPayment(url: String) {
-        val finalAmount = if (selectedAmount.isEmpty()) {
-            findViewById<EditText>(R.id.editAmount)?.text?.toString()?.trim() ?: "0"
-        } else {
-            selectedAmount
-        }
+    private fun openPayment(baseUrl: String) {
+        val finalAmount = findViewById<EditText>(R.id.editAmount)?.text?.toString()?.trim() ?: "0"
 
         if (finalAmount.toDoubleOrNull() ?: 0.0 <= 0.0) {
             Toast.makeText(this, "Please enter a valid amount before proceeding to payment.", Toast.LENGTH_LONG).show()
             return
         }
 
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url.replace("amount=$selectedAmount", "amount=$finalAmount")))
+        // Correctly append amount to the URL
+        val url = "$baseUrl?amount=$finalAmount"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
 
-    // Function to save donation to Firestore
+    /**
+     * Fetches the user's name first, then saves the full donation record to Firestore.
+     */
     private fun saveFundsDonationToFirestore(amount: String) {
         val currentUser = auth.currentUser
         if (currentUser == null) {
@@ -216,27 +211,47 @@ class FundsDonationsActivity : AppCompatActivity() {
             return
         }
 
-        if (amount.toDoubleOrNull() ?: 0.0 <= 0.0) {
-            Toast.makeText(this, "Invalid donation amount.", Toast.LENGTH_SHORT).show()
-            return
+        // Use CoroutineScope to handle the asynchronous Firestore lookups
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                // 1. Fetch the Donor's Name
+                // .await() makes this asynchronous call look synchronous
+                val userDoc = firestore.collection("Users").document(currentUser.uid).get().await()
+
+                // Assuming the donor's name is stored in a field called "name" in the User document
+                val donorName = userDoc.getString("name") ?: "Anonymous Donor"
+
+                // 2. Prepare the Donation Data
+                val donationData = hashMapOf(
+                    "amount" to amount,
+                    "type" to "Funds",
+                    "status" to "Pending Payment",
+
+                    // ⚡️ CRITICAL ADDITIONS for History View ⚡️
+                    "donorName" to donorName, // Name is now included!
+                    "userId" to currentUser.uid,
+                    "timestamp" to Timestamp.now(),
+                    "dateSubmitted" to Timestamp.now() // Use Timestamp for queryable dates
+                )
+
+                // 3. Save the record to the FundsDonations subcollection
+                firestore.collection("Users")
+                    .document(currentUser.uid)
+                    .collection("FundsDonations")
+                    .add(donationData)
+                    .addOnSuccessListener {
+                        Toast.makeText(this@FundsDonationsActivity, "Donation of R$amount recorded. Proceed to payment!", Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this@FundsDonationsActivity, "Failed to record donation. ${e.message}", Toast.LENGTH_SHORT).show()
+                        Log.e("FundsDonation", "Firestore save failed", e)
+                    }
+
+            } catch (e: Exception) {
+                // Catches errors during userDoc.get().await() if network fails or user doc not found
+                Toast.makeText(this@FundsDonationsActivity, "Error fetching user details: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e("FundsDonation", "User lookup failed", e)
+            }
         }
-
-        val donationData = hashMapOf(
-            "amount" to amount,
-            "type" to "Funds",
-            "dateSubmitted" to Date(),
-            "status" to "Pending Payment"
-        )
-
-        firestore.collection("Users")
-            .document(currentUser.uid)
-            .collection("FundsDonations")
-            .add(donationData)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Donation of R$amount recorded. Proceed to payment!", Toast.LENGTH_LONG).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Failed to record donation. Try again.", Toast.LENGTH_SHORT).show()
-            }
     }
 }

@@ -1,187 +1,163 @@
 package vcmsa.projects.thedoghouse_prototype
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import vcmsa.projects.thedoghouse_prototype.databinding.ActivityDonationHistoryBinding
 
 class DonationHistoryActivity : AppCompatActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navigationView: NavigationView
-    private lateinit var toolbar: MaterialToolbar
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: DonationHistoryAdapter
-    private lateinit var donationList: MutableList<DonationRecord>
+    // --- Firebase Instance ---
+    private val firestore = FirebaseFirestore.getInstance()
+    private val TAG = "DonationHistory"
+
+    // ⚡️ View Binding Instance ⚡️
+    private lateinit var binding: ActivityDonationHistoryBinding
+
+    // --- UI/Navigation Variables ---
+    // (DrawerLayout and Toolbar are defined in binding)
+
+    // --- Adapter Variables ---
+    private lateinit var fundsAdapter: DonationHistoryAdapter
+    private lateinit var dogFoodAdapter: DonationHistoryAdapter
+    private lateinit var medsAdapter: DonationHistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_donation_history) // XML with DrawerLayout + Toolbar + RecyclerView
 
-        // === Drawer + Toolbar setup ===
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navigationView = findViewById(R.id.navigation_view)
-        toolbar = findViewById(R.id.toolbar)
+        // ⚡️ Initialize View Binding and set content view ⚡️
+        binding = ActivityDonationHistoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Open drawer when toolbar nav icon is clicked
+        // === 1. Initialize Views ===
+        val drawerLayout = binding.drawerLayout
+        val toolbar = binding.toolbar
+
+        // === 2. Setup Adapters and Layout Managers ===
+        fundsAdapter = DonationHistoryAdapter(mutableListOf())
+        dogFoodAdapter = DonationHistoryAdapter(mutableListOf())
+        medsAdapter = DonationHistoryAdapter(mutableListOf())
+
+        // Using the simplified RecyclerView IDs from your XML
+        setupRecyclerView(binding.recyclerfunds, fundsAdapter)
+        setupRecyclerView(binding.recyclerdogfood, dogFoodAdapter)
+        setupRecyclerView(binding.recyclermeds, medsAdapter)
+
+        // === 3. Toolbar and Navigation Setup ===
+        setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(navigationView)
+            drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // Handle nav item clicks
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
+        // === 4. Button Listeners (Calling the three dedicated load methods) ===
+        binding.FundsBtn.setOnClickListener {
+            showRecyclerView(binding.recyclerfunds)
+            loadFundsHistory() // ✅ Dedicated call
+        }
+
+        binding.DogFoodBtn.setOnClickListener {
+            showRecyclerView(binding.recyclerdogfood)
+            loadDogFoodHistory() // ✅ Dedicated call
+        }
+
+        binding.MedsBtn.setOnClickListener {
+            showRecyclerView(binding.recyclermeds)
+            loadMedsHistory() // ✅ Dedicated call
+        }
+
+        // Load the default view on startup (Funds)
+        binding.FundsBtn.callOnClick()
+    }
+
+    // ----------------------------------------------------------------------
+    // --- FIREBASE LOADING FUNCTIONS (3 Dedicated Methods) -------------------
+    // ----------------------------------------------------------------------
+
+    /**
+     * Loads donation history for Funds from the FundsDonations collection group.
+     */
+    private fun loadFundsHistory() {
+        // fundsAdapter.clearData() // Optional: if you had a clear method
+        firestore.collectionGroup("FundsDonations")
+            .orderBy("dateSubmitted", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val fundsRecords = querySnapshot.documents.mapNotNull { document ->
+                    // Use toObject for clean mapping based on HistoryFundsRecord model
+                    document.toObject(HistoryFundsRecord::class.java)
                 }
-                R.id.nav_logout -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }
-                R.id.nav_home -> {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                }
-                R.id.nav_newsletter -> {
-                    startActivity(Intent(this, NewsletterActivity::class.java))
-                }
-                R.id.nav_fundsdonation -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, FundsDonationsActivity::class.java))
-                    finish()
-                }
-                R.id.nav_volunteer -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, VolunteerActivity::class.java))
-                    finish()
-                }
-                R.id.nav_adoption -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                    finish()
-                }
-                R.id.nav_donation_history -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
-                    finish()
-                }
-                R.id.nav_help -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, HelpActivity::class.java))
-                    finish()
-                }
+                fundsAdapter.updateData(fundsRecords)
             }
-            drawerLayout.closeDrawers()
-            true
-        }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error fetching funds history: ${e.message}", e)
+                Toast.makeText(this, "Failed to load Funds: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+    }
 
-        // === RecyclerView setup ===
-        recyclerView = findViewById(R.id.recyclerdonation)
+    /**
+     * Loads donation history for Dog Food from the DogFoodDonations collection group.
+     */
+    private fun loadDogFoodHistory() {
+        // dogFoodAdapter.clearData() // Optional: if you had a clear method
+        firestore.collectionGroup("DogFoodDonations")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val dogFoodRecords = querySnapshot.documents.mapNotNull { document ->
+                    // Use toObject for clean mapping based on HistoryDogFoodRecord model
+                    document.toObject(HistoryDogFoodRecord::class.java)
+                }
+                dogFoodAdapter.updateData(dogFoodRecords)
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error fetching dog food history: ${e.message}", e)
+                Toast.makeText(this, "Failed to load Dog Food: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+    }
+
+    /**
+     * Loads donation history for Medication from the MedicationDonations collection group.
+     */
+    private fun loadMedsHistory() {
+        // medsAdapter.clearData() // Optional: if you had a clear method
+        firestore.collectionGroup("MedicationDonations")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val medsRecords = querySnapshot.documents.mapNotNull { document ->
+                    // Use toObject for clean mapping based on HistoryMedsRecord model
+                    document.toObject(HistoryMedsRecord::class.java)
+                }
+                medsAdapter.updateData(medsRecords)
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error fetching meds history: ${e.message}", e)
+                Toast.makeText(this, "Failed to load Medication: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+    }
+
+
+    // ----------------------------------------------------------------------
+    // --- HELPER FUNCTIONS -------------------------------------------------
+    // ----------------------------------------------------------------------
+
+    private fun setupRecyclerView(recyclerView: RecyclerView, adapter: DonationHistoryAdapter) {
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // Dummy data (replace with Firebase/DB later)
-        donationList = mutableListOf(
-            DonationRecord("John Doe", "Funds", 500, "2025-09-15"),
-            DonationRecord("Jane Smith", "Dog Food", 2, "2025-09-16"),
-            DonationRecord("Mike Johnson", "Medication", 3, "2025-09-17")
-        )
-
-        adapter = DonationHistoryAdapter(donationList)
         recyclerView.adapter = adapter
     }
+
+    private fun showRecyclerView(recyclerViewToShow: RecyclerView) {
+        binding.recyclerfunds.visibility = View.GONE
+        binding.recyclerdogfood.visibility = View.GONE
+        binding.recyclermeds.visibility = View.GONE
+
+        recyclerViewToShow.visibility = View.VISIBLE
+    }
 }
-
-
-//package vcmsa.projects.thedoghouse_prototype
-//
-//import android.content.Intent
-//import android.os.Bundle
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.drawerlayout.widget.DrawerLayout
-//import com.google.android.material.appbar.MaterialToolbar
-//import com.google.android.material.navigation.NavigationView
-//
-//class DonationHistoryActivity : AppCompatActivity() {
-//
-//    private lateinit var drawerLayout: DrawerLayout
-//    private lateinit var navigationView: NavigationView
-//    private lateinit var toolbar: MaterialToolbar
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_donation_history) // your XML with DrawerLayout
-//
-//        drawerLayout = findViewById(R.id.drawer_layout)
-//        navigationView = findViewById(R.id.navigation_view)
-//        toolbar = findViewById(R.id.toolbar)
-//
-//        // Hook up toolbar icon to open drawer
-//        toolbar.setNavigationOnClickListener {
-//            drawerLayout.openDrawer(navigationView)
-//        }
-//
-//        // Handle nav item clicks
-//        navigationView.setNavigationItemSelectedListener { menuItem ->
-//            when (menuItem.itemId) {
-//                R.id.nav_dog_management -> {
-//                    startActivity(Intent(this, DogManagementActivity::class.java))
-//                }
-//                R.id.nav_volunteer_management -> {
-//                    startActivity(Intent(this, VolunteerManagementActivity::class.java))
-//                }
-//                R.id.nav_events_management -> {
-//                    startActivity(Intent(this, EventsManagementActivity::class.java))
-//                }
-//                R.id.nav_adoption_history -> {
-//                    startActivity(Intent(this, AdoptionHistoryActivity::class.java))
-//                }
-//                R.id.nav_logout -> {
-//                    // Optional: Handle logout
-//                    startActivity(Intent(this, LoginActivity::class.java))
-//                    finish()
-//                }
-//            }
-//            drawerLayout.closeDrawers()
-//            true
-//        }
-//    }
-//}
-//
-//
-////package vcmsa.projects.thedoghouse_prototype
-////
-////import android.os.Bundle
-////import androidx.appcompat.app.AppCompatActivity
-////import androidx.databinding.DataBindingUtil.setContentView
-////import androidx.recyclerview.widget.LinearLayoutManager
-////import androidx.recyclerview.widget.RecyclerView
-////
-////class DonationHistoryActivity : AppCompatActivity() {
-////
-////    private lateinit var recyclerView: RecyclerView
-////    private lateinit var adapter: DonationHistoryAdapter
-////    private lateinit var donationList: MutableList<DonationRecord>
-////
-////    override fun onCreate(savedInstanceState: Bundle?) {
-////        super.onCreate(savedInstanceState)
-////        setContentView(R.layout.activity_donation_history)
-//
-////
-////        // Setup RecyclerView
-////        recyclerView = findViewById(R.id.recyclerdonation)
-////        recyclerView.layoutManager = LinearLayoutManager(this)
-////
-////        // Dummy data (replace with database or Firebase later)
-////        donationList = mutableListOf(
-////            DonationRecord("John Doe", "Funds", 500, "2025-09-15"),
-////            DonationRecord("Jane Smith", "Dog Food", 2, "2025-09-16"),
-////            DonationRecord("Mike Johnson", "Medication", 3, "2025-09-17")
-////        )
-////
-////        adapter = DonationHistoryAdapter(donationList)
-////        recyclerView.adapter = adapter
-////    }
-////    }
-////}

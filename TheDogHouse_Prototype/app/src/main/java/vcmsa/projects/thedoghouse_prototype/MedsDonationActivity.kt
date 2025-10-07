@@ -91,7 +91,6 @@ class MedsDonationActivity : AppCompatActivity() {
                 R.id.nav_newsletter -> startActivity(Intent(this, NewsletterActivity::class.java))
                 R.id.nav_volunteer -> startActivity(Intent(this, VolunteerActivity::class.java))
                 R.id.nav_adoption -> startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                R.id.nav_donation_history -> startActivity(Intent(this, DonationHistoryActivity::class.java))
                 R.id.nav_fundsdonation -> drawerLayout.closeDrawers() // Already on this page
                 R.id.nav_account -> startActivity(Intent(this, EditProfileActivity::class.java))
                 R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))

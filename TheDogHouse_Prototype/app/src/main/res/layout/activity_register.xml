@@ -75,6 +75,17 @@
                     android:textColorHighlight="@color/cardview_dark_background" />
 
                 <EditText
+                    android:id="@+id/etAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Age"
+                    android:padding="8dp"
+                    android:backgroundTint="@color/purple"
+                    android:textColor="@color/black"
+                    android:typeface="serif"
+                    android:textColorHighlight="@color/cardview_dark_background" />
+
+                <EditText
                     android:id="@+id/etRegContactNumber"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

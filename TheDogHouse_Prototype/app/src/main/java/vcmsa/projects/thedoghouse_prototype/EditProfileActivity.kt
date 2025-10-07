@@ -2,150 +2,135 @@ package vcmsa.projects.thedoghouse_prototype
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView // Import TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil.setContentView
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com. google. firebase. firestore. DocumentSnapshot
-
-
 
 class EditProfileActivity : AppCompatActivity() {
-    private var editName: EditText? = null
-    private var editEmail: EditText? = null
-    private var editPhone: EditText? = null
-    private var editAge: EditText? = null
-    private var btnSave: Button? = null
 
-    private var mAuth: FirebaseAuth? = null
-    private var db: FirebaseFirestore? = null
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navigationView: NavigationView
+    // UI components
+    private lateinit var editName: EditText
+    private lateinit var viewEmail: TextView // CHANGED: Now a TextView
+    private lateinit var editPhone: EditText
+    private lateinit var editAge: EditText
+    // REMOVED: editCurrentPassword
+    private lateinit var btnSave: Button
     private lateinit var toolbar: MaterialToolbar
+
+    // Firebase instances
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+    private val USERS_COLLECTION = "Users"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editprofile)
 
-        // Firebase
+        // Initialize Firebase
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // Views
-        editName = findViewById<EditText?>(R.id.editTextText)
-        editEmail = findViewById<EditText?>(R.id.editTextTextEmailAddress)
-        editPhone = findViewById<EditText?>(R.id.editTextPhone)
-        editAge = findViewById<EditText?>(R.id.editTextNumber)
-        btnSave = findViewById<Button?>(R.id.btn_save_profile)
+        // Initialize Views
+        editName = findViewById(R.id.editTextText)
+        viewEmail = findViewById(R.id.profile_email_readonly) // CHANGED ID
+        editPhone = findViewById(R.id.editTextPhone)
+        editAge = findViewById(R.id.editTextNumber)
+        btnSave = findViewById(R.id.btn_save_profile)
+        toolbar = findViewById(R.id.toolbar)
 
-        // Load current user data
+        setupToolbar()
         loadUserData()
 
-        // Save changes
-        btnSave!!.setOnClickListener(View.OnClickListener { v: View? -> saveUserData() })
+        // Set up save button listener (no password needed now)
+        btnSave.setOnClickListener { saveUserData() }
+    }
 
-        // Handle nav item clicks
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
-                }
-                R.id.nav_logout -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }
-                R.id.nav_home -> {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                }
-                R.id.nav_newsletter -> {
-                    startActivity(Intent(this, NewsletterActivity::class.java))
-                }
-                R.id.nav_fundsdonation -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, FundsDonationsActivity::class.java))
-                    finish()
-                }
-                R.id.nav_volunteer -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, VolunteerActivity::class.java))
-                    finish()
-                }
-                R.id.nav_adoption -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                    finish()
-                }
-                R.id.nav_donation_history -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
-                    finish()
-                }
-                R.id.nav_help -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, HelpActivity::class.java))
-                    finish()
-                }
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = "Edit Profile"
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
             }
-            drawerLayout.closeDrawers()
-            true
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
     private fun loadUserData() {
-        val uid = mAuth!!.getCurrentUser()!!.getUid()
-        val userRef = db!!.collection("users").document(uid)
+        val user = mAuth.currentUser
+        val uid = user?.uid
 
-        userRef.get()
-            .addOnSuccessListener(OnSuccessListener { documentSnapshot: DocumentSnapshot? ->
-                if (documentSnapshot!!.exists()) {
-                    editName!!.setText(documentSnapshot.getString("name"))
-                    editEmail!!.setText(documentSnapshot.getString("email"))
-                    editPhone!!.setText(documentSnapshot.getString("phone"))
-                    editAge!!.setText(documentSnapshot.getString("age"))
+        if (uid == null) {
+            Toast.makeText(this, "Error: User not logged in.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        db.collection(USERS_COLLECTION).document(uid).get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    // Load editable fields
+                    editName.setText(documentSnapshot.getString("name"))
+                    editPhone.setText(documentSnapshot.getString("contactNumber"))
+                    editAge.setText(documentSnapshot.getString("age"))
+
+                    // Load read-only email
+                    viewEmail.text = documentSnapshot.getString("email")
+                } else {
+                    Toast.makeText(this, "Profile data not found.", Toast.LENGTH_SHORT).show()
                 }
-            }).addOnFailureListener(OnFailureListener { e: Exception? ->
-                Toast.makeText(
-                    this,
-                    "Failed to load profile.",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
-            )
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to load profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("EditProfile", "Load failed: ${e.message}")
+            }
     }
 
     private fun saveUserData() {
-        val uid = mAuth!!.getCurrentUser()!!.getUid()
+        val user = mAuth.currentUser
+        val uid = user?.uid
 
-        val userMap: MutableMap<String?, Any?> = HashMap<String?, Any?>()
-        userMap.put("name", editName!!.getText().toString())
-        userMap.put("email", editEmail!!.getText().toString())
-        userMap.put("phone", editPhone!!.getText().toString())
-        userMap.put("age", editAge!!.getText().toString())
+        if (uid == null) {
+            Toast.makeText(this, "Error: Cannot save data, user ID missing.", Toast.LENGTH_LONG).show()
+            return
+        }
 
-        db!!.collection("users").document(uid).set(userMap)
-            .addOnSuccessListener(OnSuccessListener { aVoid: Void? ->
-                Toast.makeText(
-                    this@EditProfileActivity,
-                    "Profile updated!",
-                    Toast.LENGTH_SHORT
-                ).show()
+        val newName = editName.text.toString().trim()
+        val newPhone = editPhone.text.toString().trim()
+        val newAge = editAge.text.toString().trim()
+
+        // Since email is read-only, we pull the original value from the TextView
+        val currentEmail = viewEmail.text.toString().trim()
+
+        val userMap = hashMapOf<String, Any>(
+            "name" to newName,
+            "email" to currentEmail, // Saves the original email value back
+            "contactNumber" to newPhone,
+            "age" to newAge
+        )
+
+        // Directly call Firestore update (safe now, no Auth changes)
+        db.collection(USERS_COLLECTION).document(uid).update(userMap)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, UserProfileActivity::class.java))
+                finish()
             }
-            )
-            .addOnFailureListener(OnFailureListener { e: Exception? ->
-                Toast.makeText(
-                    this@EditProfileActivity,
-                    "Error saving profile.",
-                    Toast.LENGTH_SHORT
-                ).show()
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error saving profile details: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e("EditProfile", "Firestore update failed: ${e.message}")
             }
-            )
     }
 }

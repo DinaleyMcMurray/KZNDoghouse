@@ -52,7 +52,7 @@ class ViewAdoptionActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
+                    startActivity(Intent(this, UserProfileActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     startActivity(Intent(this, LoginActivity::class.java))
@@ -75,8 +75,8 @@ class ViewAdoptionActivity : AppCompatActivity() {
                     // Current Activity: Close drawer but do not navigate/finish
                     Toast.makeText(this, "You are already viewing adoptions.", Toast.LENGTH_SHORT).show()
                 }
-                R.id.nav_donation_history -> {
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                R.id.nav_help -> {
+                    startActivity(Intent(this, HelpActivity::class.java))
                     finish()
                 }
                 else -> false // Handle unhandled IDs gracefully

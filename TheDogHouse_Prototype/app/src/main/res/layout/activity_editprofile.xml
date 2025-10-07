@@ -1,80 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/LightBrown">
+    tools:context=".EditProfileActivity">
 
     <LinearLayout
+        android:id="@+id/main_content_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/heading"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:textAlignment="center"
-            android:typeface="serif"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_marginTop="30dp"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="EDIT PROFILE"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
-        <!-- Profile Info -->
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:background="@color/LightBrown">
 
-
-            <EditText
-                android:id="@+id/editTextText"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Name" />
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="16dp">
 
-            <EditText
-                android:id="@+id/editTextTextEmailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:text="E-mail"
-                android:inputType="textEmailAddress" />
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="EDIT PROFILE"
+                    android:textAlignment="center"
+                    android:typeface="serif"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"/>
 
-            <EditText
-                android:id="@+id/editTextPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:text="Phone"
-                android:inputType="phone" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="20dp"
+                    android:backgroundTint="@color/pink">
 
-            <EditText
-                android:id="@+id/editTextNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:text="Age"
-                android:inputType="number" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="32dp">
 
+                        <EditText
+                            android:id="@+id/editTextText"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="Name"
+                            android:padding="8dp"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:backgroundTint="@color/purple"
+                            android:textColor="@color/black"
+                            android:typeface="serif"
+                            android:layout_marginBottom="16dp" />
 
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/profile_email_readonly"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="user.email@example.com"
+                            android:padding="8dp"
+                            android:gravity="center_vertical"
+                            android:backgroundTint="@color/purple"
+                            android:textSize="16sp"
+                            android:typeface="serif"
+                            android:layout_marginBottom="16dp" />
 
-        <!-- Save Button -->
-        <Button
-            android:id="@+id/btn_save_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save details"
-            android:layout_marginTop="24dp"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/LightGreen"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/purple"
+                            android:layout_marginVertical="4dp"
+                            android:layout_marginHorizontal="8dp"/>
 
+                        <EditText
+                            android:id="@+id/editTextPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="Phone"
+                            android:padding="8dp"
+                            android:ems="10"
+                            android:inputType="phone"
+                            android:backgroundTint="@color/purple"
+                            android:textColor="@color/black"
+                            android:typeface="serif"
+                            android:layout_marginBottom="16dp" />
+
+                        <EditText
+                            android:id="@+id/editTextNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="Age"
+                            android:padding="8dp"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:backgroundTint="@color/purple"
+                            android:textColor="@color/black"
+                            android:typeface="serif" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btn_save_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="SAVE DETAILS"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/LightGreen"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/btn_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="BACK"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/Lightpurple"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp" />
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-</ScrollView>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu_user"
+        tools:ignore="MissingDefaultResource" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

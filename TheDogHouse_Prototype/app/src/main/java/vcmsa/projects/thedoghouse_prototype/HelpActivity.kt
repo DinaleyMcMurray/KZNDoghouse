@@ -58,14 +58,13 @@ class HelpActivity : AppCompatActivity() {
         // === Navigation Drawer Menu Handling ===
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_account -> startActivity(Intent(this, EditProfileActivity::class.java))
+                R.id.nav_account -> startActivity(Intent(this, UserProfileActivity::class.java))
                 R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
                 R.id.nav_home -> startActivity(Intent(this, HomeActivity::class.java))
                 R.id.nav_newsletter -> startActivity(Intent(this, NewsletterActivity::class.java))
                 R.id.nav_fundsdonation -> startActivity(Intent(this, MedsDonationActivity::class.java))
                 R.id.nav_volunteer -> startActivity(Intent(this, VolunteerActivity::class.java))
                 R.id.nav_adoption -> startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                R.id.nav_donation_history -> startActivity(Intent(this, DonationHistoryActivity::class.java))
                 R.id.nav_help -> {
                     // Stay on current page
                     drawerLayout.closeDrawer(GravityCompat.START)

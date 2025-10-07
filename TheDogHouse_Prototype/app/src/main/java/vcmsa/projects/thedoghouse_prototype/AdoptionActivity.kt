@@ -179,10 +179,6 @@ class AdoptionActivity : AppCompatActivity() {
                     startActivity(Intent(this, AdoptionActivity::class.java))
                     finish()
                 }
-                R.id.nav_donation_history -> {
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
-                    finish()
-                }
                 R.id.nav_help -> {
                     // Optional: Handle logout
                     startActivity(Intent(this, HelpActivity::class.java))

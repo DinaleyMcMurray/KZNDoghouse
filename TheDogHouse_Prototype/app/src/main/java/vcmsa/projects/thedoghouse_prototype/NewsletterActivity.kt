@@ -75,7 +75,7 @@ class NewsletterActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
+                    startActivity(Intent(this, UserProfileActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     startActivity(Intent(this, LoginActivity::class.java))
@@ -96,10 +96,6 @@ class NewsletterActivity : AppCompatActivity() {
                 }
                 R.id.nav_adoption -> {
                     startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                    finish()
-                }
-                R.id.nav_donation_history -> {
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
                     finish()
                 }
                 R.id.nav_help -> {

@@ -77,13 +77,8 @@ class HomeActivity : AppCompatActivity() {
                 R.id.nav_home -> navigateTo(HomeActivity::class.java, clearStack = true)
                 R.id.nav_adoption -> navigateTo(ViewAdoptionActivity::class.java)
                 R.id.nav_adoption_history -> navigateTo(AdoptionHistoryActivity::class.java)
-                R.id.nav_donation_history -> navigateTo(DonationHistoryActivity::class.java)
                 R.id.nav_volunteer -> navigateTo(VolunteerActivity::class.java)
                 R.id.nav_newsletter -> navigateTo(NewsletterActivity::class.java)
-
-                // Admin-Specific Menu Items
-                R.id.nav_volunteer_management -> navigateTo(VolunteerManagementActivity::class.java)
-                // Add any other admin-specific menu items here
 
                 else -> false // Handle unhandled item IDs
             }
@@ -106,7 +101,7 @@ class HomeActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
+                    startActivity(Intent(this, UserProfileActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     startActivity(Intent(this, LoginActivity::class.java))
@@ -130,11 +125,6 @@ class HomeActivity : AppCompatActivity() {
                 R.id.nav_adoption -> {
                     // Optional: Handle logout
                     startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                    finish()
-                }
-                R.id.nav_donation_history -> {
-                    // Optional: Handle logout
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
                     finish()
                 }
                 R.id.nav_help -> {
