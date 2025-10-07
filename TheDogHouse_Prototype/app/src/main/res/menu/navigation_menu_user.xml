@@ -5,33 +5,33 @@
 
     <item
         android:id="@+id/nav_home"
-        android:title="Home" />
+        android:title="HOME" />
     <item
         android:id="@+id/nav_account"
-        android:title="My Account" />
+        android:title="MY ACCOUNT" />
 
     <item
         android:id="@+id/nav_newsletter"
-        android:title="Events" />
+        android:title="EVENTS" />
 
     <item
         android:id="@+id/nav_fundsdonation"
-        android:title="Donations" />
+        android:title="DONATIONS" />
 
     <item
         android:id="@+id/nav_volunteer"
-        android:title="Volunteering" />
+        android:title="VOLUNTEERING" />
 
     <item
         android:id="@+id/nav_adoption"
-        android:title="Adoption" />
+        android:title="ADOPTION" />
 
     <item
         android:id="@+id/nav_help"
-        android:title="Help" />
+        android:title="HELP" />
 
     <item
         android:id="@+id/nav_logout"
-        android:title="Logout" />
+        android:title="LOGOUT" />
 
 </menu>

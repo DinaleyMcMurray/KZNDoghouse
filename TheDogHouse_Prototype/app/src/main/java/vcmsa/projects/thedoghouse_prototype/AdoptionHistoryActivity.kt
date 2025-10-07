@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.widget.Button // Import the Button class
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +30,7 @@ class AdoptionHistoryActivity : AppCompatActivity() {
     private val TAG = "AdoptionHistoryActivity"
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchEditText: EditText
+    private lateinit var btnResetSearch: Button // 1. Reset Button Declaration
     private val firestore = FirebaseFirestore.getInstance()
 
     private var fullAdoptionHistoryList = mutableListOf<AdoptionHistory>()
@@ -35,7 +38,6 @@ class AdoptionHistoryActivity : AppCompatActivity() {
 
     // Confirmed path for Dog Management
     private val DOG_COLLECTION_PATH = "Admin/AdminUserDocument/AddDog"
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,29 +76,64 @@ class AdoptionHistoryActivity : AppCompatActivity() {
             true
         }
 
-        // RecyclerView setup
+        // RecyclerView and Search setup
         recyclerView = findViewById(R.id.recycleradoptionhistory)
         searchEditText = findViewById(R.id.etSearch)
+        btnResetSearch = findViewById(R.id.btnResetSearch) // 2. Initialization
 
         adapter = AdoptionHistoryAdapter(this, fullAdoptionHistoryList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        loadAdoptions()
+        // Setup Listeners
+        setupSearchListener()
+        setupResetButton() // 3. Setup the reset button
 
-        // Search
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                filterAdoptions(s.toString())
-            }
-        })
+        loadAdoptions()
     }
 
     override fun onDestroy() {
         super.onDestroy()
     }
+
+    // -------------------------------------------------------------
+    // Filtering and Reset Functions
+    // -------------------------------------------------------------
+
+    private fun setupSearchListener() {
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterAdoptions(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun setupResetButton() {
+        btnResetSearch.setOnClickListener {
+            // Clear the search field
+            searchEditText.setText("")
+
+            // Restore the full list data using the adapter's setData function
+            adapter.setData(fullAdoptionHistoryList)
+
+            Toast.makeText(this, "Search reset. Showing all records.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun filterAdoptions(query: String) {
+        val filtered = fullAdoptionHistoryList.filter {
+            it.dogName.contains(query, ignoreCase = true) ||
+                    it.ownerName.contains(query, ignoreCase = true)
+        }
+        adapter.setData(filtered)
+    }
+
+    // -------------------------------------------------------------
+    // Data Loading Function
+    // -------------------------------------------------------------
 
     private fun loadAdoptions() {
         fullAdoptionHistoryList.clear()
@@ -113,6 +150,7 @@ class AdoptionHistoryActivity : AppCompatActivity() {
                 // 2. Iterate and Join Data
                 for (adoptionDoc in adoptionSnapshots.documents) {
                     val dogId = adoptionDoc.getString("dogId")
+                    // Correctly extract the parent User ID from the document reference path
                     val userId = adoptionDoc.reference.parent.parent?.id
 
                     if (dogId.isNullOrEmpty() || userId.isNullOrEmpty()) {
@@ -160,13 +198,5 @@ class AdoptionHistoryActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun filterAdoptions(query: String) {
-        val filtered = fullAdoptionHistoryList.filter {
-            it.dogName.contains(query, ignoreCase = true) ||
-                    it.ownerName.contains(query, ignoreCase = true)
-        }
-        adapter.setData(filtered)
     }
 }

@@ -19,20 +19,47 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="Adoption History"
+            app:title="ADOPTION HISTORY"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
-        <EditText
-            android:id="@+id/etSearch"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search adoptions..."
-            android:padding="12dp"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/purple"
-            android:textColor="@android:color/black" />
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:gravity="center_vertical">
 
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Search adoptions..."
+                android:padding="12dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/purple"
+                android:textColor="@android:color/black"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btnResetSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RESET"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:backgroundTint="@color/ButtonColour"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleradoptionhistory"
             android:layout_width="match_parent"
@@ -47,55 +74,3 @@
         android:layout_gravity="start"
         app:menu="@menu/navigation_menu_admin" />
 </androidx.drawerlayout.widget.DrawerLayout>
-
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout android:id="@+id/adoption_history"-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="@color/LightBrown"-->
-<!--    android:orientation="vertical"-->
-<!--    android:padding="20dp"-->
-<!--    tools:context=".AdoptionHistoryActivity"-->
-<!--    xmlns:tools="http://schemas.android.com/tools">-->
-
-<!--    &lt;!&ndash; Title &ndash;&gt;-->
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Adoption History"-->
-<!--        android:textSize="26sp"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textStyle="bold"-->
-<!--        android:typeface="serif"-->
-<!--        android:gravity="center"-->
-<!--        android:layout_marginBottom="20dp"/>-->
-
-<!--    &lt;!&ndash; Search Bar &ndash;&gt;-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:gravity="center_horizontal">-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/etSearch"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Search adoptions..."-->
-<!--        android:inputType="text"-->
-<!--        android:padding="12dp"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:backgroundTint="@color/purple"-->
-<!--        android:textColor="@android:color/black"/>-->
-
-
-<!--    </LinearLayout>-->
-<!--    &lt;!&ndash; RecyclerView &ndash;&gt;-->
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recycleradoptionhistory"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="1"/>-->
-<!--</LinearLayout>-->

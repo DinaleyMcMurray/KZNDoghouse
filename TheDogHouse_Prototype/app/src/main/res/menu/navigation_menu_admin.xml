@@ -4,31 +4,31 @@
     <!--activity_adoption_history-->
     <item
         android:id="@+id/nav_home"
-        android:title="Home" />
+        android:title="HOME" />
     <item
         android:id="@+id/nav_adoption_history"
-        android:title="Adoption History" />
+        android:title="ADOPTION HISTORY" />
 
     <item
         android:id="@+id/nav_volunteer_management"
-        android:title="Volunteer Management" />
+        android:title="VOLUNTEER MANAGEMENT" />
 
     <!--activity_adoption_history-->
     <item
         android:id="@+id/nav_events_management"
-        android:title="Upload Event" />
+        android:title="UPLOAD EVENT" />
 
     <!--activity_donation_history-->
     <item
         android:id="@+id/nav_dog_management"
-        android:title="Dog Management" />
+        android:title="DOG MANAGEMENT" />
 
     <item
         android:id="@+id/nav_dogfood"
-        android:title="Donation History" />
+        android:title="DONATION HISTORY" />
 
     <item
         android:id="@+id/nav_logout"
-        android:title="Logout" />
+        android:title="LOGOUT" />
 
 </menu>

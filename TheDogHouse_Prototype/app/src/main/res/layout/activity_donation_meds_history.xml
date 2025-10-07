@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DonationMedsHistoryActivity">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/LightBrown">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="DONATION HISTORY"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DONATION HISTORY"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/FundsBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Funds" />
+
+                <Button
+                    android:id="@+id/DogFoodBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:textColor="@color/black"
+                    android:text="Dog Food" />
+
+                <Button
+                    android:id="@+id/MedsBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="@color/pink"
+                    android:textColor="@color/black"
+                    android:text="Medication" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclermeds"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu_admin" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

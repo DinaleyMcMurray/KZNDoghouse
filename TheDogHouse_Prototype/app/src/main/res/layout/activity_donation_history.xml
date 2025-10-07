@@ -85,18 +85,6 @@
                     android:layout_height="match_parent"
                     android:visibility="visible" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerdogfood"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclermeds"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
-
             </FrameLayout>
 
         </LinearLayout>
@@ -107,6 +95,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/navigation_menu_user" />
+        app:menu="@menu/navigation_menu_admin" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

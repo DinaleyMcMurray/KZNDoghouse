@@ -129,7 +129,7 @@ class CreateEventActivity : AppCompatActivity() {
         if (currentEvent != null) {
             // EDIT MODE: Populate fields and change text
             toolbar.title = "Edit Event: ${currentEvent!!.name}"
-            uploadButton.text = "Save"
+            uploadButton.text = "SAVE"
 
             nameEditText.setText(currentEvent!!.name)
             whereEditText.setText(currentEvent!!.location)
@@ -153,11 +153,16 @@ class CreateEventActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_events_management -> {
-                    // Navigate to event list (the previous activity)
-                    startActivity(Intent(this, EventsManagementActivity::class.java))
+                R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
+                R.id.nav_volunteer_management -> startActivity(Intent(this, VolunteerManagementActivity::class.java))
+                R.id.nav_events_management -> startActivity(Intent(this, EventsManagementActivity::class.java))
+                R.id.nav_adoption_history -> startActivity(Intent(this, AdoptionHistoryActivity::class.java))
+                R.id.nav_dogfood -> startActivity(Intent(this, DonationHistoryActivity::class.java))
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
                 }
-                // Add logic for other navigation items as needed...
+                R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
             }
             drawerLayout.closeDrawers()
             true
@@ -206,7 +211,7 @@ class CreateEventActivity : AppCompatActivity() {
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.bonebutton)
             .setContentTitle("New Event Alert!")
-            .setContentText("Don't miss the event: $eventName on $eventDate")
+            .setContentText("Event: $eventName on $eventDate, is successfully saved!")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

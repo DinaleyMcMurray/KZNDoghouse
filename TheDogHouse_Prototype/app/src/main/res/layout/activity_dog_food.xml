@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="Dog Food"
+            app:title="DOG FOOD"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 

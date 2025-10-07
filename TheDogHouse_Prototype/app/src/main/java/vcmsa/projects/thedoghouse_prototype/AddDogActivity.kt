@@ -18,9 +18,6 @@ import com.cloudinary.android.callback.UploadCallback
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Date
 
-// Assuming DogDataRecord is imported and is Parcelable
-// import DogDataRecord
-
 class AddDogActivity : AppCompatActivity() {
 
     // --- Configuration & Setup ---
@@ -106,7 +103,7 @@ class AddDogActivity : AppCompatActivity() {
         if (currentDog != null) {
             // EDIT MODE: Populate fields
             titleTextView.text = "Edit Dog: ${currentDog!!.name}"
-            uploadButton.text = "Save Changes"
+            uploadButton.text = "SAVE"
 
             dogNameEditText.setText(currentDog!!.name)
             breedEditText.setText(currentDog!!.breed)
