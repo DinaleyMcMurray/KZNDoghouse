@@ -23,15 +23,13 @@
                 android:id="@+id/heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Dog"
+                android:text="ADD DOG"
                 android:textAlignment="center"
                 android:typeface="serif"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"/>
-
-
 
             <TextView
                 android:id="@+id/mission"
@@ -59,7 +57,7 @@
                             android:orientation="vertical"
                             android:background="@color/LightBrown"
                             android:layout_gravity="center_vertical"
-                            android:backgroundTint="@color/pink"
+                            android:backgroundTint="@color/Lightpurple"
                             android:padding="24dp">
 
                             <TextView
@@ -149,8 +147,9 @@
                                 android:paddingTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:backgroundTint="@color/purple"
-                                android:text="Upload Image" />
+                                android:textColor="@color/black"
+                                android:backgroundTint="@color/ButtonColour"
+                                android:text="UPLOAD IMAGE" />
 
 
                         </LinearLayout>
@@ -168,17 +167,17 @@
                     android:id="@+id/button1"
                     android:layout_width="120dp"
                     android:layout_height="45dp"
-                    android:backgroundTint="@color/ButtonColour"
+                    android:backgroundTint="@color/pink"
                     android:textColor="@color/black"
-                    android:text="Cancel" />
+                    android:text="CANCEL" />
 
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="120dp"
                     android:layout_height="45dp"
-                    android:backgroundTint="@color/ButtonColour"
+                    android:backgroundTint="@color/pink"
                     android:textColor="@color/black"
-                    android:text="Upload" />
+                    android:text="UPLOAD" />
 
             </LinearLayout>
 

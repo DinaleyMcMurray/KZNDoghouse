@@ -84,7 +84,7 @@
                     android:id="@+id/mission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dog Food Donation"
+                    android:text="DOG FOOD DONATION"
                     android:textAlignment="center"
                     android:typeface="serif"
                     android:textColor="@color/black"
@@ -111,7 +111,7 @@
                         android:orientation="vertical"
                         android:background="@color/LightBrown"
                         android:layout_gravity="center_vertical"
-                        android:backgroundTint="@color/Green"
+                        android:backgroundTint="@color/Lightpurple"
                         android:padding="24dp">
 
                         <TextView
@@ -165,8 +165,9 @@
                             android:id="@+id/button4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/purple"
-                            android:text="Submit" />
+                            android:textColor="@color/black"
+                            android:backgroundTint="@color/ButtonColour"
+                            android:text="SUBMIT" />
 
                         <TextView
                             android:id="@+id/textView"

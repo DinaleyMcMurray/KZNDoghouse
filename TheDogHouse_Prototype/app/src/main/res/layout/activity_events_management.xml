@@ -38,7 +38,7 @@
                     android:id="@+id/heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Events Management"
+                    android:text="EVENTS MANAGEMENT"
                     android:textAlignment="center"
                     android:textSize="30sp"
                     android:textStyle="bold"
@@ -60,9 +60,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"
-                    android:backgroundTint="@color/Lightpurple"
-                    android:text="Add Event"
-                    android:textColor="@color/white" />
+                    android:backgroundTint="@color/pink"
+                    android:text="ADD EVENT"
+                    android:textColor="@color/black" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerEvents"

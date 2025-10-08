@@ -81,7 +81,7 @@
                     android:id="@+id/subheading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Funds Donation"
+                    android:text="FUNDS DONATION"
                     android:textAlignment="center"
                     android:typeface="serif"
                     android:textColor="@color/black"
@@ -158,7 +158,7 @@
                         android:layout_height="45dp"
                         android:backgroundTint="@color/purple"
                         android:textColor="@color/black"
-                        android:text="Funds" />
+                        android:text="SUBMIT" />
                 </LinearLayout>
 
                 <ImageView
@@ -198,25 +198,31 @@
                             android:layout_gravity="center_horizontal"
                             android:paddingBottom="16dp">
 
-                            <ImageView
-                                android:id="@+id/btnPayPal"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:layout_marginEnd="8dp"
-                                android:contentDescription="PayPal Icon"
-                                app:srcCompat="@drawable/paypal" />
-
-                            <TextView
-                                android:id="@+id/linkPayPal"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="Click here to donate via PayPal"
-                                android:textColor="@color/purple"
-                                android:textSize="16sp"
-                                android:textStyle="italic"
-                                android:clickable="true"
-                                android:focusable="true"/>
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal" >
+
+                                <ImageView
+                                    android:id="@+id/btnPayPal"
+                                    android:layout_width="100dp"
+                                    android:layout_height="74dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:contentDescription="PayPal Icon"
+                                    app:srcCompat="@drawable/paypal" />
+
+                                <TextView
+                                    android:id="@+id/linkPayPal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Click here to donate via PayPal"
+                                    android:textColor="@color/purple"
+                                    android:textSize="16sp"
+                                    android:textStyle="italic"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:layout_gravity="center_horizontal"/> </LinearLayout>
 
                         </LinearLayout>
 
@@ -259,28 +265,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:text="Bank: Standard Bank"
+                            android:text="Bank: First National Bank (FNB)"
                             android:layout_marginBottom="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:text="Account Number: 123456789 (Example)"
+                            android:text="Account Number: 62891260045"
                             android:layout_marginBottom="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:text="Branch Code: 051001"
+                            android:text="Reference: [Your Name]"
                             android:layout_marginBottom="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:text="NPO Registration: 245-098 NPO"
+                            android:text="WhatsApp proof of payment to: +27 (71) 929-6457"
                             android:layout_marginTop="8dp"/>
 
                     </LinearLayout>

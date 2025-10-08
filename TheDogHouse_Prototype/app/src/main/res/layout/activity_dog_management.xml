@@ -37,7 +37,7 @@
                     android:id="@+id/heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dog Management"
+                    android:text="DOG MANAGEMENT"
                     android:textAlignment="center"
                     android:typeface="serif"
                     android:textColor="@color/black"
@@ -64,9 +64,9 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"
                     android:layout_marginBottom="25dp"
-                    android:backgroundTint="@color/Lightpurple"
-                    android:text="Add Dog"
-                    android:textColor="@color/white" />
+                    android:backgroundTint="@color/pink"
+                    android:text="ADD DOG"
+                    android:textColor="@color/black" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerdogmanagement"

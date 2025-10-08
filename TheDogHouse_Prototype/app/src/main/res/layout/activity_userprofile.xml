@@ -65,7 +65,7 @@
                     android:layout_marginTop="16dp"
                     app:cardCornerRadius="30dp"
                     app:cardElevation="20dp"
-                    android:backgroundTint="@color/pink">
+                    android:backgroundTint="@color/Lightpurple">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -181,19 +181,19 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="32dp"
                     android:textColor="@color/black"
-                    android:backgroundTint="@color/LightGreen"
+                    android:backgroundTint="@color/ButtonColour"
                     app:cornerRadius="20dp" />
 
                 <Button
                     android:id="@+id/btn_back"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="BACK TO HOME"
+                    android:text="BACK"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="32dp"
                     android:textColor="@color/black"
-                    android:backgroundTint="@color/Lightpurple"
+                    android:backgroundTint="@color/pink"
                     app:cornerRadius="20dp" />
 
             </LinearLayout>

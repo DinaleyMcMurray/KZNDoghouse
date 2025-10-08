@@ -90,9 +90,17 @@
                 android:id="@+id/btnDocuments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/Green"
+                android:backgroundTint="@color/pink"
                 android:textColor="@color/black"
-                android:text="Download Documents" />
+                android:text="DOWNLOAD DOCUMENTS" />
+
+            <Button
+                android:id="@+id/btnDELETE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/ButtonColour"
+                android:textColor="@color/black"
+                android:text="DELETE" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

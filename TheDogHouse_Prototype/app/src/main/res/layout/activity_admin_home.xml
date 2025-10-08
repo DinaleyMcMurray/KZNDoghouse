@@ -13,38 +13,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/LightBrown">
+        android:background="@drawable/paw_background">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/Brown"
-            app:title="THE KZN DOGHOUSE"
-            app:titleTextColor="@android:color/white"
-            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" /> <ScrollView
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/Brown"
+        app:title="THE KZN DOGHOUSE"
+        app:titleTextColor="@android:color/white"
+        app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
-        <LinearLayout
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
+
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="top|center_horizontal"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:background="@android:color/transparent">
 
-            <TextView
-                android:id="@+id/tv_admin_welcome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="40dp"
-                android:text="WELCOME TO THE ADMIN DASHBOARD"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:typeface="serif" />
+                <TextView
+                    android:id="@+id/tv_admin_welcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="40dp"
+                    android:text="WELCOME TO THE ADMIN DASHBOARD"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
 
             <GridLayout
                 android:layout_width="381dp"
@@ -56,7 +60,8 @@
                 android:rowCount="2">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card_dog_management" android:layout_width="match_parent"
+                    android:id="@+id/card_dog_management"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -79,22 +84,13 @@
                             android:contentDescription="Logo"
                             android:src="@drawable/kzndoghouselogo" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dog Management Link"
-                            android:textAlignment="center"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"
-                            android:layout_marginTop="8dp"/>
-
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
             </GridLayout>
 
         </LinearLayout>
-    </ScrollView>
+        </ScrollView>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -102,4 +98,5 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/navigation_menu_admin" /> </androidx.drawerlayout.widget.DrawerLayout>
+        app:menu="@menu/navigation_menu_admin" />
+</androidx.drawerlayout.widget.DrawerLayout>

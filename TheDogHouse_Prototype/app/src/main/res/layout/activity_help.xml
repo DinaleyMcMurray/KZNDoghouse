@@ -39,7 +39,7 @@
                     android:id="@+id/heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Help"
+                    android:text="HELP"
                     android:textAlignment="center"
                     android:typeface="serif"
                     android:textColor="@color/black"
@@ -65,7 +65,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:background="@color/LightGreen"
+                            android:background="@color/pink"
                             android:padding="24dp">
 
                             <TextView
@@ -132,7 +132,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:background="@color/Lightpurple"
+                            android:background="@color/ButtonColour"
                             android:padding="24dp">
 
                             <TextView
@@ -151,9 +151,9 @@
                                 android:id="@+id/btnContactManager"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:backgroundTint="@color/ButtonColour"
+                                android:backgroundTint="@color/Lightpurple"
                                 android:textColor="@color/black"
-                                android:text="Contact a manager" />
+                                android:text="CONTACT A MANAGER" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>

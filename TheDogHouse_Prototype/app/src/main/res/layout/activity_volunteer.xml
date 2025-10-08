@@ -36,7 +36,7 @@
                     android:id="@+id/heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Kindly Volunteer"
+                    android:text="KINDLY VOLUNTEER"
                     android:textAlignment="center"
                     android:typeface="serif"
                     android:textColor="@color/black"

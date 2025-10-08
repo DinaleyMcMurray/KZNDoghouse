@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/Brown"
-            app:title="ADOPTION"
+            app:title="THE KZN DOGHOUSE"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size"/>
 
@@ -39,7 +39,7 @@
                     android:id="@+id/heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Adoption"
+                    android:text="ADOPTION"
                     android:textAlignment="center"
                     android:typeface="serif"
                     android:textColor="@color/black"
@@ -65,7 +65,7 @@
                     android:layout_margin="30dp"
                     app:cardCornerRadius="30dp"
                     app:cardElevation="20dp"
-                    android:backgroundTint="@color/Green"
+                    android:backgroundTint="@color/ButtonColour"
                     android:padding="20dp">
 
                     <LinearLayout
@@ -175,17 +175,17 @@
                         android:id="@+id/CancelBtn"
                         android:layout_width="120dp"
                         android:layout_height="45dp"
-                        android:backgroundTint="@color/ButtonColour"
+                        android:backgroundTint="@color/pink"
                         android:textColor="@color/black"
-                        android:text="Cancel" />
+                        android:text="CANCEL" />
 
                     <Button
                         android:id="@+id/UploadBtn"
                         android:layout_width="120dp"
                         android:layout_height="45dp"
-                        android:backgroundTint="@color/ButtonColour"
+                        android:backgroundTint="@color/pink"
                         android:textColor="@color/black"
-                        android:text="Upload" />
+                        android:text="UPLOAD" />
                 </LinearLayout>
 
             </LinearLayout>

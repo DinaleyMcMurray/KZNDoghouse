@@ -37,7 +37,7 @@
                     android:id="@+id/heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Our Events"
+                    android:text="OUR EVENTS"
                     android:textAlignment="center"
                     android:typeface="serif"
                     android:textColor="@color/black"

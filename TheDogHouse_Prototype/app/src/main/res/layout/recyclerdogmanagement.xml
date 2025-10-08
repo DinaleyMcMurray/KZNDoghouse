@@ -98,15 +98,15 @@
                     android:layout_height="45dp"
                     android:backgroundTint="@color/ButtonColour"
                     android:textColor="@color/black"
-                    android:text="Edit" />
+                    android:text="EDIT" />
 
                 <Button
                     android:id="@+id/buttonAdopted"
                     android:layout_width="120dp"
                     android:layout_height="45dp"
-                    android:backgroundTint="@color/ButtonColour"
+                    android:backgroundTint="@color/pink"
                     android:textColor="@color/black"
-                    android:text="Adopted" />
+                    android:text="ADOPTED" />
 
             </LinearLayout>
 
