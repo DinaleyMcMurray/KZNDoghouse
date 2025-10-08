@@ -3,6 +3,7 @@ package vcmsa.projects.thedoghouse_prototype
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View // <--- ADD THIS MISSING IMPORT
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,10 +23,20 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        // FIX: Find the root layout using the correct ID from the XML: R.id.main_constraint_layout
+        val rootLayout = findViewById<View>(R.id.main_constraint_layout)
+
+        // Ensure rootLayout is not null before setting the listener
+        if (rootLayout != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                // Apply system window insets (like status bar height) to the padding of the view
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
+        } else {
+            // This is a safety check; should only run if the XML is severely broken
+            Toast.makeText(this, "Error: Root layout not found in XML!", Toast.LENGTH_LONG).show()
         }
 
         auth = FirebaseAuth.getInstance()

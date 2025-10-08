@@ -18,8 +18,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="DONATION HISTORY"
+            android:background="@color/Brown"
+            app:title="THE KZN DOGHOUSE"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 

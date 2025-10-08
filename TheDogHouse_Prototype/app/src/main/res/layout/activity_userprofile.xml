@@ -17,8 +17,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="My Account"
+            android:background="@color/Brown"
+            app:title="THE KZN DOGHOUSE"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
@@ -182,6 +182,18 @@
                     android:layout_marginTop="32dp"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/LightGreen"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/btn_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BACK TO HOME"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/Lightpurple"
                     app:cornerRadius="20dp" />
 
             </LinearLayout>

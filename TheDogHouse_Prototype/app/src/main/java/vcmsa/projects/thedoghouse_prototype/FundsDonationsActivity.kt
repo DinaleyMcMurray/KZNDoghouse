@@ -89,12 +89,8 @@ class FundsDonationsActivity : AppCompatActivity() {
         val enterAmountButton = findViewById<Button>(R.id.enterAmountBtn)
 
         val btnPayPal = findViewById<ImageView>(R.id.btnPayPal)
-        val btnVisa = findViewById<ImageView>(R.id.btnVisa)
-        val btnEft = findViewById<ImageView>(R.id.btnEft)
 
         val linkPayPal = findViewById<TextView>(R.id.linkPayPal)
-        val linkVisa = findViewById<TextView>(R.id.linkVisa)
-        val linkEft = findViewById<TextView>(R.id.linkEft)
 
         // ==== Amount Selection ====
         btn100.setOnClickListener {
@@ -134,20 +130,6 @@ class FundsDonationsActivity : AppCompatActivity() {
         }
         linkPayPal.setOnClickListener {
             openPayment("https://www.paypal.com/pay")
-        }
-
-        btnVisa.setOnClickListener {
-            openPayment("https://www.visa.com/pay")
-        }
-        linkVisa.setOnClickListener {
-            openPayment("https://www.visa.com/pay")
-        }
-
-        btnEft.setOnClickListener {
-            openPayment("https://www.bank.com/eft")
-        }
-        linkEft.setOnClickListener {
-            openPayment("https://www.bank.com/eft")
         }
 
         // Handle nav item clicks

@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 
 class DogAdapter(
     private val dogs: MutableList<DogDataRecord>,
-    private val onEditClick: (DogDataRecord) -> Unit,        // <-- EDIT HANDLER
-    private val onAdoptedClick: (DogDataRecord) -> Unit      // <-- STATUS TOGGLE HANDLER
+    private val onEditClick: (DogDataRecord) -> Unit,
+    private val onAdoptedClick: (DogDataRecord) -> Unit
 ) : RecyclerView.Adapter<DogAdapter.DogViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
@@ -29,12 +29,18 @@ class DogAdapter(
         holder.sex.text = "Dog's Sex: ${dog.sex}"
         holder.age.text = "Age: ${dog.age}"
         holder.bio.text = "Bio: ${dog.bio}"
-        // Displaying the Boolean fields correctly
         holder.vacStatus.text = "Vac Status: ${if (dog.isVaccinated) "Yes" else "No"}"
         holder.sterilStatus.text = "Sterilization Status: ${if (dog.isSterilized) "Yes" else "No"}"
 
-        // Update button text based on status
-        holder.buttonAdopted.text = if (dog.status == "Available for Adoption") "Mark Adopted" else "Mark Available"
+        // 🔥 Updated button text logic: Show "Adopted (Delete)" for available dogs 🔥
+        if (dog.status == "Available for Adoption") {
+            holder.buttonAdopted.text = "Adopted"
+            holder.buttonAdopted.isEnabled = true
+        } else {
+            // Dog is already marked. Disable the button and show the status.
+            holder.buttonAdopted.text = dog.status
+            holder.buttonAdopted.isEnabled = false
+        }
 
         // 1. Load the Image using the Cloudinary URL
         if (dog.imageUrl.isNotEmpty()) {

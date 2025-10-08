@@ -29,6 +29,12 @@ android {
             )
         }
     }
+
+    // ADDED: Block to increase the memory allocated to the build process (DEXer)
+    dexOptions {
+        javaMaxHeapSize = "4g" // Setting max heap size to 4GB
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -69,7 +75,7 @@ dependencies {
 //add features without versions
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-auth")
-   // implementation("com.google.firebase:firebase-storage-ktx")
+    // implementation("com.google.firebase:firebase-storage-ktx")
 
     // Firebase Firestore or Realtime Database
     //implementation ("com.google.firebase:firebase-database-ktx:20.3.0")

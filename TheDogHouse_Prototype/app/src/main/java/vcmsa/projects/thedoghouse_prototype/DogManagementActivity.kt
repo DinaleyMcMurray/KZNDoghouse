@@ -15,6 +15,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ListenerRegistration
+import androidx.appcompat.app.AlertDialog
+import com.cloudinary.android.MediaManager
+import com.cloudinary.android.callback.ErrorInfo
+import kotlin.concurrent.thread // Import for simple background threading
 
 class DogManagementActivity : AppCompatActivity() {
 
@@ -25,12 +29,13 @@ class DogManagementActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private val ADMIN_DOC_ID = "AdminUserDocument"
     private val DOGS_COLLECTION_PATH = "Admin/$ADMIN_DOC_ID/AddDog"
+    private val CLOUDINARY_FOLDER = "doghouse_app/dogs/" // Matches folder in AddDogActivity.kt
     private val TAG = "DogManagementActivity"
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
-    private var dogListener: ListenerRegistration? = null // Listener to detach on destroy
+    private var dogListener: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +61,6 @@ class DogManagementActivity : AppCompatActivity() {
                 startActivity(intent)
             },
             onAdoptedClick = { dog ->
-                // Assuming this handler exists elsewhere in your code
                 handleAdoptionClick(dog)
             }
         )
@@ -71,7 +75,7 @@ class DogManagementActivity : AppCompatActivity() {
             startActivity(Intent(this, AddDogActivity::class.java))
         }
 
-        // 3. Toolbar navigation button setup (Opens the drawer)
+        // 3. Toolbar navigation setup
         toolbar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
@@ -79,46 +83,50 @@ class DogManagementActivity : AppCompatActivity() {
         // 4. Navigation View Item Selection Listener (Handles navigation)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_dog_management -> {
-                    // Current activity, no action needed besides closing the drawer
-                }
+                R.id.nav_dog_management -> {}
                 R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
                 R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
-                R.id.nav_volunteer_management -> {
-                    startActivity(Intent(this, VolunteerManagementActivity::class.java))
-                }
-                R.id.nav_events_management -> {
-                    startActivity(Intent(this, EventsManagementActivity::class.java))
-                }
-                R.id.nav_adoption_history -> {
-                    startActivity(Intent(this, AdoptionHistoryActivity::class.java))
-                }
-                R.id.nav_dogfood -> {
-                    startActivity(Intent(this, DonationHistoryActivity::class.java))
-                }
+                R.id.nav_volunteer_management -> startActivity(
+                    Intent(
+                        this,
+                        VolunteerManagementActivity::class.java
+                    )
+                )
+
+                R.id.nav_events_management -> startActivity(
+                    Intent(
+                        this,
+                        EventsManagementActivity::class.java
+                    )
+                )
+
+                R.id.nav_adoption_history -> startActivity(
+                    Intent(
+                        this,
+                        AdoptionHistoryActivity::class.java
+                    )
+                )
+
+                R.id.nav_dogfood -> startActivity(Intent(this, DonationHistoryActivity::class.java))
             }
-            // CRITICAL: Close the drawer after an item is selected
             drawerLayout.closeDrawers()
-            // CRITICAL: Return true to indicate the item selection was handled
             true
         }
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        // Detach the Firestore listener to prevent memory leaks
         dogListener?.remove()
     }
 
     private fun setupDogDataListener() {
-        // Listener to fetch all dogs and update the RecyclerView in real-time
         dogListener = db.collection(DOGS_COLLECTION_PATH)
             .orderBy("dateAdded", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshots, e ->
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
-                    Toast.makeText(this, "Failed to load dogs: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Failed to load dogs: ${e.message}", Toast.LENGTH_LONG)
+                        .show()
                     return@addSnapshotListener
                 }
 
@@ -126,13 +134,17 @@ class DogManagementActivity : AppCompatActivity() {
                     val newDogList = mutableListOf<DogDataRecord>()
                     for (doc in snapshots.documents) {
                         try {
-                            // Assuming DogDataRecord has a map conversion function or structure
-                            val dog = doc.toObject(DogDataRecord::class.java)?.copy(documentId = doc.id)
+                            val dog =
+                                doc.toObject(DogDataRecord::class.java)?.copy(documentId = doc.id)
                             if (dog != null) {
                                 newDogList.add(dog)
                             }
                         } catch (ex: Exception) {
-                            Log.e(TAG, "Error converting document to DogDataRecord: ${ex.message}", ex)
+                            Log.e(
+                                TAG,
+                                "Error converting document to DogDataRecord: ${ex.message}",
+                                ex
+                            )
                         }
                     }
                     dogList.clear()
@@ -142,9 +154,119 @@ class DogManagementActivity : AppCompatActivity() {
             }
     }
 
-    // Placeholder for your adoption click handler (ensure this function exists)
+    /**
+     * Handles the button click: prompts for confirmation and initiates deletion if confirmed.
+     */
     private fun handleAdoptionClick(dog: DogDataRecord) {
-        Toast.makeText(this, "Marking ${dog.name} as adopted...", Toast.LENGTH_SHORT).show()
-        // Implement logic to update Firestore status or remove the dog
+        if (dog.documentId.isEmpty()) {
+            Toast.makeText(this, "Error: Cannot delete dog without an ID.", Toast.LENGTH_LONG)
+                .show()
+            return
+        }
+
+        if (dog.status != "Available for Adoption") {
+            Toast.makeText(
+                this,
+                "${dog.name} is already ${dog.status}. The record cannot be deleted this way.",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
+        // Show confirmation dialog before permanent deletion
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Adoption & Deletion")
+            .setMessage("Are you sure you want to permanently delete ${dog.name}'s record? This confirms the adoption and removes them from the available list.")
+            .setPositiveButton("Yes, Adopt & Delete") { dialog, _ ->
+                // Call the function to handle both Firebase and Cloudinary deletion
+                deleteDogRecordAndImage(dog.documentId, dog.name, dog.imageUrl)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.cancel()
+            }
+            .show()
+    }
+
+    /**
+     * Orchestrates the deletion of the Firestore record and the Cloudinary image.
+     */
+    private fun deleteDogRecordAndImage(dogId: String, dogName: String, imageUrl: String) {
+        // 1. Delete the Firestore record first
+        db.collection(DOGS_COLLECTION_PATH).document(dogId)
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(
+                    this,
+                    "$dogName adopted and removed successfully!",
+                    Toast.LENGTH_LONG
+                ).show()
+
+                // 2. Trigger Cloudinary deletion
+                if (imageUrl.isNotEmpty()) {
+                    deleteImageFromCloudinary(imageUrl, dogName)
+                }
+                // The real-time listener handles the UI update automatically
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error deleting dog $dogName from Firestore: ${e.message}", e)
+                Toast.makeText(this, "Failed to delete dog record: ${e.message}", Toast.LENGTH_LONG)
+                    .show()
+            }
+    }
+
+    /**
+     * Extracts the full Public ID path (including the folder) from the URL and
+     * performs synchronous deletion on a background thread using SDK 2.0.0.
+     */
+    private fun deleteImageFromCloudinary(imageUrl: String, dogName: String) {
+        // The folder path that must be part of the Public ID for deletion
+        // We use "doghouse_app/dogs" as the search anchor, based on your structure.
+        val folderAnchor = "doghouse_app/dogs"
+
+        try {
+            // 1. Find the starting position of the Public ID (i.e., the start of the folder path)
+            val publicIdStartIndex = imageUrl.indexOf(folderAnchor)
+
+            // 2. Find the file extension (.jpg, .png, etc.) to know where the ID ends
+            val publicIdEndIndex = imageUrl.lastIndexOf(".")
+
+            if (publicIdStartIndex != -1 && publicIdEndIndex > publicIdStartIndex) {
+                // Extract the entire path from the start of "doghouse_app/dogs" up to the file extension
+                val publicIdToDelete = imageUrl.substring(publicIdStartIndex, publicIdEndIndex)
+
+                // publicIdToDelete should now be in the correct format: "doghouse_app/dogs/..."
+
+                thread {
+                    try {
+                        // This is the correct synchronous call for Cloudinary SDK 2.0.0
+                        val result = MediaManager.get().getCloudinary()
+                            .uploader().destroy(publicIdToDelete, mapOf<String, Any>())
+
+                        runOnUiThread {
+                            val status = result["result"] as? String
+                            if (status == "ok") {
+                                Log.i(TAG, "Cloudinary delete success for $dogName: $publicIdToDelete")
+                                Toast.makeText(this, "Image for $dogName deleted from Cloudinary.", Toast.LENGTH_SHORT).show()
+                            } else {
+                                // Logs the status and the exact ID used for final troubleshooting if it still fails
+                                Log.e(TAG, "Cloudinary delete FAILED for $dogName: Status $status. ID used: $publicIdToDelete")
+                                Toast.makeText(this, "Warning: Failed to delete image. ID or settings may be wrong.", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Cloudinary deletion failed in background thread: ${e.message}", e)
+                        runOnUiThread {
+                            Toast.makeText(this, "Warning: Cloudinary deletion failed with exception.", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            } else {
+                Log.w(TAG, "Could not reliably extract full Public ID from URL: $imageUrl")
+            }
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Cloudinary deletion process failed: ${e.message}")
+        }
     }
 }
