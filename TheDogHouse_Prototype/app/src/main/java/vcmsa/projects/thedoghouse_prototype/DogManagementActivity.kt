@@ -86,27 +86,9 @@ class DogManagementActivity : AppCompatActivity() {
                 R.id.nav_dog_management -> {}
                 R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
                 R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
-                R.id.nav_volunteer_management -> startActivity(
-                    Intent(
-                        this,
-                        VolunteerManagementActivity::class.java
-                    )
-                )
-
-                R.id.nav_events_management -> startActivity(
-                    Intent(
-                        this,
-                        EventsManagementActivity::class.java
-                    )
-                )
-
-                R.id.nav_adoption_history -> startActivity(
-                    Intent(
-                        this,
-                        AdoptionHistoryActivity::class.java
-                    )
-                )
-
+                R.id.nav_volunteer_management -> startActivity(Intent(this, VolunteerManagementActivity::class.java))
+                R.id.nav_events_management -> startActivity(Intent(this,EventsManagementActivity::class.java))
+                R.id.nav_adoption_history -> startActivity(Intent(this,AdoptionHistoryActivity::class.java))
                 R.id.nav_dogfood -> startActivity(Intent(this, DonationHistoryActivity::class.java))
             }
             drawerLayout.closeDrawers()
@@ -215,13 +197,7 @@ class DogManagementActivity : AppCompatActivity() {
             }
     }
 
-    /**
-     * Extracts the full Public ID path (including the folder) from the URL and
-     * performs synchronous deletion on a background thread using SDK 2.0.0.
-     */
     private fun deleteImageFromCloudinary(imageUrl: String, dogName: String) {
-        // The folder path that must be part of the Public ID for deletion
-        // We use "doghouse_app/dogs" as the search anchor, based on your structure.
         val folderAnchor = "doghouse_app/dogs"
 
         try {
@@ -235,11 +211,8 @@ class DogManagementActivity : AppCompatActivity() {
                 // Extract the entire path from the start of "doghouse_app/dogs" up to the file extension
                 val publicIdToDelete = imageUrl.substring(publicIdStartIndex, publicIdEndIndex)
 
-                // publicIdToDelete should now be in the correct format: "doghouse_app/dogs/..."
-
                 thread {
                     try {
-                        // This is the correct synchronous call for Cloudinary SDK 2.0.0
                         val result = MediaManager.get().getCloudinary()
                             .uploader().destroy(publicIdToDelete, mapOf<String, Any>())
 

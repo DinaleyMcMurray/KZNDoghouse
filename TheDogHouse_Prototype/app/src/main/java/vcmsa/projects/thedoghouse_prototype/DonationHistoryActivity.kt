@@ -15,17 +15,13 @@ import vcmsa.projects.thedoghouse_prototype.databinding.ActivityDonationHistoryB
 
 class DonationHistoryActivity : AppCompatActivity() {
 
-    // --- Firebase Instance ---
     private val firestore = FirebaseFirestore.getInstance()
     private val TAG = "FundsHistory"
 
-    // ⚡️ View Binding Instance ⚡️
     private lateinit var binding: ActivityDonationHistoryBinding
 
-    // --- Adapter Variables ---
     private lateinit var fundsAdapter: DonationHistoryAdapter
 
-    // --- List to hold all fetched records (necessary for finding userId during deletion) ---
     private lateinit var allDonations: MutableList<HistoryFundsRecord>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +30,8 @@ class DonationHistoryActivity : AppCompatActivity() {
         binding = ActivityDonationHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize the list
         allDonations = mutableListOf()
 
-        // === 1. Toolbar and Drawer Setup ===
         val drawerLayout = binding.drawerLayout
         val toolbar = binding.toolbar
         val navView = binding.navigationView
@@ -47,7 +41,6 @@ class DonationHistoryActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // ⚡️ Navigation Drawer Listener ⚡️
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
@@ -65,10 +58,7 @@ class DonationHistoryActivity : AppCompatActivity() {
             true
         }
 
-        // === 2. Setup Adapter and RecyclerView (UPDATED) ===
-        // ⚡️ INITIALIZE ADAPTER WITH THE DELETE CLICK LISTENER ⚡️
         fundsAdapter = DonationHistoryAdapter(mutableListOf()) { documentId ->
-            // This lambda now calls the confirmation dialog
             showDeleteConfirmationDialog(documentId)
         }
 
@@ -96,10 +86,6 @@ class DonationHistoryActivity : AppCompatActivity() {
         loadFundsHistory()
     }
 
-    // ----------------------------------------------------------------------
-    // --- FIREBASE LOADING FUNCTION ------------------------------------------
-    // ----------------------------------------------------------------------
-
     private fun loadFundsHistory() {
         binding.recyclerfunds.visibility = View.VISIBLE
         allDonations.clear()
@@ -122,9 +108,6 @@ class DonationHistoryActivity : AppCompatActivity() {
             }
     }
 
-    // ----------------------------------------------------------------------
-    // --- NEW: CONFIRMATION DIALOG FUNCTION ----------------------------------
-    // ----------------------------------------------------------------------
     private fun showDeleteConfirmationDialog(documentId: String) {
         AlertDialog.Builder(this)
             .setTitle("Confirm Deletion")
@@ -137,9 +120,6 @@ class DonationHistoryActivity : AppCompatActivity() {
             .show()
     }
 
-    // ----------------------------------------------------------------------
-    // --- ACTUAL FIREBASE DELETION FUNCTION (RENAMED) ------------------------
-    // ----------------------------------------------------------------------
     private fun performDeleteFundsDonation(documentId: String) {
 
         // 🔥 CRITICAL: Find the userId from the master list (allDonations) 🔥
@@ -152,7 +132,6 @@ class DonationHistoryActivity : AppCompatActivity() {
             return
         }
 
-        // ⚡️ Delete using the known full path: /Users/{userId}/FundsDonations/{documentId} ⚡️
         val docRef = firestore.collection("Users")
             .document(recordToDelete.userId!!) // Non-null assertion is safe after the check above
             .collection("FundsDonations")

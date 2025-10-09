@@ -8,17 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import kotlinx.coroutines.*
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.Locale
-import android.content.Intent // ADDED
-
+import android.content.Intent
 
 class AdoptionHistoryAdapter(
     private val context: Context,
-    private var adoptionList: List<AdoptionHistory>
+    private var adoptionList: List<AdoptionHistory>,
+    private val deleteClickListener: (AdoptionHistory) -> Unit
 ) : RecyclerView.Adapter<AdoptionHistoryAdapter.AdoptionViewHolder>() {
 
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
@@ -31,6 +30,7 @@ class AdoptionHistoryAdapter(
         val textDocUrl: TextView = itemView.findViewById(R.id.DocUrl)
         val textUploadDate: TextView = itemView.findViewById(R.id.UploadDate)
         val btnDocuments: Button = itemView.findViewById(R.id.btnDocuments)
+        val btnDELETE: Button = itemView.findViewById(R.id.btnDELETE)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdoptionViewHolder {
@@ -42,27 +42,26 @@ class AdoptionHistoryAdapter(
     override fun onBindViewHolder(holder: AdoptionViewHolder, position: Int) {
         val adoption = adoptionList[position]
 
-        // 2. Bind Data to Views
         holder.textDogName.text = "Dog's Name: ${adoption.dogName}"
         holder.textSex.text = "Dog's Sex: ${adoption.sex}"
         holder.textAge.text = "Dog's Age: ${adoption.age}"
         holder.textUsername.text = "Client's Name: ${adoption.ownerName}"
-
-        // Assuming documentUrl contains the full Cloudinary path (e.g., .../n7odm5ji3gwjpz1xic6b.pdf)
         val fileName = adoption.documentUrl.substringAfterLast('/')
         holder.textDocUrl.text = "Document: $fileName"
 
         holder.textUploadDate.text =
             "Upload Date: ${adoption.uploadDate?.let { dateFormat.format(it) } ?: "N/A"}"
 
-        // 3. Handle Download Button Click
         holder.btnDocuments.setOnClickListener {
             if (adoption.documentUrl.isNotEmpty()) {
-                // ⚡️ CALL THE NEW OPEN FILE FUNCTION ⚡️
                 openFile(context, adoption.documentUrl, adoption.ownerName)
             } else {
                 Toast.makeText(context, "No document URL available.", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        holder.btnDELETE.setOnClickListener {
+            deleteClickListener(adoption)
         }
     }
 
@@ -73,14 +72,23 @@ class AdoptionHistoryAdapter(
         notifyDataSetChanged()
     }
 
-    // AdoptionHistoryAdapter.kt
+    // ⚡️ NEW: Remove item utility for live UI update after deletion ⚡️
+    fun removeItem(documentId: String) {
+        val mutableList = adoptionList.toMutableList()
+        val index = mutableList.indexOfFirst { it.documentId == documentId }
+        if (index != -1) {
+            mutableList.removeAt(index)
+            adoptionList = mutableList.toList()
+            notifyItemRemoved(index)
+        }
+    }
+
     private fun openFile(context: Context, url: String, clientName: String) {
         try {
             val cleanUrl = url.replace("http://", "https://").trim()
             val viewerUrl = "https://docs.google.com/viewer?url=$cleanUrl"
             val uri = Uri.parse(viewerUrl)
 
-            // ✅ Force the link to open in a web browser instead of checking for a specific viewer app
             val intent = Intent(Intent.ACTION_VIEW, uri).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
