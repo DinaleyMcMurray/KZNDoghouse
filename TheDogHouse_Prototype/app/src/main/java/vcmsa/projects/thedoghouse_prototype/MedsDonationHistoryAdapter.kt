@@ -3,17 +3,18 @@ package vcmsa.projects.thedoghouse_prototype
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button // Import Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-// NOTE: This adapter is dedicated to Medication data
-class MedsDonationHistoryAdapter(private var donations: MutableList<HistoryMedsRecord>) :
-    RecyclerView.Adapter<MedsDonationHistoryAdapter.MedsViewHolder>() {
+class MedsDonationHistoryAdapter(
+    private val donations: MutableList<HistoryMedsRecord>,
+    private val deleteClickListener: (String) -> Unit // Lambda to handle delete click
+) : RecyclerView.Adapter<MedsDonationHistoryAdapter.MedsViewHolder>() {
 
-    // Helper function to format Timestamp (Remains the same)
     private fun formatDate(timestamp: Timestamp?): String {
         return timestamp?.let {
             SimpleDateFormat("MMM dd, yyyy, HH:mm", Locale.getDefault()).format(it.toDate())
@@ -26,8 +27,15 @@ class MedsDonationHistoryAdapter(private var donations: MutableList<HistoryMedsR
         notifyDataSetChanged()
     }
 
+    fun removeItem(documentId: String) {
+        val index = donations.indexOfFirst { it.documentId == documentId }
+        if (index != -1) {
+            donations.removeAt(index)
+            notifyItemRemoved(index)
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedsViewHolder {
-        // Inflate using standard View Binding (not Data Binding)
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_history_meds, parent, false)
         return MedsViewHolder(view)
     }
@@ -37,26 +45,27 @@ class MedsDonationHistoryAdapter(private var donations: MutableList<HistoryMedsR
     override fun onBindViewHolder(holder: MedsViewHolder, position: Int) {
         val item = donations[position]
 
+        // 1. Bind Text Data (Existing logic)
         holder.donorName.text = "Donor: ${item.donorName ?: "Anonymous"}"
-        // line2 matches medicationName from the XML
         holder.medicationName.text = "Medication: ${item.medicationName ?: "N/A"}"
-        // line3 matches dropOffDate from the XML
         holder.dropOffDate.text = "Date: ${item.dropOffDate ?: "Unknown Date"}"
-        // line4 matches dropOffTime from the XML
         holder.dropOffTime.text = "Time: ${item.dropOffTime ?: "N/A"}"
-        // line5 matches Quantity from the XML
         holder.quantity.text = "Quantity: ${item.quantity ?: "N/A"}"
-        // line6 matches Timestamp from the XML
         holder.recordTimestamp.text = "Record Timestamp: ${formatDate(item.timestamp)}"
+
+        holder.deleteButton.setOnClickListener {
+            // Pass the unique documentId back to the Activity for deletion
+            deleteClickListener(item.documentId)
+        }
     }
 
-    // This ViewHolder uses the IDs from your list item layout (recycler_history_meds.xml)
     class MedsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val donorName: TextView = itemView.findViewById(R.id.DonorName)
-        val medicationName: TextView = itemView.findViewById(R.id.medicationName) // Changed from line2
-        val dropOffDate: TextView = itemView.findViewById(R.id.dropOffDate)     // Changed from line3
-        val dropOffTime: TextView = itemView.findViewById(R.id.dropOffTime)     // Changed from line4
-        val quantity: TextView = itemView.findViewById(R.id.Quantity)           // Changed from line5
-        val recordTimestamp: TextView = itemView.findViewById(R.id.Timestamp)   // Changed from line6
+        val medicationName: TextView = itemView.findViewById(R.id.medicationName)
+        val dropOffDate: TextView = itemView.findViewById(R.id.dropOffDate)
+        val dropOffTime: TextView = itemView.findViewById(R.id.dropOffTime)
+        val quantity: TextView = itemView.findViewById(R.id.Quantity)
+        val recordTimestamp: TextView = itemView.findViewById(R.id.Timestamp)
+        val deleteButton: Button = itemView.findViewById(R.id.buttonDelete)
     }
 }

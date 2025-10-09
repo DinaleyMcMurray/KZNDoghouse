@@ -78,6 +78,13 @@
                     android:textSize="20sp"
                     android:paddingBottom="8dp" />
 
+                <Button
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/ButtonColour"
+                    android:text="DELETE"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

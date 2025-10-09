@@ -1,5 +1,6 @@
 package vcmsa.projects.thedoghouse_prototype
 
+import android.app.AlertDialog // ⚡️ IMPORT for AlertDialog ⚡️
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -22,28 +23,31 @@ class DonationHistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDonationHistoryBinding
 
     // --- Adapter Variables ---
-    // NOTE: This MUST be FundsAdapter if you created the simple adapter
     private lateinit var fundsAdapter: DonationHistoryAdapter
+
+    // --- List to hold all fetched records (necessary for finding userId during deletion) ---
+    private lateinit var allDonations: MutableList<HistoryFundsRecord>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // ⚡️ Initialize View Binding ⚡️
         binding = ActivityDonationHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Initialize the list
+        allDonations = mutableListOf()
 
         // === 1. Toolbar and Drawer Setup ===
         val drawerLayout = binding.drawerLayout
         val toolbar = binding.toolbar
-        val navView = binding.navigationView // Uses View Binding
+        val navView = binding.navigationView
 
         setSupportActionBar(toolbar)
-        // Set up the menu icon to open the drawer
         toolbar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // ⚡️ ADAPTED: Navigation Drawer Listener (Inline format) ⚡️
+        // ⚡️ Navigation Drawer Listener ⚡️
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
@@ -61,9 +65,12 @@ class DonationHistoryActivity : AppCompatActivity() {
             true
         }
 
-        // === 2. Setup Adapter and RecyclerView ===
-        // NOTE: Ensure FundsAdapter class exists and is used
-        fundsAdapter = DonationHistoryAdapter(mutableListOf())
+        // === 2. Setup Adapter and RecyclerView (UPDATED) ===
+        // ⚡️ INITIALIZE ADAPTER WITH THE DELETE CLICK LISTENER ⚡️
+        fundsAdapter = DonationHistoryAdapter(mutableListOf()) { documentId ->
+            // This lambda now calls the confirmation dialog
+            showDeleteConfirmationDialog(documentId)
+        }
 
         binding.recyclerfunds.layoutManager = LinearLayoutManager(this)
         binding.recyclerfunds.adapter = fundsAdapter
@@ -95,19 +102,72 @@ class DonationHistoryActivity : AppCompatActivity() {
 
     private fun loadFundsHistory() {
         binding.recyclerfunds.visibility = View.VISIBLE
+        allDonations.clear()
 
         firestore.collectionGroup("FundsDonations")
             .orderBy("dateSubmitted", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 val fundsRecords = querySnapshot.documents.mapNotNull { document ->
+                    // ⚡️ Capture all fields, including the required userId ⚡️
                     document.toObject(HistoryFundsRecord::class.java)
                 }
+
+                allDonations.addAll(fundsRecords) // Keep a copy for finding user ID later
                 fundsAdapter.updateData(fundsRecords)
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Error fetching funds history: ${e.message}", e)
                 Toast.makeText(this, "Failed to load Funds: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+    }
+
+    // ----------------------------------------------------------------------
+    // --- NEW: CONFIRMATION DIALOG FUNCTION ----------------------------------
+    // ----------------------------------------------------------------------
+    private fun showDeleteConfirmationDialog(documentId: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Deletion")
+            .setMessage("Are you sure you want to permanently delete this funds donation record?")
+            .setPositiveButton("Delete") { dialog, which ->
+                // If admin confirms, proceed with the actual deletion
+                performDeleteFundsDonation(documentId)
+            }
+            .setNegativeButton("Cancel", null) // Do nothing on cancel
+            .show()
+    }
+
+    // ----------------------------------------------------------------------
+    // --- ACTUAL FIREBASE DELETION FUNCTION (RENAMED) ------------------------
+    // ----------------------------------------------------------------------
+    private fun performDeleteFundsDonation(documentId: String) {
+
+        // 🔥 CRITICAL: Find the userId from the master list (allDonations) 🔥
+        val recordToDelete = allDonations.find { it.documentId == documentId }
+
+        // Ensure the record and required userId are available
+        if (recordToDelete == null || recordToDelete.userId.isNullOrEmpty()) {
+            Log.e(TAG, "Deletion failed: Cannot find record or userId for document ID: $documentId")
+            Toast.makeText(this, "Error: Could not find record details or user ID for deletion.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // ⚡️ Delete using the known full path: /Users/{userId}/FundsDonations/{documentId} ⚡️
+        val docRef = firestore.collection("Users")
+            .document(recordToDelete.userId!!) // Non-null assertion is safe after the check above
+            .collection("FundsDonations")
+            .document(documentId)
+
+        docRef.delete()
+            .addOnSuccessListener {
+                // Remove item from RecyclerView list and master list, then update UI
+                fundsAdapter.removeItem(documentId)
+                allDonations.removeAll { it.documentId == documentId }
+                Toast.makeText(this, "Donation record deleted successfully.", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error deleting document: $documentId", e)
+                Toast.makeText(this, "Failed to delete record.", Toast.LENGTH_SHORT).show()
             }
     }
 }

@@ -37,6 +37,11 @@ class FundsDonationsActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
 
+    // 🔥 FIX 1: Sandbox Business Email (Facilitator) for receiving test payments 🔥
+    // This is the email of the NPO's test account, which receives the funds.
+    private val PAYPAL_SANDBOX_RECEIVER_EMAIL = "sb-8d13646818350@business.example.com"
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +94,6 @@ class FundsDonationsActivity : AppCompatActivity() {
         val enterAmountButton = findViewById<Button>(R.id.enterAmountBtn)
 
         val btnPayPal = findViewById<ImageView>(R.id.btnPayPal)
-
         val linkPayPal = findViewById<TextView>(R.id.linkPayPal)
 
         // ==== Amount Selection ====
@@ -108,7 +112,7 @@ class FundsDonationsActivity : AppCompatActivity() {
             selectedAmount = "1000"
         }
 
-        // ==== Enter Amount Button Listener for Firestore Save ====
+        // ==== Enter Amount Button Listener for Firestore Save (UNCHANGED) ====
         enterAmountButton.setOnClickListener {
             val amountText = etAmount.text.toString().trim()
             if (amountText.isEmpty()) {
@@ -123,13 +127,14 @@ class FundsDonationsActivity : AppCompatActivity() {
             saveFundsDonationToFirestore(selectedAmount)
         }
 
-        // ==== Payment Options ====
-        // NOTE: These listeners should ensure the final amount is passed correctly
+        // ==== Payment Options: Rely on user clicking SUBMIT first ====
         btnPayPal.setOnClickListener {
-            openPayment("https://www.paypal.com/pay")
+            // 🔥 FIX 3: Removed redundant enterAmountButton.performClick()
+            openPayment(isPayPal = true)
         }
         linkPayPal.setOnClickListener {
-            openPayment("https://www.paypal.com/pay")
+            // 🔥 FIX 3: Removed redundant enterAmountButton.performClick()
+            openPayment(isPayPal = true)
         }
 
         // Handle nav item clicks
@@ -167,25 +172,35 @@ class FundsDonationsActivity : AppCompatActivity() {
             true
         }
     }
+    private fun openPayment(isPayPal: Boolean) {
+        // 1. Get the validated amount from the EditText
+        val finalAmountText = findViewById<EditText>(R.id.editAmount)?.text?.toString()?.trim() ?: ""
+        val finalAmount = finalAmountText.toDoubleOrNull() ?: 0.0
 
-    // Open browser with payment link
-    private fun openPayment(baseUrl: String) {
-        val finalAmount = findViewById<EditText>(R.id.editAmount)?.text?.toString()?.trim() ?: "0"
-
-        if (finalAmount.toDoubleOrNull() ?: 0.0 <= 0.0) {
+        if (finalAmount <= 0.0) {
             Toast.makeText(this, "Please enter a valid amount before proceeding to payment.", Toast.LENGTH_LONG).show()
             return
         }
 
-        // Correctly append amount to the URL
-        val url = "$baseUrl?amount=$finalAmount"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(intent)
+        if (isPayPal) {
+            // Use a URL structure designed to accept fixed amount/currency parameters reliably
+            val url = Uri.parse("https://www.sandbox.paypal.com/cgi-bin/webscr")
+                .buildUpon()
+                .appendQueryParameter("cmd", "_donations")
+                .appendQueryParameter("business", PAYPAL_SANDBOX_RECEIVER_EMAIL)
+                .appendQueryParameter("amount", String.format("%.2f", finalAmount))
+                .appendQueryParameter("currency_code", "USD")
+                .appendQueryParameter("lc", "ZA")
+                .appendQueryParameter("bn", "PP-DonationsBF:btn_donate_SM.gif:NonHosted")
+                .appendQueryParameter("item_name", "KZN Doghouse Funds Donation")
+                .build()
+                .toString()
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
     }
 
-    /**
-     * Fetches the user's name first, then saves the full donation record to Firestore.
-     */
     private fun saveFundsDonationToFirestore(amount: String) {
         val currentUser = auth.currentUser
         if (currentUser == null) {
@@ -207,7 +222,7 @@ class FundsDonationsActivity : AppCompatActivity() {
                 val donationData = hashMapOf(
                     "amount" to amount,
                     "type" to "Funds",
-                    "status" to "Pending Payment",
+                    "status" to "Pending Payment", // Status before PayPal confirmation
 
                     // ⚡️ CRITICAL ADDITIONS for History View ⚡️
                     "donorName" to donorName, // Name is now included!

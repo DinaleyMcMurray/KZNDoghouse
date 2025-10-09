@@ -57,6 +57,7 @@ class DogFoodActivity : AppCompatActivity() {
         fundsButton = findViewById(R.id.button1)
         dogFoodButton = findViewById(R.id.button2)
         medicationButton = findViewById(R.id.button3)
+        val userId = auth.currentUser?.uid
 
         submitButton.setOnClickListener {
             // ADDED: Get current user and check authentication
@@ -80,7 +81,8 @@ class DogFoodActivity : AppCompatActivity() {
                     "dogFoodName" to dogFoodName,
                     "dropOffDate" to date,
                     "dropOffTime" to time,
-                    "timestamp" to Date() // Added timestamp for historical tracking
+                    "timestamp" to Date(),
+                    "userId" to userId// Added timestamp for historical tracking
                 )
 
                 // CRITICAL CHANGE: Saving to the 'DogFoodDonations' subcollection

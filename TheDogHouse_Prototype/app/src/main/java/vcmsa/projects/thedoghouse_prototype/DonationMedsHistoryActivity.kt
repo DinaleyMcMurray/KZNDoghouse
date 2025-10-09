@@ -1,5 +1,6 @@
 package vcmsa.projects.thedoghouse_prototype
 
+import android.app.AlertDialog // ⚡️ IMPORT for AlertDialog ⚡️
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,17 +19,20 @@ class DonationMedsHistoryActivity : AppCompatActivity() {
     private val TAG = "MedsHistory"
 
     private lateinit var binding: ActivityDonationMedsHistoryBinding
-    // Ensure this class name matches your actual adapter file (e.g., MedsAdapter)
     private lateinit var medsAdapter: MedsDonationHistoryAdapter
+
+    private lateinit var allMeds: MutableList<HistoryMedsRecord>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // ⚡️ Initialize View Binding ⚡️
         binding = ActivityDonationMedsHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // === 1. Toolbar and Drawer Setup ===
+        // Initialize the master list
+        allMeds = mutableListOf()
+
+        // === 1. Toolbar and Drawer Setup (Remains the same) ===
         val drawerLayout = binding.drawerLayout
         val toolbar = binding.toolbar
         val navView = binding.navigationView
@@ -38,7 +42,6 @@ class DonationMedsHistoryActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // ✅ FIX 1: Corrected Navigation Drawer Listener (Removed nesting)
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
@@ -56,42 +59,35 @@ class DonationMedsHistoryActivity : AppCompatActivity() {
             true
         }
 
-        // === 2. Setup Adapter and RecyclerView ===
-        // ✅ FIX 2: Assuming adapter class is MedsAdapter (was MedsDonationHistoryAdapter)
-        medsAdapter = MedsDonationHistoryAdapter(mutableListOf())
+        medsAdapter = MedsDonationHistoryAdapter(mutableListOf()) { documentId ->
+            // ⚡️ CALL THE CONFIRMATION DIALOG ⚡️
+            showDeleteConfirmationDialog(documentId)
+        }
 
-        // The ID of the RecyclerView in your layout is 'recyclermeds'
         binding.recyclermeds.layoutManager = LinearLayoutManager(this)
         binding.recyclermeds.adapter = medsAdapter
 
-        // === 3. History Button Listeners (Navigation) ===
+        // === 3. History Button Listeners (Remains the same) ===
         binding.FundsBtn.setOnClickListener {
-            val intent = Intent(this, DonationHistoryActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, DonationHistoryActivity::class.java))
             finish()
         }
 
         binding.DogFoodBtn.setOnClickListener {
-            val intent = Intent(this, DonationDogFoodActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, DonationDogFoodActivity::class.java))
             finish()
         }
 
-        // MedsBtn: Reloads data since we are already on this page
         binding.MedsBtn.setOnClickListener {
             loadMedsHistory()
         }
 
-        // Load data automatically when the page loads
         loadMedsHistory()
-    } // ✅ FIX 3: Ensures onCreate method is closed properly
-
-    // ----------------------------------------------------------------------
-    // --- FIREBASE LOADING FUNCTION (Dedicated) ------------------------------
-    // ----------------------------------------------------------------------
+    }
 
     private fun loadMedsHistory() {
         binding.recyclermeds.visibility = View.VISIBLE
+        allMeds.clear()
 
         firestore.collectionGroup("MedsDonations")
             .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -100,12 +96,61 @@ class DonationMedsHistoryActivity : AppCompatActivity() {
                 val medsRecords = querySnapshot.documents.mapNotNull { document ->
                     document.toObject(HistoryMedsRecord::class.java)
                 }
+                allMeds.addAll(medsRecords)
                 medsAdapter.updateData(medsRecords)
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Error fetching medication history: ${e.message}", e)
                 Toast.makeText(this, "Failed to load Medication: ${e.message}", Toast.LENGTH_LONG)
                     .show()
+            }
+    }
+
+    // ----------------------------------------------------------------------
+    // --- NEW: CONFIRMATION DIALOG FUNCTION ----------------------------------
+    // ----------------------------------------------------------------------
+    private fun showDeleteConfirmationDialog(documentId: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Deletion")
+            .setMessage("Are you sure you want to permanently delete this medication donation record?")
+            .setPositiveButton("Delete") { dialog, which ->
+                // If admin confirms, proceed with the actual deletion
+                performDeleteMedsDonation(documentId)
+            }
+            .setNegativeButton("Cancel", null) // Do nothing on cancel
+            .show()
+    }
+
+    // ----------------------------------------------------------------------
+    // --- ACTUAL FIREBASE DELETION FUNCTION (RENAMED) ------------------------
+    // ----------------------------------------------------------------------
+    private fun performDeleteMedsDonation(documentId: String) {
+
+        // Find the record in the master list to get the userId
+        val recordToDelete = allMeds.find { it.documentId == documentId }
+
+        if (recordToDelete == null || recordToDelete.userId.isNullOrEmpty()) {
+            Log.e(TAG, "Deletion failed: Cannot find record or userId for document ID: $documentId")
+            Toast.makeText(this, "Error: Could not find record details or user ID for deletion.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // ⚡️ Delete using the full path: /Users/{userId}/MedsDonations/{documentId} ⚡️
+        val docRef = firestore.collection("Users")
+            .document(recordToDelete.userId!!)
+            .collection("MedsDonations")
+            .document(documentId)
+
+        docRef.delete()
+            .addOnSuccessListener {
+                // Remove item from RecyclerView list and master list, then update UI
+                medsAdapter.removeItem(documentId)
+                allMeds.removeAll { it.documentId == documentId }
+                Toast.makeText(this, "Medication record deleted successfully.", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error deleting document: $documentId", e)
+                Toast.makeText(this, "Failed to delete record.", Toast.LENGTH_SHORT).show()
             }
     }
 }
