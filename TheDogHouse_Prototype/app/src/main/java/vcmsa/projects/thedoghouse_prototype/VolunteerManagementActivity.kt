@@ -27,6 +27,8 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
 
     private lateinit var etSearch: EditText
     private lateinit var btnResetSearch: Button
+    // 🔥 NEW: Add reference for the Add Volunteer button
+    private lateinit var btnAddVolunteer: Button
     private lateinit var navigationView: NavigationView
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: VolunteerAdapter
@@ -50,9 +52,22 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
 
         setSupportActionBar(toolbar)
 
+        // ----------------------------------------------------
+        // 🔥 FIX 1: Add Up/Back navigation to the Toolbar 🔥
+        // This button goes to the AdminHomeActivity
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
+            // Check if the drawer is open (default behavior)
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                // If drawer is closed, pressing the icon goes Home
+                startActivity(Intent(this, AdminHomeActivity::class.java))
+                finish() // Optionally finish the current activity
+            }
         }
+        // ----------------------------------------------------
+
 
         // 2. Setup RecyclerView
         recyclerView = findViewById(R.id.recyclervolunteers)
@@ -68,13 +83,17 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
         // 3. Initialize Search EditText and Reset Button
         etSearch = findViewById(R.id.etSearch)
         btnResetSearch = findViewById(R.id.btnResetSearch)
+        // 🔥 NEW: Initialize Add Volunteer Button 🔥
+        btnAddVolunteer = findViewById(R.id.btnAddVolunteer)
 
         // 4. Attach Listeners
         setupSearchListener()
         setupResetButton()
+        setupAddVolunteerButton()
+
 
         // 5. Fetch Data from Firestore
-        fetchVolunteerData()
+        // 🔥 REMOVED: fetchVolunteerData() call is moved to onResume() for automatic refresh.
 
         // 6. Handle navigation clicks
         navView.setNavigationItemSelectedListener { menuItem ->
@@ -92,6 +111,27 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
         }
 
     }
+
+    // ----------------------------------------------------
+    // 🔥 FIX: Add onResume() to force data reload when returning 🔥
+    // ----------------------------------------------------
+    override fun onResume() {
+        super.onResume()
+        // This will now be called every time the activity comes to the foreground,
+        // ensuring the list is refreshed after adding a new volunteer.
+        fetchVolunteerData()
+    }
+    // ----------------------------------------------------
+
+    private fun setupAddVolunteerButton() {
+        btnAddVolunteer.setOnClickListener {
+            // Opens the Admin form activity
+            val intent = Intent(this, AdminAddVolunteerActivity::class.java)
+            Toast.makeText(this, "Opening Volunteer Application Form...", Toast.LENGTH_SHORT).show()
+            startActivity(intent)
+        }
+    }
+
 
     override fun onDeleteClick(documentId: String, position: Int) {
         AlertDialog.Builder(this)
@@ -115,6 +155,8 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
         }
 
         // 🚀 NEW, RELIABLE DELETION METHOD: Use the direct document path 🚀
+        // Note: This logic works for both user-submitted volunteers (where userId is their UID)
+        // and admin-submitted volunteers (where userId is the fixed "AdminUserDocument").
         val docRef = db.collection("Users")
             .document(recordToDelete.userId)
             .collection("Volunteer")

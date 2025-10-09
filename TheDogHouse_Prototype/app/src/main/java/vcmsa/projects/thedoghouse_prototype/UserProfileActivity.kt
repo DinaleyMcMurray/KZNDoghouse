@@ -31,7 +31,6 @@ class UserProfileActivity : AppCompatActivity() {
     private lateinit var phoneTextView: TextView
     private lateinit var ageTextView: TextView
     private lateinit var editButton: Button
-    private lateinit var backButton: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +50,6 @@ class UserProfileActivity : AppCompatActivity() {
         phoneTextView = findViewById(R.id.profile_phone)
         ageTextView = findViewById(R.id.profile_age)
         editButton = findViewById(R.id.btn_edit_profile)
-        backButton = findViewById(R.id.btn_back)
 
         // Setup Toolbar and Navigation Drawer
         setSupportActionBar(toolbar)
@@ -67,10 +65,6 @@ class UserProfileActivity : AppCompatActivity() {
         editButton.setOnClickListener {
             // Navigate to the EditProfileActivity
             startActivity(Intent(this, EditProfileActivity::class.java))
-        }
-
-        backButton.setOnClickListener {
-            startActivity(Intent(this, UserProfileActivity::class.java))
         }
     }
 

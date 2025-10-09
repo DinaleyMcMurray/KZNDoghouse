@@ -77,7 +77,7 @@
                         android:orientation="vertical"
                         android:background="@color/LightBrown"
                         android:layout_gravity="center_vertical"
-                        android:backgroundTint="@color/Green"
+                        android:backgroundTint="@color/Lightpurple"
                         android:padding="10dp">
 
                         <EditText
@@ -119,8 +119,9 @@
                             android:id="@+id/button4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/purple"
-                            android:text="Submit" />
+                            android:backgroundTint="@color/ButtonColour"
+                            android:textColor="@color/black"
+                            android:text="SUBMIT" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

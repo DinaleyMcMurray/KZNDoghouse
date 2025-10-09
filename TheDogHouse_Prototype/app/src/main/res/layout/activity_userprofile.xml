@@ -184,18 +184,6 @@
                     android:backgroundTint="@color/ButtonColour"
                     app:cornerRadius="20dp" />
 
-                <Button
-                    android:id="@+id/btn_back"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="BACK"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="32dp"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/pink"
-                    app:cornerRadius="20dp" />
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

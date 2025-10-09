@@ -22,6 +22,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var editAge: EditText
     // REMOVED: editCurrentPassword
     private lateinit var btnSave: Button
+    private lateinit var BackBtn: Button
     private lateinit var toolbar: MaterialToolbar
 
     // Firebase instances
@@ -44,12 +45,19 @@ class EditProfileActivity : AppCompatActivity() {
         editAge = findViewById(R.id.editTextNumber)
         btnSave = findViewById(R.id.btn_save_profile)
         toolbar = findViewById(R.id.toolbar)
+        BackBtn = findViewById(R.id.btn_back)
 
         setupToolbar()
         loadUserData()
 
         // Set up save button listener (no password needed now)
-        btnSave.setOnClickListener { saveUserData() }
+        btnSave.setOnClickListener {
+            saveUserData()
+        }
+
+        BackBtn.setOnClickListener {
+            startActivity (Intent(this, UserProfileActivity::class.java))
+        }
     }
 
     private fun setupToolbar() {

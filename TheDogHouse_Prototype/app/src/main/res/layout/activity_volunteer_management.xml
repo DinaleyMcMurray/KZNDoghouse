@@ -26,63 +26,72 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"> <LinearLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_above="@id/btnAddVolunteer"> <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VOLUNTEER MANAGEMENT"
+            android:textAlignment="center"
+            android:typeface="serif"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/heading"
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="VOLUNTEER MANAGEMENT"
-                    android:textAlignment="center"
-                    android:typeface="serif"
-                    android:textColor="@color/black"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="30dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="8dp"
-                    android:gravity="center_vertical">
-
-                    <EditText
-                        android:id="@+id/etSearch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/purple"
-                        android:hint="Search volunteers name..."
-                        android:importantForAutofill="no"
-                        android:inputType="text"
-                        android:padding="12dp"
-                        android:textColor="@android:color/black"
-                        android:layout_marginEnd="8dp" /> <Button
-                        android:id="@+id/btnResetSearch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/ButtonColour"
-                        android:text="RESET"
-                        android:textColor="@color/black" />
-
-                </LinearLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclervolunteers"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:padding="8dp" />
+                    android:backgroundTint="@color/purple"
+                    android:hint="Search volunteers name..."
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="12dp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginEnd="8dp" />
 
+                <Button
+                    android:id="@+id/btnResetSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/pink"
+                    android:text="RESET"
+                    android:textColor="@color/black" />
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclervolunteers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:padding="8dp" />
+
+        </LinearLayout>
+
+            <Button
+                android:id="@+id/btnAddVolunteer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/pink"
+                android:text="ADD A NEW VOLUNTEER"
+                android:textColor="@color/black" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -91,7 +100,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:visibility="gone" />
+
         </RelativeLayout>
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

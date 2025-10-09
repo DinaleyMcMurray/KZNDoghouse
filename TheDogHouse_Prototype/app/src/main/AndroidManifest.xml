@@ -18,13 +18,15 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheDogHouse_Prototype"
-
-        android:largeHeap="true"  tools:replace="android:fullBackupContent"
+        tools:replace="android:fullBackupContent"
         tools:targetApi="31">
-
+        <activity
+            android:name=".AdminAddVolunteerActivity"
+            android:exported="false" />
         <activity
             android:name=".DonationDogFoodActivity"
             android:exported="false" />

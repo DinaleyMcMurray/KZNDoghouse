@@ -30,21 +30,26 @@ class NewsletterAdapter(private val newsletters: List<NewsletterItem>, private v
         holder.cost.text = "Cost: ${item.cost}"
         holder.description.text = "About: ${item.description}"
 
-        // --- 2. Image Loading (GLIDE IMPLEMENTATION - CORRECTED) ---
-        // ⚡️ Using 'item' and 'holder.image' with placeholder/error logic ⚡️
+        // --- 2. Image Loading (GLIDE) ---
         if (item.imageUrl.isNotEmpty()) {
             Glide.with(context)
                 .load(item.imageUrl)
-                .placeholder(R.drawable.rehome) // Your chosen placeholder
-                .error(R.drawable.donatingmeds)  // Your chosen error image
-                .into(holder.image) // Correct ImageView ID is 'image'
-        }
-        else {
-            // Optional: If no image URL, set the placeholder directly
+                .placeholder(R.drawable.rehome)
+                .error(R.drawable.donatingmeds)
+                .into(holder.image)
+        } else {
             holder.image.setImageResource(R.drawable.rehome)
         }
 
-        // --- 3. Button Click Listener ---
+        if (item.needsRsvp) {
+            // If needsRsvp is true (Admin required RSVP), show the button.
+            holder.rsvpButton.visibility = View.VISIBLE
+        } else {
+            // If needsRsvp is false (Admin did NOT require RSVP), hide the button.
+            holder.rsvpButton.visibility = View.GONE
+        }
+        // ------------------------------------------------------------------
+
         holder.rsvpButton.setOnClickListener {
             Log.d("NewsletterAdapter", "RSVP button clicked for event: ${item.title}")
             // Implement RSVP/Navigation logic here
@@ -55,12 +60,12 @@ class NewsletterAdapter(private val newsletters: List<NewsletterItem>, private v
 
     class NewsletterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Views initialized using the IDs from newsletterrecyclerview.xml
-        val image: ImageView = itemView.findViewById(R.id.imageEvent) // ⚡️ Corrected ID: imageEvent ⚡️
+        val image: ImageView = itemView.findViewById(R.id.imageEvent)
         val name: TextView = itemView.findViewById(R.id.textEventName)
         val location: TextView = itemView.findViewById(R.id.textWhere)
         val date: TextView = itemView.findViewById(R.id.textWhen)
         val cost: TextView = itemView.findViewById(R.id.textSter)
         val description: TextView = itemView.findViewById(R.id.textAbout)
-        val rsvpButton: Button = itemView.findViewById(R.id.button)
+        val rsvpButton: Button = itemView.findViewById(R.id.btnRsvp) // The RSVP button
     }
 }

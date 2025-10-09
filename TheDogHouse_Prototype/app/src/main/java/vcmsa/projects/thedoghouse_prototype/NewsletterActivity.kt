@@ -109,33 +109,29 @@ class NewsletterActivity : AppCompatActivity() {
     }
 
     // ⚡️ Function to fetch events from Firestore with corrected field names ⚡️
+    // Inside NewsletterActivity.kt
+
     private fun loadEvents() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // 1. Order by 'dateCreated' which is the actual timestamp field in your document
                 val snapshot = firestore.collection(EVENTS_COLLECTION_PATH)
                     .orderBy("dateCreated", Query.Direction.DESCENDING)
                     .get()
                     .await()
 
                 val fetchedEvents = snapshot.documents.map { document ->
+                    // Use document.getBoolean() to fetch the boolean value from Firestore
+                    val needsRsvp = document.getBoolean("needsRsvp") ?: false // ⬅️ FIX: Read the boolean field
+
                     NewsletterItem(
-                        // ⚡️ FIX: Look for 'name' (document field) ⚡️
                         title = document.getString("name") ?: "N/A",
-
                         location = document.getString("location") ?: "Online",
-
-                        // ⚡️ FIX: Look for 'dateAndTime' (document field) ⚡️
                         date = document.getString("dateAndTime") ?: "N/A",
-
                         cost = document.getString("cost") ?: "Free",
-
-                        // ⚡️ FIX: Look for 'about' (document field) ⚡️
                         description = document.getString("about") ?: "No description provided.",
-
                         imageUrl = document.getString("imageUrl") ?: "",
-
-                        // ⚡️ FIX: Use 'dateCreated' (document field) ⚡️
+                        // ⬅️ FIX: Assign the fetched boolean to the data model
+                        needsRsvp = needsRsvp,
                         timestamp = document.getDate("dateCreated")
                     )
                 }
@@ -144,13 +140,11 @@ class NewsletterActivity : AppCompatActivity() {
                     newsletterList.clear()
                     newsletterList.addAll(fetchedEvents)
                     adapter.notifyDataSetChanged()
-                    // This toast should now reflect the correct count
                     Toast.makeText(this@NewsletterActivity, "Loaded ${newsletterList.size} events.", Toast.LENGTH_SHORT).show()
                 }
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    // This will catch Indexing errors or other network failures
                     Toast.makeText(this@NewsletterActivity, "Failed to load events: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
