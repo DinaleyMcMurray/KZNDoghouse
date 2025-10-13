@@ -60,9 +60,25 @@ class DogAdapterPublic(private val dogs: MutableList<DogDataRecord>, private val
             }
         }
 
+        // 🛑 CORRECTED SPONSOR BUTTON CLICK 🛑
         holder.sponsorButton.setOnClickListener {
-            Toast.makeText(context, "Clicked Sponsor for ${dog.name}", Toast.LENGTH_SHORT).show()
-            context.startActivity(Intent(context, FundsDonationsActivity::class.java))
+            val dogId = dog.documentId // Get the dog's ID
+            val dogName = dog.name // Get the dog's name
+
+            if (dogId.isNotEmpty()) {
+                val intent = Intent(context, SponsorshipActivity::class.java).apply {
+                    // 🛑 FIX: Use the proven working key to pass the ID 🛑
+                    putExtra("DOG_ID_FOR_ADOPTION", dogId)
+
+                    // Use a unique key for the dog's name
+                    putExtra("DOG_NAME_FOR_SPONSORSHIP", dogName)
+                }
+                context.startActivity(intent)
+                Toast.makeText(context, "Redirecting to sponsor ${dogName}", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.e("DogAdapterPublic", "Cannot start sponsorship: Dog documentId is missing.")
+                Toast.makeText(context, "Error starting sponsorship process (Dog ID missing).", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

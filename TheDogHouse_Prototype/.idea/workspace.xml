@@ -115,6 +115,11 @@
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sponsorship.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_userprofile.xml">
         <config>
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
@@ -202,6 +207,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec66c553-b5ba-4a48-ac82-9d74b3ab119c" name="Changes" comment="Commit-SixtySeven [Ankriya]:&#10;- I added delete buttons for the donation History activity">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/SponsorshipActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/SponsorshipAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/SponsorshipRecord.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sponsorship.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -210,11 +219,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionHistory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionHistoryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionHistoryActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionHistoryAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionHistoryAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogManagementActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogManagementActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationHistoryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationHistoryActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogAdapterPublic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogAdapterPublic.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +230,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=5fb012d8)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=383b086f)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -233,10 +239,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
         <option value="valueResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -300,6 +306,9 @@
       <recent name="vcmsa.projects.thedoghouse_prototype" />
     </key>
     <key name="android.template.640118379">
+      <recent name="vcmsa.projects.thedoghouse_prototype" />
+    </key>
+    <key name="android.template.93658626">
       <recent name="vcmsa.projects.thedoghouse_prototype" />
     </key>
   </component>
@@ -503,12 +512,12 @@
       <map>
         <entry key="vcmsa.projects.thedoghouse_prototype">
           <value>
-            <CheckInfo lastCheckTimestamp="1759962303277" />
+            <CheckInfo lastCheckTimestamp="1760394276620" />
           </value>
         </entry>
         <entry key="vcmsa.projects.thedoghouse_prototype.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1759962303294" />
+            <CheckInfo lastCheckTimestamp="1760394276621" />
           </value>
         </entry>
       </map>
