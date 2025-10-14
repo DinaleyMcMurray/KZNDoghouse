@@ -28,6 +28,10 @@
         android:title="DONATION HISTORY" />
 
     <item
+        android:id="@+id/nav_sponsor"
+        android:title="SPONSOR HISTORY" />
+
+    <item
         android:id="@+id/nav_logout"
         android:title="LOGOUT" />
 

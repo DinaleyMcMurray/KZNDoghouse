@@ -7,13 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".DogFoodActivity">
 
-    <!-- Main content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/main">
 
-        <!-- Toolbar -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -23,7 +22,6 @@
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
-        <!-- Original Donation Form Layout -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -94,14 +92,16 @@
 
                 <ImageView
                     android:id="@+id/imageView16"
-                    android:layout_width="375dp"
+                    android:layout_width="match_parent"
                     android:layout_height="96dp"
+                    android:layout_gravity="center_horizontal"
                     app:srcCompat="@drawable/dogfood" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="30dp"
+                    android:backgroundTint="@color/Lightpurple"
                     app:cardCornerRadius="30dp"
                     app:cardElevation="20dp">
 
@@ -109,8 +109,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="@color/LightBrown"
-                        android:layout_gravity="center_vertical"
                         android:backgroundTint="@color/Lightpurple"
                         android:padding="24dp">
 
@@ -149,17 +147,25 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/purple"
                             android:ems="10"
-                            android:hint="Date of drop off"
-                            android:inputType="date" />
+                            android:hint="Date of drop off (Click to select)"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:inputType="none"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp" />
 
                         <EditText
                             android:id="@+id/editTextTime2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:hint="Time of drop off"
+                            android:hint="Time of drop off (Click to select)"
                             android:backgroundTint="@color/purple"
-                            android:inputType="time" />
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:inputType="none"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp" />
 
                         <Button
                             android:id="@+id/button4"
@@ -167,7 +173,8 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:backgroundTint="@color/ButtonColour"
-                            android:text="SUBMIT" />
+                            android:text="SUBMIT"
+                            android:layout_marginTop="24dp" />
 
                         <TextView
                             android:id="@+id/textView"
@@ -183,6 +190,7 @@
                             android:id="@+id/imageView15"
                             android:layout_width="271dp"
                             android:layout_height="200dp"
+                            android:layout_gravity="center_horizontal"
                             app:srcCompat="@drawable/address" />
 
                         <TextView
@@ -200,7 +208,6 @@
         </ScrollView>
     </LinearLayout>
 
-    <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"

@@ -55,6 +55,7 @@ class AdminHomeActivity : AppCompatActivity() {
                 R.id.nav_dogfood -> {
                     startActivity(Intent(this, DonationHistoryActivity::class.java))
                 }
+                R.id.nav_sponsor -> startActivity(Intent(this, SponsorManagementActivity::class.java))
                 R.id.nav_logout -> performLogout() // ⚡️ FIX: Call the clean function for logout ⚡️
                 R.id.nav_home -> { /* Stay on current screen */ }
             }

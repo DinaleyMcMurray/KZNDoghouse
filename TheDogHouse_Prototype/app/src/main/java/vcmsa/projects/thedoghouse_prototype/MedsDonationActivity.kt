@@ -1,9 +1,12 @@
 package vcmsa.projects.thedoghouse_prototype
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem // 🛑 FIX: Needed for setNavigationItemSelectedListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -12,11 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.navigation.NavigationView
+import com.google.android.material.navigation.NavigationView // 🛑 FIX: Needed for NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
-import java.util.HashMap // Used for creating the data map
+import java.util.Locale
 
 class MedsDonationActivity : AppCompatActivity() {
 
@@ -35,9 +40,12 @@ class MedsDonationActivity : AppCompatActivity() {
     private lateinit var dogFoodButton: Button
     private lateinit var medicationButton: Button
 
-    private lateinit var auth: FirebaseAuth // Authentication instance
+    private lateinit var auth: FirebaseAuth
     private val firestore = FirebaseFirestore.getInstance()
-    private val TAG = "MedsDonation" // Tag for logging
+    private val TAG = "MedsDonation"
+
+    // Calendar instance to hold selected date/time for pickers
+    private val dropOffCalendar = Calendar.getInstance()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +79,16 @@ class MedsDonationActivity : AppCompatActivity() {
         dogFoodButton = findViewById(R.id.button2)
         medicationButton = findViewById(R.id.button3)
 
-        // ⚡️ Submit logic (CALLS THE NEW FUNCTION) ⚡️
+        // 🛑 Date and Time Picker Click Listeners 🛑
+        dropOffDateEditText.setOnClickListener {
+            showDatePicker()
+        }
+
+        dropOffTimeEditText.setOnClickListener {
+            showTimePicker()
+        }
+
+        // ⚡️ Submit logic ⚡️
         submitButton.setOnClickListener {
             saveMedsDonation()
         }
@@ -88,13 +105,13 @@ class MedsDonationActivity : AppCompatActivity() {
         }
 
         // NAV DRAWER CLICK HANDLER
-        navigationView.setNavigationItemSelectedListener { menuItem ->
+        navigationView.setNavigationItemSelectedListener { menuItem: MenuItem -> // 🛑 FIX: Added explicit type MenuItem
             when (menuItem.itemId) {
                 R.id.nav_home -> startActivity(Intent(this, HomeActivity::class.java))
                 R.id.nav_newsletter -> startActivity(Intent(this, NewsletterActivity::class.java))
                 R.id.nav_volunteer -> startActivity(Intent(this, VolunteerActivity::class.java))
                 R.id.nav_adoption -> startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                R.id.nav_fundsdonation -> drawerLayout.closeDrawers() // Close drawer or navigate if needed
+                R.id.nav_fundsdonation -> drawerLayout.closeDrawers()
                 R.id.nav_account -> startActivity(Intent(this, EditProfileActivity::class.java))
                 R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
                 R.id.nav_help -> {startActivity(Intent(this, HelpActivity::class.java))
@@ -106,8 +123,66 @@ class MedsDonationActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     // ----------------------------------------------------------------------
-    // --- FIREBASE SAVING FUNCTION -------------------------------------------
+    // --- DATE/TIME PICKER LOGIC -------------------------------------------
+    // ----------------------------------------------------------------------
+
+    private fun showDatePicker() {
+        val year = dropOffCalendar.get(Calendar.YEAR)
+        val month = dropOffCalendar.get(Calendar.MONTH)
+        val day = dropOffCalendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                // Update the shared Calendar instance
+                dropOffCalendar.set(selectedYear, selectedMonth, selectedDay)
+
+                // Format the date for display (e.g., 14 Oct 2025)
+                val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+                dropOffDateEditText.setText(dateFormat.format(dropOffCalendar.time))
+            },
+            year,
+            month,
+            day
+        )
+        // Set the minimum date to today (or later)
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+        datePickerDialog.show()
+    }
+
+    private fun showTimePicker() {
+        val hour = dropOffCalendar.get(Calendar.HOUR_OF_DAY)
+        val minute = dropOffCalendar.get(Calendar.MINUTE)
+
+        val timePickerDialog = TimePickerDialog(
+            this,
+            { _, selectedHour, selectedMinute ->
+                // Update the shared Calendar instance with the selected time
+                dropOffCalendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+                dropOffCalendar.set(Calendar.MINUTE, selectedMinute)
+
+                // Format the time for display (e.g., 2:30 PM)
+                val timeFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+                dropOffTimeEditText.setText(timeFormat.format(dropOffCalendar.time))
+            },
+            hour,
+            minute,
+            false // 'false' for 12-hour format (true for 24-hour)
+        )
+        timePickerDialog.show()
+    }
+
+    // ----------------------------------------------------------------------
+    // --- FIREBASE SAVING FUNCTION -----------------------------------------
     // ----------------------------------------------------------------------
 
     private fun saveMedsDonation() {
@@ -116,14 +191,13 @@ class MedsDonationActivity : AppCompatActivity() {
         val quantity = quantityEditText.text.toString().trim()
         val dropOffDate = dropOffDateEditText.text.toString().trim()
         val dropOffTime = dropOffTimeEditText.text.toString().trim()
-        val userId = auth.currentUser?.uid // Get the logged-in user's ID
+        val userId = auth.currentUser?.uid
 
         if (donorName.isEmpty() || medicationName.isEmpty() || quantity.isEmpty() || dropOffDate.isEmpty() || dropOffTime.isEmpty()) {
             Toast.makeText(this, "Please fill in all donation fields.", Toast.LENGTH_LONG).show()
             return
         }
 
-        // Ensure user is logged in
         if (userId == null) {
             Toast.makeText(this, "User not authenticated. Please log in.", Toast.LENGTH_LONG).show()
             return
@@ -136,11 +210,10 @@ class MedsDonationActivity : AppCompatActivity() {
             "quantity" to quantity,
             "dropOffDate" to dropOffDate,
             "dropOffTime" to dropOffTime,
-            "timestamp" to Date(), // Firestore automatically converts Date to Timestamp
-            "userId" to userId // IMPORTANT for collectionGroup queries used in history
+            "timestamp" to Date(),
+            "userId" to userId
         )
 
-        // Save to Firestore in a subcollection under the User's document
         // Path: /Users/{userId}/MedsDonations/{documentId}
         firestore.collection("Users")
             .document(userId)
@@ -148,7 +221,7 @@ class MedsDonationActivity : AppCompatActivity() {
             .add(donationData)
             .addOnSuccessListener {
                 Log.d(TAG, "Meds Donation successfully saved with ID: ${it.id}")
-                Toast.makeText(this, "Medication Donation submitted successfully!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Medication Donation submitted successfully! Drop-off scheduled.", Toast.LENGTH_LONG).show()
                 clearFields()
             }
             .addOnFailureListener { e ->
@@ -163,5 +236,7 @@ class MedsDonationActivity : AppCompatActivity() {
         quantityEditText.text.clear()
         dropOffDateEditText.text.clear()
         dropOffTimeEditText.text.clear()
+        // Reset the calendar to the current time after submission
+        dropOffCalendar.time = Date()
     }
 }

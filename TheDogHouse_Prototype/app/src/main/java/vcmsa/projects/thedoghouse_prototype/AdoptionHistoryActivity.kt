@@ -92,6 +92,7 @@ class AdoptionHistoryActivity : AppCompatActivity() {
                 R.id.nav_dogfood -> {
                     startActivity(Intent(this, DonationHistoryActivity::class.java))
                 }
+                R.id.nav_sponsor -> startActivity(Intent(this, SponsorManagementActivity::class.java))
                 R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
                 R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
             }

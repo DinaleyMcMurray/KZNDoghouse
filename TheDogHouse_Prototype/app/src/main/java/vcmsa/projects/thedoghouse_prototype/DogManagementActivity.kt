@@ -90,6 +90,7 @@ class DogManagementActivity : AppCompatActivity() {
                 R.id.nav_events_management -> startActivity(Intent(this,EventsManagementActivity::class.java))
                 R.id.nav_adoption_history -> startActivity(Intent(this,AdoptionHistoryActivity::class.java))
                 R.id.nav_dogfood -> startActivity(Intent(this, DonationHistoryActivity::class.java))
+                R.id.nav_sponsor -> startActivity(Intent(this, SponsorManagementActivity::class.java))
             }
             drawerLayout.closeDrawers()
             true

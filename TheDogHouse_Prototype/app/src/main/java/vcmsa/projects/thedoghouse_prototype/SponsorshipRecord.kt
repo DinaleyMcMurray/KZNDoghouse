@@ -16,5 +16,5 @@ data class SponsorshipRecord(
     val type: String = "Sponsorship",
     val timestamp: Timestamp? = null,
     val dateSubmitted: Timestamp? = null,
-    var documentId: String = ""
+    var recordId: String = ""
 )

@@ -1,15 +1,21 @@
 package vcmsa.projects.thedoghouse_prototype
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
+import android.net.Uri
+import android.util.Log // Log import is good for debugging
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast // Added Toast for user feedback on failure
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+
+// NOTE: You need to define the 'NewsletterItem' data class elsewhere in your project
+// for this adapter to compile successfully.
 
 class NewsletterAdapter(private val newsletters: List<NewsletterItem>, private val context: Context) :
     RecyclerView.Adapter<NewsletterAdapter.NewsletterViewHolder>() {
@@ -41,18 +47,50 @@ class NewsletterAdapter(private val newsletters: List<NewsletterItem>, private v
             holder.image.setImageResource(R.drawable.rehome)
         }
 
+        // --- 3. Visibility Logic ---
         if (item.needsRsvp) {
-            // If needsRsvp is true (Admin required RSVP), show the button.
+            // Show the button if RSVP is required by the admin.
             holder.rsvpButton.visibility = View.VISIBLE
         } else {
-            // If needsRsvp is false (Admin did NOT require RSVP), hide the button.
+            // Hide the button if RSVP is NOT required.
             holder.rsvpButton.visibility = View.GONE
         }
         // ------------------------------------------------------------------
 
+        // === WhatsApp Button Functionality FIX ===
+        // FIX 1: Use 'holder.rsvpButton' to reference the button view.
+        // FIX 2: Call 'context.startActivity(intent)' to launch the Intent.
+
         holder.rsvpButton.setOnClickListener {
-            Log.d("NewsletterAdapter", "RSVP button clicked for event: ${item.title}")
-            // Implement RSVP/Navigation logic here
+            val phoneNumber = "27716215128" // South Africa +27
+
+            // Customize the message to include the event details
+            val message = "Hello, I would like to RSVP for the event: ${item.title} on ${item.date}."
+
+            try {
+                val url = "https://wa.me/$phoneNumber?text=${Uri.encode(message)}"
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    setPackage("com.whatsapp")
+                    data = Uri.parse(url)
+                }
+                context.startActivity(intent)
+            } catch (e: Exception) {
+                // If WhatsApp is not installed or package name is wrong
+                Log.e("NewsletterAdapter", "WhatsApp launch failed.", e)
+                Toast.makeText(context, "WhatsApp not found. Opening Play Store.", Toast.LENGTH_SHORT).show()
+
+                // Open Play Store
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("market://details?id=com.whatsapp")
+                }
+                // Use a try-catch in case opening the store also fails
+                try {
+                    context.startActivity(intent)
+                } catch (storeError: Exception) {
+                    // Fallback to web browser for Play Store
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.whatsapp")))
+                }
+            }
         }
     }
 
