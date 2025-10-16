@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DOGS FILTER"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/edit_breed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Breed (e.g., Terrier)"
+        android:inputType="textCapWords"
+        android:minHeight="48dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/edit_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Maximum Age (e.g., 5)"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:layout_marginBottom="16dp"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_vaccinated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Must be Vaccinated"
+        android:layout_marginBottom="8dp"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_sterilized"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Must be Sterilized"
+        android:layout_marginBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/button_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/LightGreen"
+            android:textColor="@color/black"
+            android:text="RESET "/>
+
+        <Button
+            android:id="@+id/button_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/Lightpurple"
+            android:textColor="@color/black"
+            android:text="APPLY"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -32,7 +32,8 @@ class AddDogActivity : AppCompatActivity() {
     private val TAG = "AddDogActivity"
 
     // --- Data Variables ---
-    private var currentDog: DogDataRecord? = null
+    // CHANGE 1: Use the new FirestoreDogData class
+    private var currentDog: FirestoreDogData? = null
     private var imageUri: Uri? = null
     private var imageUrl: String? = null
 
@@ -76,10 +77,8 @@ class AddDogActivity : AppCompatActivity() {
                 "api_key" to CLOUDINARY_API_KEY,
                 "api_secret" to CLOUDINARY_API_SECRET
             )
-            // Use applicationContext as previously established
             MediaManager.init(applicationContext, config)
         } catch (e: Exception) {
-            // Log if initialization fails (e.g., if called twice, though the SDK usually prevents this)
             Log.e("Cloudinary", "Initialization failed: ${e.message}")
         }
 
@@ -91,14 +90,15 @@ class AddDogActivity : AppCompatActivity() {
         bioEditText = findViewById(R.id.editTextTextMultiLine)
         vaccinatedSwitch = findViewById(R.id.textVac)
         sterilizedSwitch = findViewById(R.id.textSterilization)
-        titleTextView = findViewById(R.id.heading) // Using your specified ID
+        titleTextView = findViewById(R.id.heading)
 
         uploadImageButton = findViewById(R.id.button4)
         cancelButton = findViewById(R.id.button1)
         uploadButton = findViewById(R.id.button2)
 
         // 1. Handle Edit Mode Logic
-        currentDog = intent.getParcelableExtra("DOG_TO_EDIT")
+        // CHANGE 2: Retrieve the intent extra as FirestoreDogData
+        currentDog = intent.getParcelableExtra<FirestoreDogData>("DOG_TO_EDIT")
 
         if (currentDog != null) {
             // EDIT MODE: Populate fields
@@ -110,8 +110,10 @@ class AddDogActivity : AppCompatActivity() {
             sexEditText.setText(currentDog!!.sex)
             ageEditText.setText(currentDog!!.age.toString())
             bioEditText.setText(currentDog!!.bio)
-            vaccinatedSwitch.isChecked = currentDog!!.isVaccinated // Populate switch state
-            sterilizedSwitch.isChecked = currentDog!!.isSterilized // Populate switch state
+
+            // Boolean values should now populate correctly from FirestoreDogData
+            vaccinatedSwitch.isChecked = currentDog!!.isVaccinated
+            sterilizedSwitch.isChecked = currentDog!!.isSterilized
 
             uploadImageButton.text = "Change Image (Current image exists)"
         } else {
@@ -128,6 +130,8 @@ class AddDogActivity : AppCompatActivity() {
         }
         uploadImageButton.setOnClickListener { chooseImage() }
     }
+
+    // ... (chooseImage and validateAndStartUpload methods are unchanged)
 
     private fun chooseImage() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -214,13 +218,15 @@ class AddDogActivity : AppCompatActivity() {
             "sex" to sex,
             "bio" to bio,
             "age" to ageInt,
-            "isVaccinated" to vaccinatedSwitch.isChecked, // Boolean value from switch
-            "isSterilized" to sterilizedSwitch.isChecked,   // Boolean value from switch
+            // The boolean values here use the correct field names for Firestore
+            "isVaccinated" to vaccinatedSwitch.isChecked,
+            "isSterilized" to sterilizedSwitch.isChecked,
             "status" to (currentDog?.status ?: "Available for Adoption"),
             "imageUrl" to finalImageUrl
         )
 
-        // Preserve dateAdded if editing
+        // Preserve dateAdded if editing, otherwise set current Date
+        // NOTE: This relies on currentDog?.dateAdded being a java.util.Date (which it is now)
         dogData["dateAdded"] = currentDog?.dateAdded ?: Date()
 
         // 3. Determine the Firestore operation

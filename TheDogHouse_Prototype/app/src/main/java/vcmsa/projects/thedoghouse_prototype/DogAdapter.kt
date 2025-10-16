@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class DogAdapter(
-    private val dogs: MutableList<DogDataRecord>,
-    private val onEditClick: (DogDataRecord) -> Unit,
-    private val onAdoptedClick: (DogDataRecord) -> Unit
+    private val dogs: MutableList<FirestoreDogData>,
+    private val onEditClick: (FirestoreDogData) -> Unit,
+    private val onAdoptedClick: (FirestoreDogData) -> Unit
 ) : RecyclerView.Adapter<DogAdapter.DogViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
@@ -76,7 +76,7 @@ class DogAdapter(
         val buttonAdopted: Button = itemView.findViewById(R.id.buttonAdopted)
     }
 
-    fun updateData(newDogs: List<DogDataRecord>) {
+    fun updateData(newDogs: List<FirestoreDogData>) {
         dogs.clear()
         dogs.addAll(newDogs)
         notifyDataSetChanged()

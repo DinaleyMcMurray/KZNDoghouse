@@ -1,28 +1,34 @@
 package vcmsa.projects.thedoghouse_prototype
 
 
-import android.content.Intent // Required for starting new activities
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Menu // NEW
+import android.view.MenuItem // NEW
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat // Required to open/close the drawer
-import androidx.drawerlayout.widget.DrawerLayout // Required for the drawer layout
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.MaterialToolbar // Required for the toolbar
-import com.google.android.material.navigation.NavigationView // Required for the nav view
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
+
+// NEW IMPORTS for Retrofit and Coroutines
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+// NEW IMPORT for the Filter Dialog Fragment
+import vcmsa.projects.thedoghouse_prototype.FilterDialogFragment // Assuming this is where you created the file
 
 class ViewAdoptionActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DogAdapterPublic
-    private val db = FirebaseFirestore.getInstance()
     private val TAG = "ViewAdoptionActivity"
 
     // NAV DRAWER COMPONENTS
@@ -30,15 +36,17 @@ class ViewAdoptionActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
 
+    // NEW: Properties to hold the current filter state
+    private var currentFilterAge: Int? = null
+    private var currentFilterBreed: String? = null
+    private var currentFilterIsVaccinated: Boolean? = null
+    private var currentFilterIsSterilized: Boolean? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_adoption)
 
-
-
-
         // 1. Initialize Nav Drawer Views
-        // These IDs must match the ones in your activity_view_adoption.xml layout
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.navigation_view)
         toolbar = findViewById(R.id.toolbar)
@@ -88,13 +96,6 @@ class ViewAdoptionActivity : AppCompatActivity() {
             true
         }
 
-//        // Handle system bars/insets (keep this at the bottom of the view initialization)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
-
         // 3. Setup RecyclerView
         recyclerView = findViewById(R.id.viewadoptionrecyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -103,8 +104,13 @@ class ViewAdoptionActivity : AppCompatActivity() {
         adapter = DogAdapterPublic(mutableListOf(), this)
         recyclerView.adapter = adapter
 
-        // 4. Fetch Data
-        fetchAvailableDogs()
+        // 4. Fetch Data (Initial load with no filters)
+        fetchAvailableDogs(
+            age = currentFilterAge,
+            breed = currentFilterBreed,
+            isVaccinated = currentFilterIsVaccinated,
+            isSterilized = currentFilterIsSterilized
+        )
     }
 
     // Override onBackPressed to close the drawer instead of exiting the activity
@@ -116,37 +122,107 @@ class ViewAdoptionActivity : AppCompatActivity() {
         }
     }
 
+    // ------------------------------------------------------------------
+    // NEW: Filter Menu Methods
+    // ------------------------------------------------------------------
 
-    private fun fetchAvailableDogs() {
-        // 1. Get a reference to the 'AddDog' Collection Group.
-        db.collectionGroup("AddDog")
-            // 2. Filter for only dogs that are available for adoption
-            .whereEqualTo("status", "Available for Adoption")
-            // 3. Order by date (optional, but good practice)
-            .orderBy("dateAdded", Query.Direction.DESCENDING)
-            .get()
-            .addOnSuccessListener { querySnapshot ->
+    // 1. Inflate the filter menu into the toolbar
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.filter_menu, menu) // Ensure you created res/menu/filter_menu.xml
+        return true
+    }
 
-                val availableDogs = querySnapshot.documents.mapNotNull { document ->
-                    try {
-                        // Map each Firestore document to your data class
-                        document.toObject(DogDataRecord::class.java)
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error mapping document ${document.id}: ${e.message}", e)
-                        null
+    // 2. Handle the filter icon click
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                showFilterDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    // 3. Implemented method to show the filter dialog
+    private fun showFilterDialog() {
+        val dialog = FilterDialogFragment()
+
+        // Pass the current filter values to the dialog so it can pre-fill the fields (optional but good UX)
+        val args = Bundle().apply {
+            currentFilterAge?.let { putInt("age", it) }
+            currentFilterBreed?.let { putString("breed", it) }
+            currentFilterIsVaccinated?.let { putBoolean("isVaccinated", it) }
+            currentFilterIsSterilized?.let { putBoolean("isSterilized", it) }
+        }
+        dialog.arguments = args
+
+        // Show the dialog
+        dialog.show(supportFragmentManager, "FilterDialog")
+    }
+
+    /**
+     * Call this method from your filter dialog when the user hits "Apply".
+     */
+    fun updateFiltersAndFetch(
+        age: Int?,
+        breed: String?,
+        isVaccinated: Boolean?,
+        isSterilized: Boolean?
+    ) {
+        // Update the activity's state with the new filters
+        currentFilterAge = age
+        currentFilterBreed = breed
+        currentFilterIsVaccinated = isVaccinated
+        currentFilterIsSterilized = isSterilized
+
+        // Fetch data with the new filters applied
+        fetchAvailableDogs(age, breed, isVaccinated, isSterilized)
+
+        // Optional: Notify user that filters were applied
+        Toast.makeText(this, "Filters applied.", Toast.LENGTH_SHORT).show()
+    }
+
+    // ------------------------------------------------------------------
+    // UPDATED: Fetch Data Method (now accepts parameters)
+    // ------------------------------------------------------------------
+
+    /**
+     * Fetches available dogs by calling the Render API via Retrofit.
+     */
+    private fun fetchAvailableDogs(
+        age: Int?,
+        breed: String?,
+        isVaccinated: Boolean?,
+        isSterilized: Boolean?
+    ) {
+        // Launch a coroutine on the IO thread for network operations
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Pass the filter parameters to the API call
+                val availableDogs = RetrofitClient.dogApiService.getFilteredDogs(
+                    age = age,
+                    breed = breed,
+                    isVaccinated = isVaccinated,
+                    isSterilized = isSterilized
+                )
+
+                // Switch to the Main thread to update the UI
+                withContext(Dispatchers.Main) {
+                    adapter.updateData(availableDogs.toMutableList())
+
+                    if (availableDogs.isEmpty()) {
+                        Toast.makeText(this@ViewAdoptionActivity, "No dogs match the current criteria.", Toast.LENGTH_LONG).show()
                     }
                 }
 
-                adapter.updateData(availableDogs)
+            } catch (e: Exception) {
+                Log.e(TAG, "Error fetching dogs from Render API: ${e.message}", e)
 
-                if (availableDogs.isEmpty()) {
-                    Toast.makeText(this, "No dogs are available for adoption right now.", Toast.LENGTH_LONG).show()
+                // Switch to the Main thread to display the error
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@ViewAdoptionActivity, "Failed to load dogs. Check network/API status.", Toast.LENGTH_LONG).show()
                 }
-
             }
-            .addOnFailureListener { e ->
-                Log.e(TAG, "Error fetching dogs from collection group: ${e.message}", e)
-                Toast.makeText(this, "Failed to load dogs. Please check network/index.", Toast.LENGTH_LONG).show()
-            }
+        }
     }
 }
