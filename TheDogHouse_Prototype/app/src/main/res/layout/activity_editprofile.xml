@@ -9,7 +9,7 @@
     tools:context=".EditProfileActivity">
 
     <LinearLayout
-        android:id="@+id/main_content_wrapper"
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -22,6 +22,7 @@
             app:title="THE KZN DOGHOUSE"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
+
 
         <ScrollView
             android:layout_width="match_parent"

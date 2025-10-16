@@ -16,22 +16,23 @@ class HelpActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_help)
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_help)
 
-        // === Initialize Drawer Components ===
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navigationView = findViewById(R.id.navigation_view)
-        toolbar = findViewById(R.id.toolbar)
+            // 1. Initialize Nav Drawer Views
+            // These IDs must match the ones in your activity_view_adoption.xml layout
+            drawerLayout = findViewById(R.id.drawer_layout)
+            navigationView = findViewById(R.id.navigation_view)
+            toolbar = findViewById(R.id.toolbar)
 
-        // === Setup Toolbar as ActionBar ===
-        setSupportActionBar(toolbar)
+            // Set the toolbar as the action bar
+            setSupportActionBar(toolbar)
 
-        // Open the drawer when the hamburger icon is tapped
-        toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
+            // Set click listener for the navigation icon (hamburger icon) to open the drawer
+            toolbar.setNavigationOnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
 
         // === WhatsApp Button Functionality ===
         val btnContactManager: Button = findViewById(R.id.btnContactManager)
@@ -65,13 +66,10 @@ class HelpActivity : AppCompatActivity() {
                 R.id.nav_fundsdonation -> startActivity(Intent(this, MedsDonationActivity::class.java))
                 R.id.nav_volunteer -> startActivity(Intent(this, VolunteerActivity::class.java))
                 R.id.nav_adoption -> startActivity(Intent(this, ViewAdoptionActivity::class.java))
-                R.id.nav_help -> {
-                    // Stay on current page
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    return@setNavigationItemSelectedListener true
-                }
+                R.id.nav_help -> { startActivity(Intent(this, HelpActivity::class.java))
+                    finish()}
             }
-            drawerLayout.closeDrawer(GravityCompat.START)
+            drawerLayout.closeDrawers()
             true
         }
     }

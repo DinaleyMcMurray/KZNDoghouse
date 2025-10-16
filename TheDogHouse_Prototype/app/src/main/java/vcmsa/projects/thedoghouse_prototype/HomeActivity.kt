@@ -36,12 +36,12 @@ class HomeActivity : AppCompatActivity() {
         val isAdmin = intent.getBooleanExtra("IS_ADMIN", false)
         // ---------------------------------------------------------------------
 
-        // Edge-to-edge padding (Keep as is)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        // Edge-to-edge padding (Keep as is)
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         // ===== Drawer + Toolbar setup =====
         drawerLayout = findViewById(R.id.drawer_layout)

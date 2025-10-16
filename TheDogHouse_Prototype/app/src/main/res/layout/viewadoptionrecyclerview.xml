@@ -20,6 +20,17 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <TextView
+                android:id="@+id/textDogName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Charlie"
+                android:textColor="@color/pink"
+                android:layout_gravity="center_horizontal"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
+
             <ImageView
                 android:id="@+id/imageDog"
                 android:layout_width="match_parent"
@@ -29,70 +40,192 @@
                 android:layout_marginBottom="12dp"
                 android:minHeight="150dp"  />
 
-            <TextView
-                android:id="@+id/textDogName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name: Charlie"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:paddingBottom="8dp" />
+                android:orientation="vertical"
+                android:background="@drawable/bio_background"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/textSex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sex: Male"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:paddingBottom="4dp" />
+                <!-- Breed -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="6dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/paw"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/textBreed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Breed: Africanis"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/textBreed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Breed: Labrador"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:paddingBottom="4dp" />
+                <!-- Gender -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="6dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/sex"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/textSex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender: Male"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/textAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Age: 0"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:paddingBottom="4dp" />
+                <!-- age -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="6dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/bonebutton"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/textAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Age:"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/textVac"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Vaccination Status: Complete"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:paddingBottom="4dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="6dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/syringe"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/textVac"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vaccination Status:"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/textSter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sterilization Status: Yes"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:paddingBottom="16dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="6dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/steril"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/textSter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sterilization Status:"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="16dp">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textSex"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Sex: Male"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:paddingBottom="4dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textBreed"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Breed: Labrador"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:paddingBottom="4dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textAge"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Age: 0"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:paddingBottom="4dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textVac"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Vaccination Status: Complete"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:paddingBottom="4dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textSter"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Sterilization Status: Yes"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:paddingBottom="16dp" />-->
+<!--        </LinearLayout>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textBio"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Bio: "-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:paddingBottom="16dp" />-->
 
             <TextView
                 android:id="@+id/textBio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Bio: "
+                android:text="Charlie is gentle and playful..."
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:paddingBottom="16dp" />
+                android:gravity="center"
+                android:background="@drawable/bio_background"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp" />
+
 
 
             <LinearLayout
@@ -123,7 +256,7 @@
                         android:gravity="center"
                         android:text="Adopt Me"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </FrameLayout>
 
@@ -142,12 +275,13 @@
                         app:srcCompat="@drawable/bonebutton" />
 
                     <TextView
+
                         android:layout_width="160dp"
                         android:layout_height="50dp"
                         android:gravity="center"
                         android:text="Sponsor Me"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </FrameLayout>
 

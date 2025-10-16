@@ -104,7 +104,7 @@
                     android:id="@+id/buttonAdopted"
                     android:layout_width="120dp"
                     android:layout_height="45dp"
-                    android:backgroundTint="@color/pink"
+                    android:backgroundTint="@color/purple"
                     android:textColor="@color/black"
                     android:text="ADOPTED" />
 

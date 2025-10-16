@@ -41,36 +41,33 @@ class FundsDonationsActivity : AppCompatActivity() {
     // This is the email of the NPO's test account, which receives the funds.
     private val PAYPAL_SANDBOX_RECEIVER_EMAIL = "sb-8d13646818350@business.example.com"
 
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_funds_donations)
 
+        auth = FirebaseAuth.getInstance()
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // Correct drawer toggle
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
         // Handle system insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        // === INITIALIZE DRAWER COMPONENTS ===
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navigationView = findViewById(R.id.navigation_view)
-        toolbar = findViewById(R.id.toolbar)
-
-        setSupportActionBar(toolbar)
-
-        // Set Toolbar to open drawer
-        toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-        // === END INITIALIZATION ===
-
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         // NAVIGATION BUTTONS
         val DogFoodButton = findViewById<Button>(R.id.DogFoodBtn)

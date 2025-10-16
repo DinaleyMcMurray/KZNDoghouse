@@ -30,11 +30,11 @@ class NewsletterAdapter(private val newsletters: List<NewsletterItem>, private v
         val item = newsletters[position]
 
         // --- 1. Text Fields ---
-        holder.name.text = "Name: ${item.title}"
+        holder.name.text = "${item.title}"
         holder.location.text = "Where: ${item.location}"
         holder.date.text = "When: ${item.date}"
         holder.cost.text = "Cost: ${item.cost}"
-        holder.description.text = "About: ${item.description}"
+        holder.description.text = "${item.description}"
 
         // --- 2. Image Loading (GLIDE) ---
         if (item.imageUrl.isNotEmpty()) {

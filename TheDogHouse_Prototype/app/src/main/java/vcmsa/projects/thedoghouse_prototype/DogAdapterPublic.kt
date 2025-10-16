@@ -34,13 +34,13 @@ class DogAdapterPublic(private val dogs: MutableList<DogDataRecord>, private val
         }
 
         // 2. Set Text Fields
-        holder.name.text = "Name: ${dog.name}"
+        holder.name.text = "${dog.name}"
         holder.sex.text = "Sex: ${dog.sex}"
         holder.breed.text = "Breed: ${dog.breed}"
         holder.age.text = "Age: ${dog.age}"
         holder.vacStatus.text = "Vaccination Status: ${if (dog.isVaccinated) "Complete" else "Incomplete"}"
         holder.sterStatus.text = "Sterilization Status: ${if (dog.isSterilized) "Yes" else "No"}"
-        holder.bio.text = "Bio: ${dog.bio}"
+        holder.bio.text = "${dog.bio}"
 
         // 3. Handle Adopt Button Click - PASS THE DOG'S ID
         holder.adoptButton.setOnClickListener {

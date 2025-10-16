@@ -34,6 +34,9 @@ class ViewAdoptionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_adoption)
 
+
+
+
         // 1. Initialize Nav Drawer Views
         // These IDs must match the ones in your activity_view_adoption.xml layout
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -81,17 +84,16 @@ class ViewAdoptionActivity : AppCompatActivity() {
                 }
                 else -> false // Handle unhandled IDs gracefully
             }
-            // Close the drawer after an item is clicked
             drawerLayout.closeDrawers()
             true
         }
 
-        // Handle system bars/insets (keep this at the bottom of the view initialization)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        // Handle system bars/insets (keep this at the bottom of the view initialization)
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         // 3. Setup RecyclerView
         recyclerView = findViewById(R.id.viewadoptionrecyclerview)

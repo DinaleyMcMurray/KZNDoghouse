@@ -112,7 +112,7 @@ class MedsDonationActivity : AppCompatActivity() {
                 R.id.nav_volunteer -> startActivity(Intent(this, VolunteerActivity::class.java))
                 R.id.nav_adoption -> startActivity(Intent(this, ViewAdoptionActivity::class.java))
                 R.id.nav_fundsdonation -> drawerLayout.closeDrawers()
-                R.id.nav_account -> startActivity(Intent(this, EditProfileActivity::class.java))
+                R.id.nav_account -> startActivity(Intent(this, UserProfileActivity::class.java))
                 R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
                 R.id.nav_help -> {startActivity(Intent(this, HelpActivity::class.java))
                     finish()

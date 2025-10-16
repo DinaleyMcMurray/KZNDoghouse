@@ -5,7 +5,22 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/bio_background.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/eventsinfo_background.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_add_dog.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_admin_add_volunteer.xml">
         <config>
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
@@ -40,7 +55,17 @@
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_donation_dog_food.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_donation_history.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_donation_meds_history.xml">
         <config>
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
@@ -82,11 +107,7 @@
       </layout>
       <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_meds_donation.xml">
         <config>
-          <theme>@style/Theme.TheDogHouse_Prototype</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_nav_user.xml">
-        <config>
+          <state>Landscape</state>
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
       </layout>
@@ -125,12 +146,47 @@
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recycler_history_dogfood.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recycler_history_funds.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recycler_history_meds.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recycleradoptionhistory.xml">
         <config>
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclerdogmanagement.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclerdonation.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclerevents.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclersponsorhistory.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclervolunteer.xml">
         <config>
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
@@ -156,7 +212,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="840fc8b4-8e28-4f6f-b9cb-828923344206" name="Changes" comment="adding help to navigation">
+    <list default="true" id="840fc8b4-8e28-4f6f-b9cb-828923344206" name="Changes" comment="commit 60">
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/bio_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/coin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/eventsinfo_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/pills.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/placeholder.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/sex.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/steril.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/syringe.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
@@ -165,14 +231,42 @@
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdminHomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdminHomeActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionHistoryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionHistoryActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogManagementActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogManagementActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/EventsManagementActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/EventsManagementActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdoptionActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogAdapterPublic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogAdapterPublic.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogFoodActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogFoodActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationDogFoodActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationDogFoodActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/EditProfileActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/EditProfileActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FundsDonationsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FundsDonationsActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/HelpActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/HelpActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/HomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/HomeActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/MedsDonationActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/MedsDonationActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/NewsletterActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/NewsletterActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/NewsletterAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/NewsletterAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/UserProfileActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/UserProfileActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerManagementActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerManagementActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/ViewAdoptionActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/ViewAdoptionActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/drawable/calendar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_admin_add_volunteer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_admin_add_volunteer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_adoption.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_adoption.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_dog_food.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_dog_food.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_editprofile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_editprofile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_funds_donations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_funds_donations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_help.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_help.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_meds_donation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_meds_donation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_register.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_userprofile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_userprofile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/menu/navigation_menu_admin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/menu/navigation_menu_admin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_volunteer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/activity_volunteer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/newsletterrecyclerview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/newsletterrecyclerview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recycleradoptionhistory.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recycleradoptionhistory.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclerdogmanagement.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclerdogmanagement.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclerevents.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclerevents.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclervolunteer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/recyclervolunteer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/viewadoptionrecyclerview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TheDogHouse_Prototype/app/src/main/res/layout/viewadoptionrecyclerview.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +276,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=b18efd75)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\lab_services_student\.android\avd\Script_VM.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$/TheDogHouse_Prototype">
       <ProjectState />
@@ -192,6 +286,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -237,6 +332,11 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Ntobeko.Mnguni/AndroidStudioProjects/KZNDoghouse&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lab_services_student\AndroidStudioProjects\KZNDoghouse\TheDogHouse_Prototype\app\src\main\res\drawable" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="TheDogHouse_Prototype.app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="TheDogHouse_Prototype.app" />
@@ -376,7 +476,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759662310330</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="commit 60">
+      <option name="closed" value="true" />
+      <created>1759740919216</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1759740919216</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -396,19 +504,20 @@
     <MESSAGE value="adding navigation for admin" />
     <MESSAGE value="adding navigation for user" />
     <MESSAGE value="adding help to navigation" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding help to navigation" />
+    <MESSAGE value="commit 60" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 60" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="vcmsa.projects.thedoghouse_prototype">
           <value>
-            <CheckInfo lastCheckTimestamp="1759659584420" />
+            <CheckInfo lastCheckTimestamp="1760541578190" />
           </value>
         </entry>
         <entry key="vcmsa.projects.thedoghouse_prototype.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1759659584403" />
+            <CheckInfo lastCheckTimestamp="1760541578151" />
           </value>
         </entry>
       </map>

@@ -1,5 +1,6 @@
 package vcmsa.projects.thedoghouse_prototype
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem // Needed for NavigationView listener
@@ -15,6 +16,7 @@ import java.util.Date
 import android.app.DatePickerDialog // 🛑 NEW
 import android.app.TimePickerDialog // 🛑 NEW
 import android.util.Log
+import androidx.activity.enableEdgeToEdge
 import java.text.SimpleDateFormat
 import java.util.Calendar // 🛑 NEW
 import java.util.Locale
@@ -34,7 +36,6 @@ class DogFoodActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
-
     private lateinit var auth: FirebaseAuth
     private val firestore = FirebaseFirestore.getInstance()
     private val TAG = "DogFoodDonation"
@@ -42,8 +43,10 @@ class DogFoodActivity : AppCompatActivity() {
     // 🛑 NEW: Calendar instance to hold selected date/time
     private val dropOffCalendar = Calendar.getInstance()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_dog_food)
 
         auth = FirebaseAuth.getInstance()
@@ -52,6 +55,11 @@ class DogFoodActivity : AppCompatActivity() {
         navigationView = findViewById(R.id.navigation_view)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        // Correct drawer toggle
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
 
         donorNameEditText = findViewById(R.id.DonorName)
         dogFoodNameEditText = findViewById(R.id.DogFoodName)
@@ -138,7 +146,7 @@ class DogFoodActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
+                    startActivity(Intent(this, UserProfileActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     startActivity(Intent(this, LoginActivity::class.java))

@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -35,28 +36,31 @@ class UserProfileActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_userprofile)
+
+        auth = FirebaseAuth.getInstance()
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // Correct drawer toggle
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
 
         // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
         // 1. Initialize UI components from XML
-        drawerLayout = findViewById(R.id.drawer_layout)
-        toolbar = findViewById(R.id.toolbar)
-        navigationView = findViewById(R.id.navigation_view)
         nameTextView = findViewById(R.id.profile_name)
         emailTextView = findViewById(R.id.profile_email)
         phoneTextView = findViewById(R.id.profile_phone)
         ageTextView = findViewById(R.id.profile_age)
         editButton = findViewById(R.id.btn_edit_profile)
-
-        // Setup Toolbar and Navigation Drawer
-        setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-        setupNavigationDrawer()
 
         // 2. Load the user's data from Firestore
         loadUserProfile()
@@ -66,6 +70,47 @@ class UserProfileActivity : AppCompatActivity() {
             // Navigate to the EditProfileActivity
             startActivity(Intent(this, EditProfileActivity::class.java))
         }
+
+        // Handle nav item clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_account -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java))
+                }
+                R.id.nav_logout -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
+                R.id.nav_newsletter -> {
+                    startActivity(Intent(this, NewsletterActivity::class.java))
+                }
+                R.id.nav_fundsdonation -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, FundsDonationsActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, VolunteerActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, ViewAdoptionActivity::class.java))
+                    finish()
+                }
+                R.id.nav_help -> {
+                    // Optional: Handle logout
+                    startActivity(Intent(this, HelpActivity::class.java))
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
+        }
+
     }
 
     private fun loadUserProfile() {

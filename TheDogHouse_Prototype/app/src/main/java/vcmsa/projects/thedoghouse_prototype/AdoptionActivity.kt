@@ -44,7 +44,6 @@ class AdoptionActivity : AppCompatActivity() {
 
     private val PICK_PDF_REQUEST = 1001
     private var selectedFileUri: Uri? = null
-    private lateinit var drawerLayout: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
 
     private val APPLICATION_FORM_FILENAME = "Application_Form.pdf"
@@ -52,6 +51,11 @@ class AdoptionActivity : AppCompatActivity() {
     // Firebase instances
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var toolbar: MaterialToolbar
+
 
     // Cloudinary Configuration
     private val CLOUDINARY_CLOUD_NAME = "dyuieeirb"
@@ -68,6 +72,16 @@ class AdoptionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_adoption)
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
 
         // Initialize Firebase services
         auth = FirebaseAuth.getInstance()
@@ -95,29 +109,28 @@ class AdoptionActivity : AppCompatActivity() {
         }
 
 
-        // Edge-to-edge padding logic (standard practice)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        // Edge-to-edge padding logic (standard practice)
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
-        // 1. NAVIGATION DRAWER SETUP
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+//        // 1. NAVIGATION DRAWER SETUP
+//        val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
+//        val navigationView: NavigationView = findViewById(R.id.navigation_view)
 
-        // Toolbar + hamburger toggle
-        setSupportActionBar(toolbar)
-        toggle = ActionBarDrawerToggle(
-            this,
-            drawerLayout,
-            toolbar,
-            R.string.nav_open,
-            R.string.nav_close
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+//        // Toolbar + hamburger toggle
+//        setSupportActionBar(toolbar)
+//        toggle = ActionBarDrawerToggle(
+//            this,
+//            drawerLayout,
+//            toolbar,
+//            R.string.nav_open,
+//            R.string.nav_close
+//        )
+//        drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
 
         // 2. ADOPTION LOGIC SETUP
 
@@ -156,7 +169,7 @@ class AdoptionActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_account -> {
-                    startActivity(Intent(this, EditProfileActivity::class.java))
+                    startActivity(Intent(this, UserProfileActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     startActivity(Intent(this, LoginActivity::class.java))
