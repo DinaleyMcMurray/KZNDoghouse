@@ -41,38 +41,81 @@
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"/>
 
+            <!-- Navigation Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:weightSum="3">
 
                 <Button
                     android:id="@+id/FundsBtn"
-                    android:layout_width="120dp"
+                    android:layout_width="0dp"
                     android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:textSize="13sp"
                     android:backgroundTint="@color/pink"
                     android:textColor="@color/black"
                     android:text="Funds" />
 
                 <Button
                     android:id="@+id/DogFoodBtn"
-                    android:layout_width="120dp"
+                    android:layout_width="0dp"
                     android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:textSize="13sp"
                     android:backgroundTint="@color/ButtonColour"
                     android:textColor="@color/black"
-                    android:text="Dog Food" />
+                    android:text="Food" />
 
                 <Button
                     android:id="@+id/MedsBtn"
-                    android:layout_width="120dp"
+                    android:layout_width="0dp"
                     android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:textSize="13sp"
                     android:backgroundTint="@color/ButtonColour"
                     android:textColor="@color/black"
-                    android:text="Medication" />
+                    android:text="Meds" />
             </LinearLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginTop="25dp"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:weightSum="3">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/FundsBtn"-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:backgroundTint="@color/pink"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:text="Funds" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/DogFoodBtn"-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:backgroundTint="@color/ButtonColour"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:text="Food" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/MedsBtn"-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:backgroundTint="@color/ButtonColour"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:text="Meds" />-->
+<!--            </LinearLayout>-->
 
             <FrameLayout
                 android:layout_width="match_parent"

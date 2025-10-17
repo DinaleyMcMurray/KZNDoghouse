@@ -38,8 +38,8 @@
 
         <ImageView
             android:id="@+id/header_image"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/kzndoghouselogo"
             android:contentDescription="@string/app_name"
             android:layout_marginBottom="24dp"

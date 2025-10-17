@@ -37,7 +37,7 @@
                     android:id="@+id/heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="KINDLY SPONSOR A DOG"
+                    android:text="Kindly sponshor a dog"
                     android:textAlignment="center"
                     android:typeface="serif"
                     android:textColor="@color/black"
@@ -71,22 +71,25 @@
                         android:orientation="vertical"
                         android:background="@color/LightBrown"
                         android:layout_gravity="center_vertical"
-                        android:backgroundTint="@color/Lightpurple"
+                        android:backgroundTint="@color/white"
                         android:padding="10dp">
 
                         <TextView
-                            android:id="@+id/Details"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="YOUR DETAILS:"
-                            android:textSize="20sp"
-                            />
+                            android:id="@+id/textDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:typeface="serif"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Please fill out the following" />
 
                         <EditText
                             android:id="@+id/volNameEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
+                            android:backgroundTint="@color/purple"
                             android:hint="Enter name" />
 
                         <EditText
@@ -94,6 +97,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number"
+                            android:backgroundTint="@color/purple"
                             android:hint="Enter age" />
 
                         <EditText
@@ -101,16 +105,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"
+                            android:backgroundTint="@color/purple"
                             android:hint="Enter mobile number"
                             android:layout_marginBottom="16dp" />
 
                         <TextView
-                            android:id="@+id/SponsorDetails"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="PAYMENT DETAILS:"
-                            android:textSize="20sp"
-                            />
+                            android:id="@+id/textDetailsAmt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:typeface="serif"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Payment Details" />
 
                         <EditText
                             android:id="@+id/SponsorAmount"
@@ -118,6 +125,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:hint="Enter amount"
+                            android:backgroundTint="@color/purple"
                             android:layout_marginBottom="16dp" />
 
                         <Button
@@ -126,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/ButtonColour"
                         android:textColor="@color/black"
-                        android:text="CONFIRM DETAILS &amp; CHOOSE PAYMENT" />
+                        android:text="Submit" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

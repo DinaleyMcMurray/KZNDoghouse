@@ -3,6 +3,7 @@ package vcmsa.projects.thedoghouse_prototype
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -18,6 +19,9 @@ class HelpActivity : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            window.statusBarColor = android.graphics.Color.TRANSPARENT
+            supportActionBar?.hide()
             setContentView(R.layout.activity_help)
 
             // 1. Initialize Nav Drawer Views

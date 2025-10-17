@@ -27,6 +27,9 @@ class DonationMedsHistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDonationMedsHistoryBinding.inflate(layoutInflater)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        supportActionBar?.hide()
         setContentView(binding.root)
 
         // Initialize the master list

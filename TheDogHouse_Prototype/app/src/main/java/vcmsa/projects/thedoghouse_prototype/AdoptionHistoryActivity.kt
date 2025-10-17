@@ -52,6 +52,9 @@ class AdoptionHistoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        supportActionBar?.hide()
         setContentView(R.layout.activity_adoption_history)
 
         // --- Cloudinary Initialization ---
@@ -68,12 +71,12 @@ class AdoptionHistoryActivity : AppCompatActivity() {
             Log.e("Cloudinary", "Initialization failed: ${e.message}")
         }
 
-        // Apply insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        // Apply insets
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         // Drawer + Toolbar setup
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)

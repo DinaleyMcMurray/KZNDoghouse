@@ -59,6 +59,9 @@ class SponsorshipActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        supportActionBar?.hide()
         setContentView(R.layout.activity_sponsorship)
 
         // Initialize Firebase Auth
@@ -88,12 +91,12 @@ class SponsorshipActivity : AppCompatActivity() {
         }
 
 
-        // Handle system insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        // Handle system insets
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         // === INITIALIZE DRAWER AND TOOLBAR ===
         drawerLayout = findViewById(R.id.drawer_layout)

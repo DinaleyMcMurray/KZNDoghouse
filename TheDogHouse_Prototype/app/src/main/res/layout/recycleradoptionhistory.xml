@@ -88,21 +88,24 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnDocuments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/purple"
-                android:textColor="@color/black"
-                android:text="DOWNLOAD DOCUMENTS" />
-
-            <Button
                 android:id="@+id/btnDELETE"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/ButtonColour"
                 android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
                 android:text="DELETE" />
+
+            <Button
+                android:id="@+id/btnDocuments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/purple"
+                android:text="DOWNLOAD DOCUMENTS"
+                android:textColor="@color/black" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 </LinearLayout>

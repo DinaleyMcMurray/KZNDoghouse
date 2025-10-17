@@ -2,6 +2,7 @@ package vcmsa.projects.thedoghouse_prototype
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button // NOTE: This import may no longer be necessary if you don't use 'Button' anywhere else.
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,9 @@ class AdminHomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        supportActionBar?.hide()
         setContentView(R.layout.activity_admin_home)
 
         // 1. Initialize Drawer/Toolbar components
@@ -64,11 +68,11 @@ class AdminHomeActivity : AppCompatActivity() {
         }
 
         // Apply insets
-        ViewCompat.setOnApplyWindowInsetsListener(drawerLayout) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        ViewCompat.setOnApplyWindowInsetsListener(drawerLayout) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
     }
 
     // Extracted Logout Function

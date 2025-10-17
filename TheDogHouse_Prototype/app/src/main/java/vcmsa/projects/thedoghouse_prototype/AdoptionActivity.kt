@@ -24,6 +24,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import android.Manifest
 import android.content.pm.PackageManager
+import android.view.View
 
 // Firebase/Date Imports
 import com.google.firebase.auth.FirebaseAuth
@@ -71,6 +72,9 @@ class AdoptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        supportActionBar?.hide()
         setContentView(R.layout.activity_adoption)
 
         drawerLayout = findViewById(R.id.drawer_layout)

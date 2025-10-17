@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:backgroundTint="@color/Lightpurple"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
@@ -71,10 +71,11 @@
 
                 <Button
                     android:id="@+id/buttonDelete"
-                    android:layout_width="match_parent"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/ButtonColour"
                     android:text="DELETE"
+                    android:layout_gravity="center_horizontal"
                     android:textColor="@color/black" />
 
             </LinearLayout>
