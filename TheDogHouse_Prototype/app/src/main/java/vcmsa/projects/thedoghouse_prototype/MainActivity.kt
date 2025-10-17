@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Find root layout (the LinearLayout itself)
-        val rootLayout = findViewById<android.widget.LinearLayout>(R.id.root_layout)
+        val rootLayout = findViewById<android.widget.FrameLayout>(R.id.root_layout)
 
         // Apply window inset padding
         ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { v, insets ->

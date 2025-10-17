@@ -1,34 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/white"
+    android:id="@+id/root_layout"
+    android:background="@color/LightBrown"
     tools:context=".MainActivity">
 
+    <!-- Background Image -->
     <ImageView
-        android:id="@+id/header_image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/kzndoghouselogo"
-        android:contentDescription="@string/app_name"
-        android:layout_marginBottom="24dp" />
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"
+        android:contentDescription="Background image" />
 
-    <TextView
-        android:id="@+id/swipe_text"
-        android:layout_width="wrap_content"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SWIPE RIGHT"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+        android:layout_margin="30dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="30dp"
+        android:layout_gravity="center_vertical"
+        app:cardElevation="20dp"
+        android:alpha="0.9">
 
-</LinearLayout>
+    <!-- Foreground content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp">
+
+        <ImageView
+            android:id="@+id/header_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/kzndoghouselogo"
+            android:contentDescription="@string/app_name"
+            android:layout_marginBottom="24dp"
+            android:alpha="1.0"/>
+
+        <TextView
+            android:id="@+id/swipe_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Swipe"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/Lightpurple"
+            android:typeface="serif" />
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
+
 
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->

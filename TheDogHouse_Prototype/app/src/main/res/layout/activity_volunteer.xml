@@ -77,16 +77,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="@color/LightBrown"
                         android:layout_gravity="center_vertical"
-                        android:backgroundTint="@color/Lightpurple"
                         android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/textDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:typeface="serif"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Please fill out the following" />
 
                         <EditText
                             android:id="@+id/volNameEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
+                            android:backgroundTint="@color/purple"
                             android:hint="Enter name" />
 
                         <EditText
@@ -94,13 +103,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textCapWords"
-                            android:hint="Enter Gender" />
+                            android:backgroundTint="@color/purple"
+                            android:hint="Enter gender" />
 
                         <EditText
                             android:id="@+id/editTextAge"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number"
+                            android:backgroundTint="@color/purple"
                             android:hint="Enter age" />
 
                         <EditText
@@ -108,6 +119,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"
+                            android:backgroundTint="@color/purple"
                             android:hint="Enter mobile number" />
 
                         <EditText
@@ -115,13 +127,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textEmailAddress"
+                            android:backgroundTint="@color/purple"
                             android:hint="Enter email" />
 
                         <Button
                             android:id="@+id/button4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/ButtonColour"
+                            android:backgroundTint="@color/purple"
                             android:textColor="@color/black"
                             android:text="SUBMIT" />
 

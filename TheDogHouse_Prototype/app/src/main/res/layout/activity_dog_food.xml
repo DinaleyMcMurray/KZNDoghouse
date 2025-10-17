@@ -148,7 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="30dp"
-                    android:backgroundTint="@color/Lightpurple"
+                    android:backgroundTint="@color/white"
                     app:cardCornerRadius="30dp"
                     app:cardElevation="20dp">
 
@@ -156,7 +156,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:backgroundTint="@color/Lightpurple"
+                        android:backgroundTint="@color/white"
                         android:padding="24dp">
 
                         <TextView
@@ -166,6 +166,7 @@
                             android:typeface="serif"
                             android:textColor="@color/black"
                             android:textSize="18sp"
+                            android:layout_gravity="center_horizontal"
                             android:text="Please fill out the following" />
 
                         <EditText
