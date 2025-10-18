@@ -231,12 +231,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec66c553-b5ba-4a48-ac82-9d74b3ab119c" name="Changes" comment="Commit-SeventyFive [Ankriya]:&#10;- I fixed the navigation drawer&#10;- I changed the app name and logo&#10;- I fixed the events page&#10;- I implemented a new paypal thing">
+    <list default="true" id="ec66c553-b5ba-4a48-ac82-9d74b3ab119c" name="Changes" comment="Commit-SeventySix [Ankriya]:&#10;- updating paypal submission code">
+      <change afterPath="$PROJECT_DIR$/.idea/studiobot.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FundsDonationsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FundsDonationsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,7 +245,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=de934df0)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=2e2e6800)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -545,7 +544,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760807444703</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Commit-SeventySix [Ankriya]:&#10;- updating paypal submission code">
+      <option name="closed" value="true" />
+      <created>1760815782123</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1760815782123</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -564,7 +571,8 @@
     <MESSAGE value="Commit-Seventy [Ankriya]:&#10;- I added the admin pages for sponsoring and the admin can delete it&#10;- I added the date time pickers for the meds donation and dog food donations&#10;- i added the whatsapp link for the rsvp button" />
     <MESSAGE value="Commit-SeventyTwo [Ankriya]:&#10;- I implemented the api&#10;- I edited the dog Management page and fixed it &#10;- I added in a fragment for the filter" />
     <MESSAGE value="Commit-SeventyFive [Ankriya]:&#10;- I fixed the navigation drawer&#10;- I changed the app name and logo&#10;- I fixed the events page&#10;- I implemented a new paypal thing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit-SeventyFive [Ankriya]:&#10;- I fixed the navigation drawer&#10;- I changed the app name and logo&#10;- I fixed the events page&#10;- I implemented a new paypal thing" />
+    <MESSAGE value="Commit-SeventySix [Ankriya]:&#10;- updating paypal submission code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit-SeventySix [Ankriya]:&#10;- updating paypal submission code" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">

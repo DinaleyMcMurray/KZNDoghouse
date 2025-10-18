@@ -25,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.util.Locale
 
 class FundsDonationsActivity : AppCompatActivity() {
 
@@ -188,7 +189,7 @@ class FundsDonationsActivity : AppCompatActivity() {
                 .appendQueryParameter("business", PAYPAL_SANDBOX_RECEIVER_EMAIL)
 
                 // Ensure amount is formatted correctly with two decimal places
-                .appendQueryParameter("amount", String.format("%.2f", finalAmount))
+                .appendQueryParameter("amount", String.format(Locale.US, "%.2f", finalAmount))
 
                 // Keep currency code as USD to match Sandbox account settings
                 .appendQueryParameter("currency_code", "USD")
