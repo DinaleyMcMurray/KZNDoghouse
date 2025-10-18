@@ -18,13 +18,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.Timestamp // Import Firebase Timestamp
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await // Import .await() extension
+import kotlinx.coroutines.tasks.await
 
 class FundsDonationsActivity : AppCompatActivity() {
 
@@ -37,8 +37,7 @@ class FundsDonationsActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: MaterialToolbar
 
-    // 🔥 FIX 1: Sandbox Business Email (Facilitator) for receiving test payments 🔥
-    // This is the email of the NPO's test account, which receives the funds.
+    // 🔥 Sandbox Business Email (Facilitator) for receiving test payments 🔥
     private val PAYPAL_SANDBOX_RECEIVER_EMAIL = "sb-8d13646818350@business.example.com"
 
     @SuppressLint("MissingInflatedId")
@@ -126,11 +125,9 @@ class FundsDonationsActivity : AppCompatActivity() {
 
         // ==== Payment Options: Rely on user clicking SUBMIT first ====
         btnPayPal.setOnClickListener {
-            // 🔥 FIX 3: Removed redundant enterAmountButton.performClick()
             openPayment(isPayPal = true)
         }
         linkPayPal.setOnClickListener {
-            // 🔥 FIX 3: Removed redundant enterAmountButton.performClick()
             openPayment(isPayPal = true)
         }
 
@@ -169,6 +166,11 @@ class FundsDonationsActivity : AppCompatActivity() {
             true
         }
     }
+
+    /**
+     * Attempts to open the PayPal Sandbox payment link with USD currency
+     * and includes mobile-compatibility parameters.
+     */
     private fun openPayment(isPayPal: Boolean) {
         // 1. Get the validated amount from the EditText
         val finalAmountText = findViewById<EditText>(R.id.editAmount)?.text?.toString()?.trim() ?: ""
@@ -180,21 +182,36 @@ class FundsDonationsActivity : AppCompatActivity() {
         }
 
         if (isPayPal) {
-            // Use a URL structure designed to accept fixed amount/currency parameters reliably
-            val url = Uri.parse("https://www.sandbox.paypal.com/cgi-bin/webscr")
+            val urlBuilder = Uri.parse("https://www.sandbox.paypal.com/cgi-bin/webscr")
                 .buildUpon()
                 .appendQueryParameter("cmd", "_donations")
                 .appendQueryParameter("business", PAYPAL_SANDBOX_RECEIVER_EMAIL)
+
+                // Ensure amount is formatted correctly with two decimal places
                 .appendQueryParameter("amount", String.format("%.2f", finalAmount))
+
+                // Keep currency code as USD to match Sandbox account settings
                 .appendQueryParameter("currency_code", "USD")
-                .appendQueryParameter("lc", "ZA")
+                .appendQueryParameter("lc", "ZA") // Locale for South Africa
+
+                // 🚀 FIX 1: CRITICAL for mobile stability - remove shipping fields
+                .appendQueryParameter("no_shipping", "1")
+
+                // 🚀 FIX 2: Force a clearer checkout page layout
+                .appendQueryParameter("page_style", "primary")
+
+                // Button information
                 .appendQueryParameter("bn", "PP-DonationsBF:btn_donate_SM.gif:NonHosted")
                 .appendQueryParameter("item_name", "KZN Doghouse Funds Donation")
-                .build()
-                .toString()
 
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            val finalUrl = urlBuilder.build().toString()
+
+            // Log the URL for inspection if the problem persists
+            Log.d("PayPal_URL_DEBUG", "Generated URL: $finalUrl")
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(finalUrl))
             startActivity(intent)
+            Toast.makeText(this, "Redirecting to PayPal Sandbox for R${finalAmountText} (Charged as USD)...", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -209,7 +226,6 @@ class FundsDonationsActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 // 1. Fetch the Donor's Name
-                // .await() makes this asynchronous call look synchronous
                 val userDoc = firestore.collection("Users").document(currentUser.uid).get().await()
 
                 // Assuming the donor's name is stored in a field called "name" in the User document
@@ -221,11 +237,11 @@ class FundsDonationsActivity : AppCompatActivity() {
                     "type" to "Funds",
                     "status" to "Pending Payment", // Status before PayPal confirmation
 
-                    // ⚡️ CRITICAL ADDITIONS for History View ⚡️
-                    "donorName" to donorName, // Name is now included!
+                    // CRITICAL ADDITIONS for History View
+                    "donorName" to donorName,
                     "userId" to currentUser.uid,
                     "timestamp" to Timestamp.now(),
-                    "dateSubmitted" to Timestamp.now() // Use Timestamp for queryable dates
+                    "dateSubmitted" to Timestamp.now()
                 )
 
                 // 3. Save the record to the FundsDonations subcollection

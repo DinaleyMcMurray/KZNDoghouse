@@ -2,6 +2,7 @@ package vcmsa.projects.thedoghouse_prototype
 
 import VolunteerRecord
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -21,13 +22,12 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import android.widget.Toast
-// FieldPath is no longer strictly needed for delete, but kept for legacy reference
+import com.google.firebase.auth.FirebaseAuth
 
 class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItemDeleteListener {
 
     private lateinit var etSearch: EditText
     private lateinit var btnResetSearch: Button
-    // 🔥 NEW: Add reference for the Add Volunteer button
     private lateinit var btnAddVolunteer: Button
     private lateinit var navigationView: NavigationView
     private lateinit var recyclerView: RecyclerView
@@ -36,42 +36,43 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
     private lateinit var allVolunteers: MutableList<VolunteerRecord>
     private lateinit var progressBar: ProgressBar
 
+    private lateinit var drawerLayout: DrawerLayout
+
+    // Initialize Auth and Firestore
+    private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private val TAG = "VolunteerMgt"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        // Note: Using deprecated flags might be incompatible with enableEdgeToEdge()
+        // window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        // window.statusBarColor = android.graphics.Color.TRANSPARENT
+
+        // This line hides the standard action bar if you are using a MaterialToolbar
         supportActionBar?.hide()
         setContentView(R.layout.activity_volunteer_management)
 
         progressBar = findViewById(R.id.progressBar)
 
         // 1. Drawer + Toolbar setup
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawer_layout)
         val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
-        val navView: NavigationView = findViewById(R.id.navigation_view)
+        // 🔥 FIX: Assign the NavigationView to the class property
+        navigationView = findViewById(R.id.navigation_view)
 
         setSupportActionBar(toolbar)
 
-        // ----------------------------------------------------
-        // 🔥 FIX 1: Add Up/Back navigation to the Toolbar 🔥
-        // This button goes to the AdminHomeActivity
+        // Setting DisplayHomeAsUpEnabled makes the navigation icon (hamburger) visible
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
-            // Check if the drawer is open (default behavior)
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else {
-                // If drawer is closed, pressing the icon goes Home
-                startActivity(Intent(this, AdminHomeActivity::class.java))
-                finish() // Optionally finish the current activity
+                // This is the essential fix: open the drawer instead of navigating home
+                drawerLayout.openDrawer(GravityCompat.START)
             }
         }
-        // ----------------------------------------------------
-
-
         // 2. Setup RecyclerView
         recyclerView = findViewById(R.id.recyclervolunteers)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -86,7 +87,6 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
         // 3. Initialize Search EditText and Reset Button
         etSearch = findViewById(R.id.etSearch)
         btnResetSearch = findViewById(R.id.btnResetSearch)
-        // 🔥 NEW: Initialize Add Volunteer Button 🔥
         btnAddVolunteer = findViewById(R.id.btnAddVolunteer)
 
         // 4. Attach Listeners
@@ -95,20 +95,42 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
         setupAddVolunteerButton()
 
 
-        // 5. Fetch Data from Firestore
-        // 🔥 REMOVED: fetchVolunteerData() call is moved to onResume() for automatic refresh.
-
-        // 6. Handle navigation clicks
-        navView.setNavigationItemSelectedListener { menuItem ->
+        // 5. Handle navigation clicks
+        navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
-                R.id.nav_volunteer_management -> drawerLayout.closeDrawers()
-                R.id.nav_events_management -> startActivity(Intent(this, EventsManagementActivity::class.java))
-                R.id.nav_adoption_history -> startActivity(Intent(this, AdoptionHistoryActivity::class.java))
-                R.id.nav_dogfood -> startActivity(Intent(this, DonationHistoryActivity::class.java))
-                R.id.nav_sponsor -> startActivity(Intent(this, SponsorManagementActivity::class.java))
-                R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
-                R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
+                R.id.nav_dog_management -> {
+                    startActivity(Intent(this, DogManagementActivity::class.java))
+                    finish()
+                }
+                R.id.nav_volunteer_management -> {
+                    // This is the current activity. Do nothing except close the drawer.
+                    // The drawer closing is handled below.
+                }
+                R.id.nav_events_management -> {
+                    startActivity(Intent(this, EventsManagementActivity::class.java))
+                    finish()
+                }
+                R.id.nav_adoption_history -> {
+                    startActivity(Intent(this, AdoptionHistoryActivity::class.java))
+                    finish()
+                }
+                R.id.nav_dogfood -> {
+                    startActivity(Intent(this, DonationHistoryActivity::class.java))
+                    finish()
+                }
+                R.id.nav_sponsor -> {
+                    startActivity(Intent(this, SponsorManagementActivity::class.java))
+                    finish()
+                }
+                R.id.nav_logout -> {
+                    auth.signOut()
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finishAffinity()
+                }
+                R.id.nav_home -> {
+                    startActivity(Intent(this, AdminHomeActivity::class.java))
+                    finish()
+                }
             }
             drawerLayout.closeDrawers()
             true
@@ -117,12 +139,10 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
     }
 
     // ----------------------------------------------------
-    // 🔥 FIX: Add onResume() to force data reload when returning 🔥
+    // FIX: Add onResume() to force data reload when returning
     // ----------------------------------------------------
     override fun onResume() {
         super.onResume()
-        // This will now be called every time the activity comes to the foreground,
-        // ensuring the list is refreshed after adding a new volunteer.
         fetchVolunteerData()
     }
     // ----------------------------------------------------
@@ -149,7 +169,7 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
     }
 
     private fun deleteVolunteerRecord(documentId: String, position: Int) {
-        // 🔥 CRITICAL FIX: Find the User ID associated with the document ID 🔥
+        // CRITICAL FIX: Find the User ID associated with the document ID
         val recordToDelete = allVolunteers.firstOrNull { it.documentId == documentId }
 
         if (recordToDelete == null || recordToDelete.userId.isEmpty() || recordToDelete.userId == "N/A") {
@@ -158,9 +178,7 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
             return
         }
 
-        // 🚀 NEW, RELIABLE DELETION METHOD: Use the direct document path 🚀
-        // Note: This logic works for both user-submitted volunteers (where userId is their UID)
-        // and admin-submitted volunteers (where userId is the fixed "AdminUserDocument").
+        // NEW, RELIABLE DELETION METHOD: Use the direct document path
         val docRef = db.collection("Users")
             .document(recordToDelete.userId)
             .collection("Volunteer")
@@ -235,7 +253,7 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
                     try {
                         val volunteer = VolunteerRecord(
                             documentId = document.id,
-                            // 🔥 NEW: Capture the userId for use in direct deletion 🔥
+                            // NEW: Capture the userId for use in direct deletion
                             userId = document.getString("userId") ?: "N/A",
                             name = document.getString("Name") ?: "N/A",
                             gender = document.getString("Gender") ?: "N/A",
@@ -269,5 +287,17 @@ class VolunteerManagementActivity : AppCompatActivity(), VolunteerAdapter.OnItem
                     Toast.LENGTH_LONG
                 ).show()
             }
+    }
+
+    // Ensure onBackPressed handles the drawer correctly
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            // Since this is likely an Admin secondary screen, pressing back should go home
+            startActivity(Intent(this, AdminHomeActivity::class.java))
+            finish()
+        }
     }
 }

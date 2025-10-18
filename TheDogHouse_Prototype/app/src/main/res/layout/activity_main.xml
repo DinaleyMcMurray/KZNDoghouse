@@ -49,10 +49,10 @@
             android:id="@+id/swipe_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Swipe"
+            android:text="SWIPE RIGHT"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:textColor="@color/Lightpurple"
+            android:textColor="@color/black"
             android:typeface="serif" />
     </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 class SponsorManagementActivity : AppCompatActivity() {
 
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth // Added FirebaseAuth for logout
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SponsorshipAdapter
     private val sponsorRecords = mutableListOf<SponsorshipRecord>()
@@ -37,6 +39,7 @@ class SponsorManagementActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sponsor_management)
 
         firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance() // Initialize FirebaseAuth
 
         // Handle system insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -100,12 +103,21 @@ class SponsorManagementActivity : AppCompatActivity() {
             }
     }
 
+    /**
+     * Sets up the navigation drawer functionality for an Admin user.
+     * Assumes this screen is the main admin dashboard/hub.
+     */
     private fun setupNavigationDrawer() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_account -> Toast.makeText(this, "Account Management", Toast.LENGTH_SHORT).show()
-                R.id.nav_logout -> Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
-                // Add your navigation logic here
+                R.id.nav_dog_management -> startActivity(Intent(this, DogManagementActivity::class.java))
+                R.id.nav_volunteer_management -> startActivity(Intent(this, VolunteerManagementActivity::class.java))
+                R.id.nav_events_management -> startActivity(Intent(this, EventsManagementActivity::class.java))
+                R.id.nav_adoption_history -> startActivity(Intent(this, AdoptionHistoryActivity::class.java))
+                R.id.nav_dogfood -> startActivity(Intent(this, DonationHistoryActivity::class.java))
+                R.id.nav_sponsor -> startActivity(Intent(this, SponsorManagementActivity::class.java))
+                R.id.nav_logout -> startActivity(Intent(this, LoginActivity::class.java))
+                R.id.nav_home -> startActivity(Intent(this, AdminHomeActivity::class.java))
             }
             drawerLayout.closeDrawers()
             true

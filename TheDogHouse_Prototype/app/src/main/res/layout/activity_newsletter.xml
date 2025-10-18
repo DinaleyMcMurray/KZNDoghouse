@@ -23,52 +23,51 @@
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:text="OUR EVENTS"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp" />
 
-                <TextView
-                    android:id="@+id/heading"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="OUR EVENTS"
-                    android:textAlignment="center"
-                    android:typeface="serif"
-                    android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="30dp" />
-
-                <TextView
-                    android:id="@+id/mission"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dont miss out on our latest fund raisers!"
-                    android:textAlignment="center"
-                    android:typeface="serif"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="25dp"
-                    android:padding="15dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerNewsletters"
+            <TextView
+                android:id="@+id/mission"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:text="Dont miss out on our latest fund raisers!"
+                android:textAlignment="center"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="25dp"
+                android:paddingBottom="15dp"
+                android:layout_marginBottom="16dp" />
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
 
-    <!-- NAV DRAWER -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerNewsletters"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp" />
+
+    </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"

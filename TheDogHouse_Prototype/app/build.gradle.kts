@@ -17,6 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        ndkVersion = "29.0.14206865"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,6 +48,14 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+    // 🔥 FIX FOR 16 KB ALIGNMENT WARNING (Android 15+) 🔥
+    packaging {
+        jniLibs {
+            // Forces the build system to attempt 16KB alignment for native libraries
+            useLegacyPackaging = false
+        }
+    }
 }
 
 dependencies {
@@ -63,7 +72,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    
+
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.databinding:databinding-runtime:8.1.0")
@@ -77,8 +86,8 @@ dependencies {
 
     implementation("com.cloudinary:cloudinary-android:2.0.0")
 
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
@@ -86,14 +95,3 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }
-
-// TEMPORARILY COMMENT OUT THIS ENTIRE BLOCK
-/*
-configurations.all {
-    resolutionStrategy {
-        force("org.jetbrains:annotations:23.0.0")
-    }
-
-    exclude(group = "com.intellij", module = "annotations")
-}
-*/

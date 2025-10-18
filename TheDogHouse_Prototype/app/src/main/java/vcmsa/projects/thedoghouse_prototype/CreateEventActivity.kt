@@ -1,14 +1,14 @@
 package vcmsa.projects.thedoghouse_prototype
 
 import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+// Removed: import android.app.NotificationChannel
+// Removed: import android.app.NotificationManager
+// Removed: import android.app.PendingIntent
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
+// Removed: import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -17,8 +17,8 @@ import android.widget.Switch
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+// Removed: import androidx.core.app.NotificationCompat
+// Removed: import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
@@ -31,16 +31,15 @@ import java.util.Date
 
 class CreateEventActivity : AppCompatActivity() {
 
-    // --- Notification Constants ---
-    private val CHANNEL_ID = "event_notifications_channel"
-    private val CHANNEL_NAME = "New Event Alerts"
+    // --- Removed Notification Constants ---
+    // private val CHANNEL_ID = "event_notifications_channel"
+    // private val CHANNEL_NAME = "New Event Alerts"
 
     // --- Cloudinary Configuration ---
     private val CLOUDINARY_CLOUD_NAME = "dyuieeirb"
     private val CLOUDINARY_UPLOAD_PRESET = "KZNDoghouse"
-    // Assuming you defined CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET elsewhere if needed for init
-     private val CLOUDINARY_API_KEY = "959111626652188"
-     private val CLOUDINARY_API_SECRET = "MPC45jC70zK656BiiADN-0ULohs"
+    private val CLOUDINARY_API_KEY = "959111626652188"
+    private val CLOUDINARY_API_SECRET = "MPC45jC70zK656BiiADN-0ULohs"
 
     // --- UI/Navigation Variables ---
     private lateinit var drawerLayout: DrawerLayout
@@ -49,8 +48,8 @@ class CreateEventActivity : AppCompatActivity() {
 
     // --- Data Variables ---
     private var imageUri: Uri? = null
-    private var imageUrl: String? = null // Holds the new Cloudinary URL if uploaded
-    private var currentEvent: EventData? = null // Stores the event object if in EDIT mode
+    private var imageUrl: String? = null
+    private var currentEvent: EventData? = null
 
     // Input Fields
     private lateinit var nameEditText: EditText
@@ -88,8 +87,7 @@ class CreateEventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
 
-        // 1. Initialize Notification Channel (Good practice)
-        createNotificationChannel()
+        // Removed: 1. Initialize Notification Channel (createNotificationChannel())
 
         // 2. Initialize Cloudinary (Ensure this only runs once globally if possible)
         try {
@@ -98,10 +96,8 @@ class CreateEventActivity : AppCompatActivity() {
                 "api_key" to CLOUDINARY_API_KEY,
                 "api_secret" to CLOUDINARY_API_SECRET
             )
-            // Use applicationContext as previously established
             MediaManager.init(applicationContext, config)
         } catch (e: Exception) {
-            // Log if initialization fails (e.g., if called twice, though the SDK usually prevents this)
             Log.e("Cloudinary", "Initialization failed: ${e.message}")
         }
 
@@ -123,7 +119,6 @@ class CreateEventActivity : AppCompatActivity() {
 
 
         // 4. Handle Edit Mode Logic
-        // Use the key "EVENT_TO_EDIT" passed from EventsManagementActivity
         currentEvent = intent.getParcelableExtra("EVENT_TO_EDIT")
 
         if (currentEvent != null) {
@@ -182,51 +177,11 @@ class CreateEventActivity : AppCompatActivity() {
         }
     }
 
-    // --- Helper Functions (Notifications, Image Upload, Firestore Save) ---
+    // --- Helper Functions (Image Upload, Firestore Save) ---
 
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance).apply {
-                description = "Alerts for new events created by the administrator."
-            }
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
+    // Removed: createNotificationChannel() function
 
-    private fun showNotification(eventName: String, eventDate: String) {
-        val intent = Intent(this, ViewAdoptionActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
-        val pendingIntent = PendingIntent.getActivity(
-            this,
-            0,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.bonebutton)
-            .setContentTitle("New Event Alert!")
-            .setContentText("Event: $eventName on $eventDate, is successfully saved!")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-
-        with(NotificationManagerCompat.from(this)) {
-            // Add permission check to avoid crash on API 33+
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                    Log.w("Notification", "POST_NOTIFICATIONS permission not granted.")
-                    return@with
-                }
-            }
-            notify(System.currentTimeMillis().toInt(), builder.build())
-        }
-    }
+    // Removed: showNotification() function
 
     private fun chooseImage() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -270,18 +225,16 @@ class CreateEventActivity : AppCompatActivity() {
             .option("folder", "doghouse_app/events")
             .option("upload_preset", CLOUDINARY_UPLOAD_PRESET)
 
-            // ⚡️ FIX: Add this option to request Cloudinary to provide the HTTPS link ⚡️
+            // Add this option to request Cloudinary to provide the HTTPS link
             .option("secure", true)
 
             .callback(object : UploadCallback {
                 override fun onSuccess(requestId: String, resultData: Map<*, *>) {
-                    // This line is now safe because we requested the secure URL
                     val secureUrl = resultData["secure_url"] as? String
                     if (secureUrl != null) {
                         imageUrl = secureUrl
                         Log.d(TAG, "Upload successful. Secure URL: $imageUrl")
                     } else {
-                        // Should not happen with 'secure: true' but provides a fallback
                         imageUrl = resultData["url"] as? String
                         Log.w(TAG, "Secure URL not found, falling back to non-secure.")
                     }
@@ -346,10 +299,7 @@ class CreateEventActivity : AppCompatActivity() {
             val toastMessage = if (isEditing) "Event '$eventName' updated successfully!" else "Event '$eventName' created successfully!"
             Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
 
-            // Only show notification if a NEW event was created
-            if (!isEditing) {
-                showNotification(eventName, dateAndTime)
-            }
+            // Removed: Notification call
 
             clearFields()
             uploadButton.isEnabled = true
@@ -377,6 +327,5 @@ class CreateEventActivity : AppCompatActivity() {
         rsvpSwitch.isChecked = false
         imageUri = null
         imageUrl = null
-        currentEvent = null // Resetting currentEvent isn't strictly necessary here, but good for cleanup
     }
 }

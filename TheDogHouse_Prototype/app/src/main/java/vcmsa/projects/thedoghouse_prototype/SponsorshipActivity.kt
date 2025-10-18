@@ -193,6 +193,10 @@ class SponsorshipActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Attempts to open the PayPal Sandbox payment link with USD currency
+     * and includes mobile-compatibility parameters to prevent blank screen errors.
+     */
     private fun openPayment(amountText: String) {
         val finalAmount = amountText.toDoubleOrNull() ?: 0.0
 
@@ -201,20 +205,36 @@ class SponsorshipActivity : AppCompatActivity() {
             return
         }
 
-        val url = Uri.parse("https://www.sandbox.paypal.com/cgi-bin/webscr")
+        val urlBuilder = Uri.parse("https://www.sandbox.paypal.com/cgi-bin/webscr")
             .buildUpon()
             .appendQueryParameter("cmd", "_donations")
             .appendQueryParameter("business", PAYPAL_RECEIVER_EMAIL)
+
+            // Ensure amount is formatted correctly with two decimal places
             .appendQueryParameter("amount", String.format("%.2f", finalAmount))
+
+            // Keep currency code as USD (required by Sandbox account)
             .appendQueryParameter("currency_code", "USD")
-            .appendQueryParameter("lc", "ZA")
+            .appendQueryParameter("lc", "ZA") // Locale for South Africa
+
+            // 🚀 FIX 1: CRITICAL for mobile stability - remove shipping fields
+            .appendQueryParameter("no_shipping", "1")
+
+            // 🚀 FIX 2: Force a clearer checkout page layout
+            .appendQueryParameter("page_style", "primary")
+
+            // Button and Item information
             .appendQueryParameter("bn", "PP-DonationsBF:btn_donate_SM.gif:NonHosted")
             .appendQueryParameter("item_name", "Sponsorship for Dog: $dogNameForSponsorship")
-            .build()
-            .toString()
 
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        val finalUrl = urlBuilder.build().toString()
+
+        // Log the URL for inspection if the problem persists
+        Log.d("PayPal_Sponsor_DEBUG", "Generated URL: $finalUrl")
+
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(finalUrl))
         startActivity(intent)
+        Toast.makeText(this, "Redirecting to PayPal Sandbox for sponsorship...", Toast.LENGTH_LONG).show()
     }
 
     private fun saveSponsorshipRecordToFirestore(name: String, age: String, mobile: String, amount: String) {
@@ -245,6 +265,7 @@ class SponsorshipActivity : AppCompatActivity() {
                     "userId" to currentUser.uid,
                     "userEmail" to userEmail,
                     "type" to "Sponsorship",
+                    "status" to "Pending Payment", // Add status for tracking
                     "timestamp" to Timestamp.now(),
                     "dateSubmitted" to Timestamp.now()
                 )

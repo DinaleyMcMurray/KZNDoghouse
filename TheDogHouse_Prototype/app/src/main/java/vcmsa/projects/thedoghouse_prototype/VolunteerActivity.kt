@@ -6,21 +6,25 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import android.Manifest
 
 class VolunteerActivity : AppCompatActivity() {
 
@@ -41,6 +45,41 @@ class VolunteerActivity : AppCompatActivity() {
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var auth: FirebaseAuth
 
+    // 🔥 NEW: Storage for data submitted before permission was granted
+    private var pendingVolunteerData: VolunteerData? = null
+
+    // Helper data class to temporarily hold the form data
+    data class VolunteerData(
+        val name: String,
+        val gender: String,
+        val age: String,
+        val phone: String,
+        val email: String,
+        val userId: String
+    )
+
+
+    // 🔥 NEW: Activity Result Launcher modified to auto-submit the application
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(this, "Notification permission granted. Processing application...", Toast.LENGTH_SHORT).show()
+                // Process the application automatically using the pending data
+                pendingVolunteerData?.let { data ->
+                    saveAndNotifyVolunteer(data.userId, data.name, data.gender, data.age, data.phone, data.email)
+                }
+                // Clear the pending data
+                pendingVolunteerData = null
+            } else {
+                Toast.makeText(this, "Notification permission denied. Application saved but confirmation alert skipped.", Toast.LENGTH_LONG).show()
+                // If permission is denied, still process the application but skip the notification
+                pendingVolunteerData?.let { data ->
+                    saveVolunteerOnly(data.userId, data.name, data.gender, data.age, data.phone, data.email)
+                }
+                pendingVolunteerData = null
+            }
+        }
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +88,8 @@ class VolunteerActivity : AppCompatActivity() {
 
         // 1. Initialize Notification Channel
         createNotificationChannel()
+
+        // No need to request on startup, we request when they click submit.
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.navigation_view)
@@ -81,35 +122,23 @@ class VolunteerActivity : AppCompatActivity() {
             val age = volAge.text.toString().trim()
             val phone = volNumber.text.toString().trim()
             val email = volEmail.text.toString().trim()
+            val userId = currentUser.uid
 
             if (name.isEmpty() || gender.isEmpty() || age.isEmpty() || phone.isEmpty() || email.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else {
-                val volunteerData = hashMapOf(
-                    "Name" to name,
-                    "Gender" to gender,
-                    "Age" to age,
-                    "Phone" to phone,
-                    "Email" to email,
-                    "userId" to currentUser.uid
-                )
+                // 1. Package the current data
+                val currentData = VolunteerData(name, gender, age, phone, email, userId)
 
-                FirebaseFirestore.getInstance()
-                    .collection("Users")
-                    .document(currentUser.uid)
-                    .collection("Volunteer")
-                    .add(volunteerData)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Volunteer details saved!", Toast.LENGTH_SHORT).show()
-
-                        // 🔥 CALL THE NOTIFICATION FUNCTION HERE 🔥
-                        showApplicationNotification(name)
-
-                        clearFields()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "Error saving details", Toast.LENGTH_SHORT).show()
-                    }
+                if (isNotificationPermissionGranted()) {
+                    // 2. Permission is granted, save and notify immediately
+                    saveAndNotifyVolunteer(userId, name, gender, age, phone, email)
+                } else {
+                    // 3. Permission is NOT granted, store data and request permission
+                    pendingVolunteerData = currentData
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    // The result launcher will handle the rest.
+                }
             }
         }
 
@@ -131,11 +160,84 @@ class VolunteerActivity : AppCompatActivity() {
         }
     }
 
+    // --- PERMISSION AND SAVE HELPER FUNCTIONS ---
+
+    private fun isNotificationPermissionGranted(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            // Permission is not required for devices below Android 13
+            true
+        }
+    }
+
+    /**
+     * Saves volunteer data to Firestore and shows the notification.
+     */
+    private fun saveAndNotifyVolunteer(userId: String, name: String, gender: String, age: String, phone: String, email: String) {
+        val volunteerData = hashMapOf(
+            "Name" to name,
+            "Gender" to gender,
+            "Age" to age,
+            "Phone" to phone,
+            "Email" to email,
+            "userId" to userId
+        )
+
+        FirebaseFirestore.getInstance()
+            .collection("Users")
+            .document(userId)
+            .collection("Volunteer")
+            .add(volunteerData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Volunteer details saved!", Toast.LENGTH_SHORT).show()
+
+                // CALL THE NOTIFICATION FUNCTION HERE
+                showApplicationNotification(name)
+
+                clearFields()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Error saving details", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    /**
+     * Saves volunteer data to Firestore but skips the notification (used if permission is denied).
+     */
+    private fun saveVolunteerOnly(userId: String, name: String, gender: String, age: String, phone: String, email: String) {
+        val volunteerData = hashMapOf(
+            "Name" to name,
+            "Gender" to gender,
+            "Age" to age,
+            "Phone" to phone,
+            "Email" to email,
+            "userId" to userId
+        )
+
+        FirebaseFirestore.getInstance()
+            .collection("Users")
+            .document(userId)
+            .collection("Volunteer")
+            .add(volunteerData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Volunteer details saved!", Toast.LENGTH_SHORT).show()
+                clearFields()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Error saving details", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
     // --- NOTIFICATION HELPER FUNCTIONS ---
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_HIGH // Use HIGH for more visibility
+            val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance).apply {
                 description = "Alerts for the status of volunteer applications."
             }
@@ -146,7 +248,8 @@ class VolunteerActivity : AppCompatActivity() {
     }
 
     private fun showApplicationNotification(volunteerName: String) {
-        // Intent will take the user back to the Home screen when they tap the notification
+        // Since this function is only called after permission is verified, we can proceed.
+
         val intent = Intent(this, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -155,11 +258,11 @@ class VolunteerActivity : AppCompatActivity() {
             this,
             0,
             intent,
-            PendingIntent.FLAG_IMMUTABLE // Use IMMUTABLE for security
+            PendingIntent.FLAG_IMMUTABLE
         )
 
         val title = "Application Successful!"
-        val message = "Thank you, $volunteerName! Your volunteer application has been submitted. KZN will contact you soon."
+        val message = "Thank you, $volunteerName! Your volunteer application has been submitted. The KZN Doghouse will contact you soon."
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.bonebutton)
@@ -171,15 +274,14 @@ class VolunteerActivity : AppCompatActivity() {
             .setAutoCancel(true)
 
         with(NotificationManagerCompat.from(this)) {
-            // 🔥 REQUIRED FIX: Explicit permission check for API 33 (TIRAMISU) and above 🔥
+            // Re-check for Tiramisu+ safety, although the external check handles the user prompt
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                    // If permission is not granted, we cannot send the notification.
-                    // You can add code here to request the permission, but for now, we return.
+                if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                     return@with
                 }
             }
-            // If the check passes (or if the API level is below 33), the notification is sent.
+
+            // Generate a unique ID for the notification
             notify(System.currentTimeMillis().toInt(), builder.build())
         }
     }

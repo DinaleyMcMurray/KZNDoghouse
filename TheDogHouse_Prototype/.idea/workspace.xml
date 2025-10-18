@@ -5,7 +5,12 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/background_tiled.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml">
+        <config>
+          <theme>@style/Theme.TheDogHouse_Prototype</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_foreground.xml">
         <config>
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
@@ -71,11 +76,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_events_management.xml">
-        <config>
-          <theme>@style/Theme.TheDogHouse_Prototype</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_filter_dialog_fragment.xml">
         <config>
           <theme>@style/Theme.TheDogHouse_Prototype</theme>
         </config>
@@ -231,14 +231,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec66c553-b5ba-4a48-ac82-9d74b3ab119c" name="Changes" comment="Commit-Seventy [Ankriya]:&#10;- I added the admin pages for sponsoring and the admin can delete it&#10;- I added the date time pickers for the meds donation and dog food donations&#10;- i added the whatsapp link for the rsvp button">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogApiService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FilterDialogFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FirestoreDogData.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/RetrofitClient.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/filter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_filter_dialog.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/filter_menu.xml" afterDir="false" />
+    <list default="true" id="ec66c553-b5ba-4a48-ac82-9d74b3ab119c" name="Changes" comment="Commit-SeventyTwo [Ankriya]:&#10;- I implemented the api&#10;- I edited the dog Management page and fixed it &#10;- I added in a fragment for the filter">
+      <change afterPath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/calendar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/ic_launcher_background.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" afterDir="false" />
@@ -248,17 +249,39 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AddDogActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AddDogActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogDataRecord.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogDataRecord.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogManagementActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DogManagementActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/ViewAdoptionActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/ViewAdoptionActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdminAddVolunteerActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/AdminAddVolunteerActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/CreateEventActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/CreateEventActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationDogFoodActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationDogFoodActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationMedsHistoryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/DonationMedsHistoryActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FundsDonationsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/FundsDonationsActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/SponsorManagementActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/SponsorManagementActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/SponsorshipActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/SponsorshipActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerManagementActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/vcmsa/projects/thedoghouse_prototype/VolunteerManagementActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_newsletter.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_newsletter.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/newsletterrecyclerview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/newsletterrecyclerview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +291,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=6dccd531)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=127.0.0.1:5554;connection=e4989675)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -315,22 +338,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/lab_services_student/Desktop/AndroidStudio/KZNDoghouse/TheDogHouse_Prototype/app/src/main/res/drawable&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;memory.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/lab_services_student/Desktop/AndroidStudio/KZNDoghouse/TheDogHouse_Prototype/app/src/main/res/drawable",
+    "settings.editor.selected.configurable": "memory.settings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="android.template.778677550">
       <recent name="vcmsa.projects.thedoghouse_prototype" />
@@ -551,7 +574,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760472128538</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Commit-SeventyTwo [Ankriya]:&#10;- I implemented the api&#10;- I edited the dog Management page and fixed it &#10;- I added in a fragment for the filter">
+      <option name="closed" value="true" />
+      <created>1760652373931</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1760652373931</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -568,19 +599,20 @@
     <MESSAGE value="Commit-SixtySeven [Ankriya]:&#10;- I added delete buttons for the donation History activity" />
     <MESSAGE value="Commit-SixtyNine [Ankriya]:&#10;- I added the frontend and the backend to firebase. It saves in firebase now" />
     <MESSAGE value="Commit-Seventy [Ankriya]:&#10;- I added the admin pages for sponsoring and the admin can delete it&#10;- I added the date time pickers for the meds donation and dog food donations&#10;- i added the whatsapp link for the rsvp button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit-Seventy [Ankriya]:&#10;- I added the admin pages for sponsoring and the admin can delete it&#10;- I added the date time pickers for the meds donation and dog food donations&#10;- i added the whatsapp link for the rsvp button" />
+    <MESSAGE value="Commit-SeventyTwo [Ankriya]:&#10;- I implemented the api&#10;- I edited the dog Management page and fixed it &#10;- I added in a fragment for the filter" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit-SeventyTwo [Ankriya]:&#10;- I implemented the api&#10;- I edited the dog Management page and fixed it &#10;- I added in a fragment for the filter" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="vcmsa.projects.thedoghouse_prototype">
           <value>
-            <CheckInfo lastCheckTimestamp="1760642630587" />
+            <CheckInfo lastCheckTimestamp="1760796761730" />
           </value>
         </entry>
         <entry key="vcmsa.projects.thedoghouse_prototype.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1760642630580" />
+            <CheckInfo lastCheckTimestamp="1760796761737" />
           </value>
         </entry>
       </map>
