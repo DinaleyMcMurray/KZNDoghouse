@@ -200,6 +200,11 @@ class FundsDonationsActivity : AppCompatActivity() {
                 // 🚀 FIX 2: Force a clearer checkout page layout
                 .appendQueryParameter("page_style", "primary")
 
+                // 🚀 NEW ADDITIONS FOR MOBILE STABILITY 🚀
+                .appendQueryParameter("return", "https://developer.paypal.com/docs/api/overview/") // Success page placeholder
+                .appendQueryParameter("cancel_return", "https://developer.paypal.com/docs/api/overview/") // Cancel page placeholder
+                .appendQueryParameter("rm", "2") // Return method (2=HTTPS POST)
+
                 // Button information
                 .appendQueryParameter("bn", "PP-DonationsBF:btn_donate_SM.gif:NonHosted")
                 .appendQueryParameter("item_name", "KZN Doghouse Funds Donation")
